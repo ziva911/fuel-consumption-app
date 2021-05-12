@@ -4,6 +4,8 @@ import * as morgan from "morgan";
 import Config from "./config/dev";
 import * as fs from "fs";
 import * as path from "path";
+import IApplicationResources from './services/IApplicationResources.interface';
+import VehicleRouter from './components/vehicle/router';
 
 const app: express.Application = express();
 
@@ -32,6 +34,9 @@ app.use(
 
 app.use(cors());
 app.use(express.json());
+
+const resources: IApplicationResources = {};
+VehicleRouter.setupeRoutes(app, resources);
 
 app.use((req, res) => {
     res.sendStatus(404);

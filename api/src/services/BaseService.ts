@@ -1,16 +1,22 @@
 import * as mysql2 from "mysql2/promise";
 import IModel from "../common/IModel.interface";
 import IModelAdapterOptions from "../common/IModelAdapterOptions.interface";
+import IApplicationResources from '../common/IApplicationResources.interface';
+import IServices from '../common/IServices.interface';
 
 export default abstract class BaseService<ReturnModel extends IModel> {
-    private database: mysql2.Connection;
+    private resources: IApplicationResources;
 
-    constructor(db: mysql2.Connection) {
-        this.database = db;
+    constructor(resource: IApplicationResources) {
+        this.resources = resource;
     }
 
     protected get db(): mysql2.Connection {
-        return this.database;
+        return this.resources.databaseConnection;
+    }
+
+    protected get services(): IServices {
+        return this.resources.services;
     }
 
     abstract adaptToModel(
@@ -18,11 +24,9 @@ export default abstract class BaseService<ReturnModel extends IModel> {
         options: Partial<IModelAdapterOptions>,
     ): Promise<ReturnModel>;
 
-    protected async getAllFromTable(
+    protected async getAllFromTable<AdapterOptions extends IModelAdapterOptions>(
         tableName: string,
-        options: Partial<IModelAdapterOptions> = {
-            loadChildren: true,
-        },
+        options: Partial<AdapterOptions> = {},
     ): Promise<ReturnModel[]> {
         const items: ReturnModel[] = [];
 
@@ -43,10 +47,10 @@ export default abstract class BaseService<ReturnModel extends IModel> {
         return items;
     }
 
-    protected async getByIdFromTable(
+    protected async getByIdFromTable<AdapterOptions extends IModelAdapterOptions>(
         tableName: string,
         id: number,
-        options: Partial<IModelAdapterOptions> = null,
+        options: Partial<AdapterOptions> = {},
     ): Promise<ReturnModel | null> {
         const sql: string = `SELECT * FROM ${tableName} WHERE ${tableName}_id = ?;`;
         const [rows, fields] = await this.db.execute(sql, [id]);
@@ -65,11 +69,11 @@ export default abstract class BaseService<ReturnModel extends IModel> {
         );
     }
 
-    protected async getByFieldIdFromTable(
+    protected async getByFieldIdFromTable<AdapterOptions extends IModelAdapterOptions>(
         tableName: string,
         fieldName: string = null,
         fieldValue: any = null,
-        options: Partial<IModelAdapterOptions> = null,
+        options: Partial<AdapterOptions> = {},
     ): Promise<ReturnModel[]> {
         const items: ReturnModel[] = [];
 

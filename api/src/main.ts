@@ -3,15 +3,18 @@ import * as cors from "cors";
 import * as morgan from "morgan";
 import * as fs from "fs";
 import * as path from "path";
+import * as mysql2 from 'mysql2/promise';
 
 import Config from "./config/dev";
-import VehicleRouter from './components/vehicle/vehicle.router';
 import IApplicationResources from "./common/IApplicationResources.interface";
-import * as mysql2 from 'mysql2/promise';
 import Router from './router';
+import VehicleRouter from './components/vehicle/vehicle.router';
 import BrandRouter from './components/brand/brand.router';
 import BrandModelRouter from "./components/brand-model/brand-model.router";
 import FuelTypeRouter from "./components/fuel-type/fuel-type.router";
+import BrandService from "./components/brand/brand.service";
+import BrandModelService from "./components/brand-model/brand-model.service";
+import FuelTypeService from "./components/fuel-type/fuel-type.service";
 
 async function main() {
 
@@ -43,29 +46,36 @@ async function main() {
     app.use(cors());
     app.use(express.json());
 
-    const resources: IApplicationResources = {
-        databaseConnection: await mysql2.createConnection({
-            host: Config.database.host,
-            port: Config.database.port,
-            user: Config.database.user,
-            password: Config.database.password,
-            database: Config.database.database,
-            charset: Config.database.charset,
-            timezone: Config.database.timezone,
-            supportBigNumbers: true,
-        }),
-    };
+    const databaseConnection = await mysql2.createConnection({
+        host: Config.database.host,
+        port: Config.database.port,
+        user: Config.database.user,
+        password: Config.database.password,
+        database: Config.database.database,
+        charset: Config.database.charset,
+        timezone: Config.database.timezone,
+        supportBigNumbers: true,
+    });
 
-    resources.databaseConnection.connect();
+    databaseConnection.connect();
+    const resources: IApplicationResources = {
+        databaseConnection: databaseConnection,
+    }
+
+    resources.services = {
+        brandService: new BrandService(resources),
+        brandModelService: new BrandModelService(resources),
+        fuelTypeService: new FuelTypeService(resources)
+    }
 
     Router.setupRoutes(
         app,
         resources,
         [
-            new VehicleRouter(),
             new BrandRouter(),
             new BrandModelRouter(),
             new FuelTypeRouter(),
+            new VehicleRouter(),
         ]
     );
     app.use((err, req, res, next) => {

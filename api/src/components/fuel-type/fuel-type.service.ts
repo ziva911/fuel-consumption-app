@@ -4,7 +4,7 @@ import BaseService from "../../services/BaseService";
 import { ICreateFuelType } from "./dto/ICreateFuelType";
 import { IUpdateFuelType } from "./dto/IUpdateFuelType";
 
-export default class BrandService extends BaseService<FuelTypeModel> {
+export default class FuelTypeService extends BaseService<FuelTypeModel> {
 
     async adaptToModel(
         data: any,

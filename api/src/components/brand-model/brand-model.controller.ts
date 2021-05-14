@@ -1,22 +1,16 @@
 import * as express from 'express';
 
-import BrandModelService from './brand-model.service';
-import BrandModel from './brand-model.model';
 import { ICreateBrandModel, ICreateBrandModelSchemaValidator } from './dto/ICreateBrandModel';
 import { IUpdateBrandModel, IUpdateBrandModelSchemaValidator } from './dto/IUpdateBrandModel';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import BrandModelModel from './brand-model.model';
+import BaseController from '../../services/BaseController';
 
-export default class BrandModelController {
-    private brandModelService: BrandModelService;
-
-    constructor(brandModelService: BrandModelService) {
-        this.brandModelService = brandModelService;
-    }
+export default class BrandModelController extends BaseController {
 
     async getAllByBrandId(req: express.Request, res: express.Response, next: express.NextFunction) {
         const brandId: number = Number(req.params?.brandid);
-        res.send(await this.brandModelService.getAllByBrandId(brandId));
+        res.send(await this.services.brandModelService.getAllByBrandId(brandId, { loadParent: false }));
     }
 
     async getById(req: express.Request, res: express.Response, next: express.NextFunction) {
@@ -27,7 +21,7 @@ export default class BrandModelController {
             return;
         }
 
-        const item: BrandModelModel | null = await this.brandModelService.getById(id);
+        const item: BrandModelModel | null = await this.services.brandModelService.getById(id, { loadParent: true });
 
         if (item == null) {
             res.sendStatus(404);
@@ -45,7 +39,7 @@ export default class BrandModelController {
             return;
         }
 
-        const newBrandModel: BrandModelModel | IErrorResponse = await this.brandModelService.create(item as ICreateBrandModel);
+        const newBrandModel: BrandModelModel | IErrorResponse = await this.services.brandModelService.create(item as ICreateBrandModel);
 
         res.send(newBrandModel);
     }
@@ -64,7 +58,7 @@ export default class BrandModelController {
             return;
         }
 
-        const updatedBrandModel: BrandModelModel | IErrorResponse = await this.brandModelService.update(brandModelId, item as IUpdateBrandModel);
+        const updatedBrandModel: BrandModelModel | IErrorResponse = await this.services.brandModelService.update(brandModelId, item as IUpdateBrandModel);
 
         if (updatedBrandModel == null) {
             res.status(404).send("The model with that name does not exist");
@@ -81,6 +75,6 @@ export default class BrandModelController {
             return;
         }
 
-        res.send(await this.brandModelService.delete(brandModelId));
+        res.send(await this.services.brandModelService.delete(brandModelId));
     }
 }

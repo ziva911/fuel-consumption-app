@@ -1,20 +1,14 @@
 import * as express from 'express';
-
-import FuelTypeService from './fuel-type.service';
 import FuelTypeModel from './fuel-type.model';
 import { ICreateFuelType, ICreateFuelTypeSchemaValidator } from './dto/ICreateFuelType';
 import { IUpdateFuelType, IUpdateFuelTypeSchemaValidator } from './dto/IUpdateFuelType';
 import IErrorResponse from '../../common/IErrorResponse.interface';
+import BaseController from '../../services/BaseController';
 
-export default class FuelTypeController {
-    private fuelTypeService: FuelTypeService;
-
-    constructor(fuelTypeService: FuelTypeService) {
-        this.fuelTypeService = fuelTypeService;
-    }
+export default class FuelTypeController extends BaseController {
 
     async getAll(req: express.Request, res: express.Response, next: express.NextFunction) {
-        res.send(await this.fuelTypeService.getAll());
+        res.send(await this.services.fuelTypeService.getAll());
     }
 
     async getById(req: express.Request, res: express.Response, next: express.NextFunction) {
@@ -25,7 +19,7 @@ export default class FuelTypeController {
             return;
         }
 
-        const item: FuelTypeModel | null = await this.fuelTypeService.getById(id);
+        const item: FuelTypeModel | null = await this.services.fuelTypeService.getById(id);
 
         if (item == null) {
             res.sendStatus(404);
@@ -43,7 +37,7 @@ export default class FuelTypeController {
             return;
         }
 
-        const newFuelType: FuelTypeModel | IErrorResponse = await this.fuelTypeService.create(item as ICreateFuelType);
+        const newFuelType: FuelTypeModel | IErrorResponse = await this.services.fuelTypeService.create(item as ICreateFuelType);
 
         res.send(newFuelType);
     }
@@ -62,7 +56,7 @@ export default class FuelTypeController {
             return;
         }
 
-        const updatedFuelType: FuelTypeModel | IErrorResponse = await this.fuelTypeService.update(id, item as IUpdateFuelType);
+        const updatedFuelType: FuelTypeModel | IErrorResponse = await this.services.fuelTypeService.update(id, item as IUpdateFuelType);
 
         if (updatedFuelType == null) {
             res.status(404).send("There is no fuel type with that ID");
@@ -80,6 +74,6 @@ export default class FuelTypeController {
             return;
         }
 
-        res.send(await this.fuelTypeService.delete(id));
+        res.send(await this.services.fuelTypeService.delete(id));
     }
 }

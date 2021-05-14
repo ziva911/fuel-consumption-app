@@ -2,17 +2,13 @@ import * as express from 'express';
 import IApplicationResources from '../../common/IApplicationResources.interface';
 import IRouter from '../../common/IRouter.interface';
 import BrandModelController from './brand-model.controller';
-import BrandModelService from './brand-model.service';
 
 export default class BrandModelRouter implements IRouter {
 
     setupRoutes(app: express.Application, resources: IApplicationResources) {
 
-        // Service
-        const brandModelService: BrandModelService = new BrandModelService(resources.databaseConnection);
-
         // Controller
-        const brandModelController: BrandModelController = new BrandModelController(brandModelService);
+        const brandModelController: BrandModelController = new BrandModelController(resources);
 
         // Routing
 

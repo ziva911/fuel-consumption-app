@@ -1,20 +1,14 @@
 import * as express from 'express';
-
-import BrandService from './brand.service';
 import BrandModel from './brand.model';
 import { ICreateBrand, ICreateBrandSchemaValidator } from './dto/ICreateBrand';
 import { IUpdateBrand, IUpdateBrandSchemaValidator } from './dto/IUpdateBrand';
 import IErrorResponse from '../../common/IErrorResponse.interface';
+import BaseController from '../../services/BaseController';
 
-export default class BrandController {
-    private brandService: BrandService;
-
-    constructor(brandService: BrandService) {
-        this.brandService = brandService;
-    }
+export default class BrandController extends BaseController {
 
     async getAll(req: express.Request, res: express.Response, next: express.NextFunction) {
-        res.send(await this.brandService.getAll());
+        res.send(await this.services.brandService.getAll());
     }
 
     async getById(req: express.Request, res: express.Response, next: express.NextFunction) {
@@ -25,7 +19,7 @@ export default class BrandController {
             return;
         }
 
-        const item: BrandModel | null = await this.brandService.getById(id);
+        const item: BrandModel | null = await this.services.brandService.getById(id);
 
         if (item == null) {
             res.sendStatus(404);
@@ -43,7 +37,7 @@ export default class BrandController {
             return;
         }
 
-        const newBrand: BrandModel | IErrorResponse = await this.brandService.create(item as ICreateBrand);
+        const newBrand: BrandModel | IErrorResponse = await this.services.brandService.create(item as ICreateBrand);
 
         res.send(newBrand);
     }
@@ -62,7 +56,7 @@ export default class BrandController {
             return;
         }
 
-        const updatedBrand: BrandModel | IErrorResponse = await this.brandService.update(brandId, item as IUpdateBrand);
+        const updatedBrand: BrandModel | IErrorResponse = await this.services.brandService.update(brandId, item as IUpdateBrand);
 
         if (updatedBrand == null) {
             res.status(404).send("The brand with that id does not exist");
@@ -80,6 +74,6 @@ export default class BrandController {
             return;
         }
 
-        res.send(await this.brandService.delete(brandId));
+        res.send(await this.services.brandService.delete(brandId));
     }
 }

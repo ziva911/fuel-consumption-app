@@ -1,4 +1,4 @@
-import IConfig from "./IConfig.interface";
+import IConfig from "../common/IConfig.interface";
 
 const Config: IConfig = {
     server: {
@@ -15,6 +15,15 @@ const Config: IConfig = {
     },
     logger: {
         path: "logs/access.log"
+    },
+    database: {
+        host: "localhost",
+        port: 3306,
+        user: "nikola",
+        password: "nikola92",
+        database: "fuel-consumption-db",
+        charset: "utf8mb4",
+        timezone: "+01:00"
     }
 }
 

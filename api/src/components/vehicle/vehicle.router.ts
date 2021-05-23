@@ -15,7 +15,7 @@ export default class VehicleRouter implements IRouter {
         app.get("/api/vehicle", vehicleController.getAll.bind(vehicleController));
         app.get("/api/vehicle/:id", vehicleController.getById.bind(vehicleController));
         app.post("/api/vehicle", vehicleController.create.bind(vehicleController));
-        // app.put("/api/vehicle/:id", vehicleController.updateById.bind(vehicleController));
+        app.put("/api/vehicle/:id", vehicleController.updateById.bind(vehicleController));
         app.post("/api/vehicle/:id/photo", vehicleController.addVehiclePhoto.bind(vehicleController));
         //app.delete("/api/vehicle/:id", vehicleController.deleteById.bind(vehicleController));
     }

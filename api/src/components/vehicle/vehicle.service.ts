@@ -34,7 +34,7 @@ export default class VehicleService extends BaseService<VehicleModel> {
         item.brandModelId = Number(data?.brand_model_id);
         if (options?.loadChildren) {
             let photo: Photo = null;
-            photo = (await this.services.photoService.getByVehicleId(Number(item.vehicleId), { loadChildren: false }))[0];
+            photo = (await this.getPhotoByVehicleId(Number(item.vehicleId)))[0];
             if (!photo) {
                 photo = (await this.getPhotoByBrandModelAndYearAndColor(item.brandModelId, item.manufactureYear, item.paintColor));
             }
@@ -54,6 +54,10 @@ export default class VehicleService extends BaseService<VehicleModel> {
         }
 
         return item;
+    }
+
+    private async getPhotoByVehicleId(vehicleId: number) {
+        return this.services.photoService.getByVehicleId(vehicleId, { loadChildren: false });
     }
 
     private async getBrandModelById(brandModelId: number): Promise<BrandModelModel | null> {
@@ -84,7 +88,6 @@ export default class VehicleService extends BaseService<VehicleModel> {
 
     public async create(data: ICreateVehicle, uploadPhoto: IUploadPhoto): Promise<VehicleModel | IErrorResponse> {
         return new Promise<VehicleModel | IErrorResponse>((resolve) => {
-            console.log(data);
             this.db.beginTransaction()
                 .then(() => {
                     this.db.execute(`
@@ -160,7 +163,98 @@ export default class VehicleService extends BaseService<VehicleModel> {
                 });
         });
     }
+    public async update(vehicleId: number, data: IUpdateVehicle, uploadPhoto: IUploadPhoto): Promise<VehicleModel | IErrorResponse> {
+        return new Promise<VehicleModel | IErrorResponse>(async (resolve) => {
+            const currentVehicle = await this.getById(vehicleId, {
+                loadChildren: true,
+            });
+            if (currentVehicle === null) {
+                resolve(null);
+                return;
+            }
+            this.db.beginTransaction()
+                .then(() => {
+                    this.db.execute(`
+                        UPDATE
+                            vehicle
+                        SET
+                            internal_name = ?,
+                            paint_color = ?,
+                            user_id = ?
+                        WHERE
+                            vehicle_id = ?;`,
+                        [
+                            data.internalName,
+                            data.paintColor,
+                            data.userId,
+                            vehicleId
+                        ])
+                        .then(async () => {
+                            const currentPhoto = (await this.getPhotoByVehicleId(vehicleId))[0];
+                            const promises = [];
+                            if (uploadPhoto) {
+                                if (!currentPhoto) {
+                                    promises.push(
+                                        this.db.execute(`
+                                            INSERT
+                                                photo
+                                            SET
+                                                image_path = ?,
+                                                vehicle_id = ?;`,
+                                            [
+                                                uploadPhoto[0].imagePath,
+                                                vehicleId
+                                            ]
+                                        )
+                                    );
+                                } else {
+                                    promises.push(
+                                        this.db.execute(`
+                                            UPDATE
+                                                photo
+                                            SET
+                                                image_path = ?
+                                            WHERE vehicle_id = ?;`,
+                                            [
+                                                uploadPhoto[0].imagePath,
+                                                vehicleId
+                                            ]
+                                        )
+                                    );
+                                }
+                            }
 
+                            Promise
+                                .all(promises)
+                                .then(() => {
+                                    this.db.commit()
+                                        .then(async () => {
+                                            resolve(await this.getById(vehicleId, { loadChildren: true }));
+                                        });
+                                })
+                                .catch(err => {
+                                    resolve({
+                                        errorCode: err?.errno,
+                                        message: err?.sqlMessage,
+                                    });
+                                })
+                        })
+                        .catch(err => {
+                            resolve({
+                                errorCode: err?.errno,
+                                message: err?.sqlMessage,
+                            });
+                        })
+                })
+                .catch(err => {
+                    resolve({
+                        errorCode: err?.errno,
+                        message: err?.sqlMessage,
+
+                    });
+                });
+        });
+    }
     // public async update(vehicleId: number, data: IUpdateVehicle): Promise<VehicleModel | IErrorResponse> {
     //     return new Promise<VehicleModel | IErrorResponse>((result) => {
     //         const sql: string = `
@@ -214,27 +308,14 @@ export default class VehicleService extends BaseService<VehicleModel> {
 
                     promises.push(
                         this.db.execute(`
-                        INSERT INTO photo (vehicle_id, image_path)
-                        VALUES (?, ?)
-                        ON DUPLICATE KEY UPDATE
-                          image_path = VALUES(image_path);
-                        `,
-                            //     `
-                            // INSERT
-                            //     photo
-                            // SET
-                            //     vehicle_id = ?,
-                            //     image_path = ?
-                            // ON DUPLICATE KEY UPDATE
-                            //     vehicle_id = ?;`,
-
-
-
-
-                            //`UPDATE vehicle SET photo_id = ? WHERE vehicle_id=?;`,
-                            [vehicleId, uploadPhoto.imagePath],
-                        )
-                    );
+                            INSERT INTO
+                                photo (vehicle_id, image_path)
+                            VALUES
+                                (?, ?)
+                            ON DUPLICATE KEY UPDATE
+                              image_path = VALUES(image_path);`,
+                            [vehicleId, uploadPhoto.imagePath]
+                        ));
                     Promise
                         .all(promises)
                         .then(async () => {

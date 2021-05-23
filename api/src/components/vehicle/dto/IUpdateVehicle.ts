@@ -3,36 +3,34 @@ import Ajv from "ajv";
 const ajv = new Ajv();
 
 interface IUpdateVehicle {
-    name: string;
-    imagePath: string;
-    parentCategoryId?: number;
+    internalName: string | null,
+    paintColor: string,
+    userId: number
 }
 
 const IUpdateVehicleSchema = {
     type: "object",
     properties: {
-        name: {
+        internalName: {
+            type: ["string", "null"],
+            minLength: 1,
+            maxLength: 100,
+        },
+        paintColor: {
             type: "string",
             minLength: 2,
-            maxLength: 64,
+            maxLength: 32,
         },
-        imagePath: {
-            type: "string",
-            minLength: 2,
-            maxLength: 255,
-            pattern: "\.(png|jpg)$"
-        },
-        parentCategoryId: {
-            type: ["integer", "null"],
+        userId: {
+            type: ["integer"],
             minimum: 1,
-        },
+        }
 
     },
     required: [
-        "name",
-        "imagePath",
+        "userId",
     ],
-    additionalProperties: false,
+    additionalProperties: true,
 }
 
 const IUpdateVehicleSchemaValidator = ajv.compile(IUpdateVehicleSchema);

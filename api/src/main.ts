@@ -15,7 +15,11 @@ import FuelTypeRouter from "./components/fuel-type/fuel-type.router";
 import BrandService from "./components/brand/brand.service";
 import BrandModelService from "./components/brand-model/brand-model.service";
 import FuelTypeService from "./components/fuel-type/fuel-type.service";
+import AdministratorService from './components/administrator/administrator.service';
 import fileUpload = require("express-fileupload");
+import AdministratorRouter from "./components/administrator/administrator.router";
+import UserRouter from "./components/user/user.router";
+import UserService from "./components/user/user.service";
 import PhotoService from "./components/photo/photo.service";
 import VehicleService from './components/vehicle/vehicle.service';
 
@@ -84,6 +88,8 @@ async function main() {
         fuelTypeService: new FuelTypeService(resources),
         vehicleService: new VehicleService(resources),
         photoService: new PhotoService(resources),
+        administratorService: new AdministratorService(resources),
+        userService: new UserService(resources),
     }
 
     Router.setupRoutes(
@@ -93,6 +99,8 @@ async function main() {
             new BrandRouter(),
             new BrandModelRouter(),
             new FuelTypeRouter(),
+            new AdministratorRouter(),
+            new UserRouter(),
             new VehicleRouter(),
         ]
     );

@@ -80,9 +80,10 @@ export default abstract class BaseService<ReturnModel extends IModel> {
         let sql: string = `SELECT * FROM ${tableName}`;
 
         if (fieldName) {
-            sql = `${sql} WHERE ${fieldName} = ?;`
             if (fieldValue === null) {
                 sql = `${sql} WHERE ${fieldName} IS NULL;`;
+            } else {
+                sql = `${sql} WHERE ${fieldName} = ?;`;
             }
         }
 
@@ -100,5 +101,44 @@ export default abstract class BaseService<ReturnModel extends IModel> {
         }
 
         return items;
+    }
+
+    protected async getOneByFieldsValueFromTable<AdapterOptions extends IModelAdapterOptions>(
+        tableName: string,
+        queryFields: { name: string, value: any }[] = [],
+        options: Partial<AdapterOptions> = {},
+    ): Promise<ReturnModel | null> {
+        let sql = "";
+        let queryValues: any[] = [];
+        if (queryFields.length) {
+            sql = `SELECT * FROM ${tableName} WHERE `;
+            for (let i = 0; i < queryFields.length; i++) {
+                const field = queryFields[i];
+                if (i > 0) {
+                    sql = `${sql} AND `;
+                }
+                if (field.value === null) {
+                    sql = `${sql} ${field.name} IS NULL`;
+                } else {
+                    sql = `${sql} ${field.name} = ?`;
+                    queryValues.push(field.value);
+                }
+            }
+        }
+
+        const [rows, fields] = await this.db.execute(sql, [...queryValues]);
+
+        if (!Array.isArray(rows)) {
+            return null;
+        }
+
+        if (rows.length == 0) {
+            return null;
+        }
+
+        return await this.adaptToModel(
+            rows[0],
+            options,
+        );
     }
 }

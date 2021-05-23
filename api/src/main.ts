@@ -15,6 +15,9 @@ import FuelTypeRouter from "./components/fuel-type/fuel-type.router";
 import BrandService from "./components/brand/brand.service";
 import BrandModelService from "./components/brand-model/brand-model.service";
 import FuelTypeService from "./components/fuel-type/fuel-type.service";
+import fileUpload = require("express-fileupload");
+import PhotoService from "./components/photo/photo.service";
+import VehicleService from './components/vehicle/vehicle.service';
 
 async function main() {
 
@@ -45,6 +48,19 @@ async function main() {
 
     app.use(cors());
     app.use(express.json());
+    app.use(fileUpload({
+        limits: {
+            fileSize: Config.fileUploadOptions.maxSize,
+            files: Config.fileUploadOptions.maxFiles
+        },
+        tempFileDir: Config.fileUploadOptions.tempDirectory,
+        uploadTimeout: Config.fileUploadOptions.timeout,
+        useTempFiles: true,
+        safeFileNames: true,
+        preserveExtension: true,
+        abortOnLimit: true,
+        createParentPath: true
+    }));
 
     const databaseConnection = await mysql2.createConnection({
         host: Config.database.host,
@@ -65,7 +81,9 @@ async function main() {
     resources.services = {
         brandService: new BrandService(resources),
         brandModelService: new BrandModelService(resources),
-        fuelTypeService: new FuelTypeService(resources)
+        fuelTypeService: new FuelTypeService(resources),
+        vehicleService: new VehicleService(resources),
+        photoService: new PhotoService(resources),
     }
 
     Router.setupRoutes(

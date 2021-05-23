@@ -3,36 +3,65 @@ import Ajv from "ajv";
 const ajv = new Ajv();
 
 interface ICreateVehicle {
-    name: string;
-    imagePath: string;
-    parentCategoryId?: number;
+    internalName: string | null,
+    manufactureYear: number,
+    paintColor: string,
+    mileageStart: number,
+    fuelTypeId: number,
+    mileageCurrent: number,
+    brandModelId: number,
+    userId: number
 }
 
 const ICreateVehicleSchema = {
     type: "object",
     properties: {
-        name: {
+        internalName: {
             type: "string",
-            minLength: 2,
-            maxLength: 64,
+            minLength: 1,
+            maxLength: 100,
         },
-        imagePath: {
-            type: "string",
-            minLength: 2,
-            maxLength: 255,
-            pattern: "\.(png|jpg)$"
-        },
-        parentCategoryId: {
+        manufactureYear: {
             type: ["integer", "null"],
             minimum: 1,
         },
+        paintColor: {
+            type: "string",
+            minLength: 2,
+            maxLength: 32,
+        },
+        mileageStart: {
+            type: ["integer"],
+            minimum: 0,
+        },
+        fuelTypeId: {
+            type: ["integer"],
+            minimum: 1,
+        },
+        mileageCurrent: {
+            type: ["integer"],
+            minimum: 0,
+        },
+        brandModelId: {
+            type: ["integer"],
+            minimum: 1,
+        },
+        userId: {
+            type: ["integer", "null"],
+            minimum: 1,
+        }
 
     },
     required: [
-        "name",
-        "imagePath",
+        "manufactureYear",
+        "paintColor",
+        "mileageStart",
+        "fuelTypeId",
+        "mileageCurrent",
+        "brandModelId",
+        "userId",
     ],
-    additionalProperties: false,
+    additionalProperties: true,
 }
 
 const ICreateVehicleSchemaValidator = ajv.compile(ICreateVehicleSchema);

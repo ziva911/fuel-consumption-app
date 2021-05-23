@@ -1,22 +1,18 @@
-import VehicleService from './vehicle.service';
-import * as express from 'express';
+import { Request, Response, NextFunction } from 'express';
 import VehicleModel from './vehicle.model';
 import { ICreateVehicle, ICreateVehicleSchemaValidator } from './dto/ICreateVehicle';
 import { IUpdateVehicle, IUpdateVehicleSchemaValidator } from './dto/IUpdateVehicle';
 import IErrorResponse from '../../common/IErrorResponse.interface';
+import BaseController from '../../services/BaseController';
 
-export default class VehicleController {
-    private vehicleService: VehicleService;
+export default class VehicleController extends BaseController {
 
-    constructor(vehicleService: VehicleService) {
-        this.vehicleService = vehicleService;
+    async getAll(req: Request, res: Response, next: NextFunction) {
+        let userId = 1; //TODO
+        res.send(await this.services.vehicleService.getAllByUserId(userId, { loadChildren: true }));
     }
 
-    async getAll(req: express.Request, res: express.Response, next: express.NextFunction) {
-        res.send(await this.vehicleService.getAll());
-    }
-
-    async getById(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async getById(req: Request, res: Response, next: NextFunction) {
         const id: number = Number(req.params?.id);
 
         if (!id) {
@@ -24,7 +20,7 @@ export default class VehicleController {
             return;
         }
 
-        const item: VehicleModel | null = await this.vehicleService.getById(id);
+        const item: VehicleModel | null = await this.services.vehicleService.getById(id, { loadChildren: true });
 
         if (item == null) {
             res.sendStatus(404);
@@ -34,47 +30,70 @@ export default class VehicleController {
         res.send(item);
     }
 
-    async create(req: express.Request, res: express.Response, next: express.NextFunction) {
-        const item = req.body;
+    async create(req: Request, res: Response, next: NextFunction) {
+        let uploadPhoto = null;
+        if (req.files && Object.keys(req.files).length) {
+            uploadPhoto = await this.getUploadPhotos(req, res);
+        }
+        const itemString = req.body?.data as string;
+        const item = JSON.parse(itemString);
 
         if (!ICreateVehicleSchemaValidator(item)) {
             res.status(400).send(ICreateVehicleSchemaValidator.errors);
             return;
         }
-
-
-        const newCategory: VehicleModel | IErrorResponse = await this.vehicleService.create(item as ICreateVehicle);
-
-        res.send(newCategory);
+        const newVehicle: VehicleModel | IErrorResponse = await this.services.vehicleService.create(item as ICreateVehicle, uploadPhoto);
+        res.send(newVehicle);
     }
 
-    async updateById(req: express.Request, res: express.Response, next: express.NextFunction) {
-        const item = req.body;
-        const categoryId = Number(req.params.id);
+    // async updateById(req: Request, res: Response, next: NextFunction) {
+    //     const item = req.body;
+    //     const categoryId = Number(req.params.id);
 
-        if (categoryId <= 0) {
-            res.status(400).send(["The category ID must be a numerical value larger than 0."]);
+    //     if (categoryId <= 0) {
+    //         res.status(400).send(["The category ID must be a numerical value larger than 0."]);
+    //         return;
+    //     }
+
+    //     if (!IUpdateVehicleSchemaValidator(item)) {
+    //         res.status(400).send(IUpdateVehicleSchemaValidator.errors);
+    //         return;
+    //     }
+
+
+    //     const editedCategory: VehicleModel | IErrorResponse = await this.services.vehicleService.update(categoryId, item as IUpdateVehicle);
+
+    //     res.send(editedCategory);
+    // }
+    // async deleteById(req: Request, res: Response, next: NextFunction) {
+    //     const categoryId = Number(req.params.id);
+
+    //     if (categoryId <= 0) {
+    //         res.status(400).send(["The category ID must be a numerical value larger than 0."]);
+    //         return;
+    //     }
+
+    //     res.send(await this.services.vehicleService.delete(categoryId));
+    // }
+
+    public async addVehiclePhoto(req: Request, res: Response) {
+        const id: number = +(req.params?.id);
+
+        if (id <= 0) {
+            res.sendStatus(404);
             return;
         }
-
-        if (!IUpdateVehicleSchemaValidator(item)) {
-            res.status(400).send(IUpdateVehicleSchemaValidator.errors);
+        const vehicle = await this.services.vehicleService.getById(id, { loadChildren: true })
+        if (vehicle == null) {
+            res.sendStatus(404);
             return;
         }
-
-
-        const editedCategory: VehicleModel | IErrorResponse = await this.vehicleService.update(categoryId, item as IUpdateVehicle);
-
-        res.send(editedCategory);
+        const uploadPhotos = await this.getUploadPhotos(req, res);
+        if (uploadPhotos.length === 0) {
+            return;
+        }
+        res.send(await this.services.vehicleService.addVehiclePhoto(id, uploadPhotos[0]));
     }
-    async deleteById(req: express.Request, res: express.Response, next: express.NextFunction) {
-        const categoryId = Number(req.params.id);
 
-        if (categoryId <= 0) {
-            res.status(400).send(["The category ID must be a numerical value larger than 0."]);
-            return;
-        }
 
-        res.send(await this.vehicleService.delete(categoryId));
-    }
 }

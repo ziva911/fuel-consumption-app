@@ -1,11 +1,11 @@
-import * as express from 'express';
+import { Application } from 'express';
 import IApplicationResources from '../../common/IApplicationResources.interface';
 import IRouter from '../../common/IRouter.interface';
 import BrandController from './brand.controller';
 
 export default class BrandRouter implements IRouter {
 
-    setupRoutes(app: express.Application, resources: IApplicationResources) {
+    setupRoutes(app: Application, resources: IApplicationResources) {
 
         // Controller
         const brandController: BrandController = new BrandController(resources);

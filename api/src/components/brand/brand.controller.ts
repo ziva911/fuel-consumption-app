@@ -1,4 +1,4 @@
-import * as express from 'express';
+import { Request, Response, NextFunction } from 'express';
 import BrandModel from './brand.model';
 import { ICreateBrand, ICreateBrandSchemaValidator } from './dto/ICreateBrand';
 import { IUpdateBrand, IUpdateBrandSchemaValidator } from './dto/IUpdateBrand';
@@ -7,11 +7,11 @@ import BaseController from '../../services/BaseController';
 
 export default class BrandController extends BaseController {
 
-    async getAll(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async getAll(req: Request, res: Response, next: NextFunction) {
         res.send(await this.services.brandService.getAll());
     }
 
-    async getById(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async getById(req: Request, res: Response, next: NextFunction) {
         const id: number = Number(req.params?.id);
 
         if (!id) {
@@ -29,7 +29,7 @@ export default class BrandController extends BaseController {
         res.send(item);
     }
 
-    async create(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async create(req: Request, res: Response, next: NextFunction) {
         const item = req.body;
 
         if (!ICreateBrandSchemaValidator(item)) {
@@ -42,7 +42,7 @@ export default class BrandController extends BaseController {
         res.send(newBrand);
     }
 
-    async updateById(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async updateById(req: Request, res: Response, next: NextFunction) {
         const item = req.body;
         const brandId = Number(req.params.id);
 
@@ -66,7 +66,7 @@ export default class BrandController extends BaseController {
         res.send(updatedBrand);
     }
 
-    async deleteById(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async deleteById(req: Request, res: Response, next: NextFunction) {
         const brandId = Number(req.params.id);
 
         if (brandId <= 0) {

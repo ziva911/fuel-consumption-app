@@ -1,17 +1,17 @@
-import * as express from 'express';
 import FuelTypeModel from './fuel-type.model';
 import { ICreateFuelType, ICreateFuelTypeSchemaValidator } from './dto/ICreateFuelType';
 import { IUpdateFuelType, IUpdateFuelTypeSchemaValidator } from './dto/IUpdateFuelType';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import BaseController from '../../services/BaseController';
+import { Request, Response, NextFunction } from 'express';
 
 export default class FuelTypeController extends BaseController {
 
-    async getAll(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async getAll(req: Request, res: Response, next: NextFunction) {
         res.send(await this.services.fuelTypeService.getAll());
     }
 
-    async getById(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async getById(req: Request, res: Response, next: NextFunction) {
         const id: number = Number(req.params?.id);
 
         if (!id) {
@@ -29,7 +29,7 @@ export default class FuelTypeController extends BaseController {
         res.send(item);
     }
 
-    async create(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async create(req: Request, res: Response, next: NextFunction) {
         const item = req.body;
 
         if (!ICreateFuelTypeSchemaValidator(item)) {
@@ -42,7 +42,7 @@ export default class FuelTypeController extends BaseController {
         res.send(newFuelType);
     }
 
-    async updateById(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async updateById(req: Request, res: Response, next: NextFunction) {
         const item = req.body;
         const id = Number(req.params.id);
 
@@ -66,7 +66,7 @@ export default class FuelTypeController extends BaseController {
         res.send(updatedFuelType);
     }
 
-    async deleteById(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async deleteById(req: Request, res: Response, next: NextFunction) {
         const id = Number(req.params.id);
 
         if (id <= 0) {

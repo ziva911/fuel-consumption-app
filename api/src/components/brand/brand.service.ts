@@ -36,14 +36,14 @@ export default class BrandService extends BaseService<BrandModel> {
     public async getAll(
         options: Partial<BrandModelAdapterOptions> = { loadChildren: true }
     ): Promise<BrandModel[]> {
-        return this.getByFieldIdFromTable<BrandModelAdapterOptions>("brand", null, null, options);
+        return this.getAllFromTable<BrandModelAdapterOptions>("brand", options);
     }
 
     public async getById(
         brandId: number,
         options: Partial<BrandModelAdapterOptions> = { loadChildren: true }
     ): Promise<BrandModel | null> {
-        return super.getByIdFromTable("brand", brandId, options);
+        return super.getByIdFromTable<BrandModelAdapterOptions>("brand", brandId, options);
     }
 
     public async create(data: ICreateBrand): Promise<BrandModel | IErrorResponse> {

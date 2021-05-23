@@ -4,3 +4,4 @@ dist
 api/node_modules
 api/coverage
 api/logs
+api/static/uploads

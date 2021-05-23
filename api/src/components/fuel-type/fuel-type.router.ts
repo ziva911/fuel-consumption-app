@@ -1,11 +1,11 @@
-import * as express from 'express';
+import { Application } from 'express';
 import IApplicationResources from '../../common/IApplicationResources.interface';
 import IRouter from '../../common/IRouter.interface';
 import FuelTypeController from './fuel-type.controller';
 
 export default class FuelTypeRouter implements IRouter {
 
-    setupRoutes(app: express.Application, resources: IApplicationResources) {
+    setupRoutes(app: Application, resources: IApplicationResources) {
 
         // Controller
         const fuelTypeController: FuelTypeController = new FuelTypeController(resources);

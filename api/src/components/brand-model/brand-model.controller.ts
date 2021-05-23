@@ -1,5 +1,4 @@
-import * as express from 'express';
-
+import { Request, Response, NextFunction } from 'express';
 import { ICreateBrandModel, ICreateBrandModelSchemaValidator } from './dto/ICreateBrandModel';
 import { IUpdateBrandModel, IUpdateBrandModelSchemaValidator } from './dto/IUpdateBrandModel';
 import IErrorResponse from '../../common/IErrorResponse.interface';
@@ -8,12 +7,12 @@ import BaseController from '../../services/BaseController';
 
 export default class BrandModelController extends BaseController {
 
-    async getAllByBrandId(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async getAllByBrandId(req: Request, res: Response, next: NextFunction) {
         const brandId: number = Number(req.params?.brandid);
         res.send(await this.services.brandModelService.getAllByBrandId(brandId, { loadParent: false }));
     }
 
-    async getById(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async getById(req: Request, res: Response, next: NextFunction) {
         const id: number = Number(req.params?.id);
 
         if (!id) {
@@ -31,7 +30,7 @@ export default class BrandModelController extends BaseController {
         res.send(item);
     }
 
-    async create(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async create(req: Request, res: Response, next: NextFunction) {
         const item = req.body;
 
         if (!ICreateBrandModelSchemaValidator(item)) {
@@ -44,7 +43,7 @@ export default class BrandModelController extends BaseController {
         res.send(newBrandModel);
     }
 
-    async updateById(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async updateById(req: Request, res: Response, next: NextFunction) {
         const item = req.body;
         const brandModelId = Number(req.params.id);
 
@@ -67,7 +66,7 @@ export default class BrandModelController extends BaseController {
         res.send(updatedBrandModel);
     }
 
-    async deleteById(req: express.Request, res: express.Response, next: express.NextFunction) {
+    async deleteById(req: Request, res: Response, next: NextFunction) {
         const brandModelId = Number(req.params.id);
 
         if (brandModelId <= 0) {

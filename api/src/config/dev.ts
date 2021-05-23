@@ -30,7 +30,7 @@ const Config: IConfig = {
         maxFiles: 1,
         tempDirectory: 'static/temp/',
         timeout: 30000,
-        uploadDestinationDirectory: 'static/uploads',
+        uploadDestinationDirectory: 'static/uploads/',
         photos: {
             limits: {
                 minWidth: 320,

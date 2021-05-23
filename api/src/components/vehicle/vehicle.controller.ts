@@ -73,16 +73,38 @@ export default class VehicleController extends BaseController {
 
         res.send(result);
     }
-    // async deleteById(req: Request, res: Response, next: NextFunction) {
-    //     const categoryId = Number(req.params.id);
+    async deleteById(req: Request, res: Response, next: NextFunction) {
+        const id: number = +(req.params?.id);
 
-    //     if (categoryId <= 0) {
-    //         res.status(400).send(["The category ID must be a numerical value larger than 0."]);
-    //         return;
-    //     }
+        if (id <= 0) {
+            res.sendStatus(404);
+            return;
+        }
+        const item: VehicleModel | null = await this.services.vehicleService.getById(id);
 
-    //     res.send(await this.services.vehicleService.delete(categoryId));
-    // }
+        if (item == null) {
+            res.sendStatus(404);
+            return;
+        }
+        res.send(await this.services.vehicleService.delete(id));
+    }
+
+    async deletePhotoByVehicleId(req: Request, res: Response, next: NextFunction) {
+        const vehicleId: number = +(req.params?.id);
+
+        if (vehicleId <= 0) {
+            res.sendStatus(404);
+            return;
+        }
+
+        const result = await this.services.vehicleService.deletePhotoByVehicleId(vehicleId);
+
+        if (result === null) {
+            res.sendStatus(404);
+            return;
+        }
+        res.send(result);
+    }
 
     public async addVehiclePhoto(req: Request, res: Response) {
         const id: number = +(req.params?.id);

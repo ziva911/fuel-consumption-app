@@ -8,6 +8,10 @@ import Photo from "../photo/photo.model";
 import { IUploadPhoto } from "../photo/dto/ICreatePhoto";
 import BrandModelModel from '../brand-model/brand-model.model';
 import FuelTypeModel from '../fuel-type/fuel-type.model';
+import * as fs from 'fs';
+import Config from '../../config/dev';
+import * as path from 'path';
+import * as rimraf from "rimraf";
 
 class VehicleModelAdapterOptions implements IModelAdapterOptions {
     loadParent: boolean = false;
@@ -255,50 +259,194 @@ export default class VehicleService extends BaseService<VehicleModel> {
                 });
         });
     }
-    // public async update(vehicleId: number, data: IUpdateVehicle): Promise<VehicleModel | IErrorResponse> {
-    //     return new Promise<VehicleModel | IErrorResponse>((result) => {
-    //         const sql: string = `
-    //             UPDATE
-    //                 vehicleId
-    //             SET
-    //                 name = ?,
-    //                 image_path = ?,
-    //                 parent__category_id = ?
-    //             WHERE
-    //                 category_id = ?;`;
 
-    //         this.db.execute(sql, [data.name, data.imagePath, data.parentCategoryId ?? null, vehicleId])
-    //             .then(async res => {
-    //                 result(await this.getById(vehicleId));
-    //             })
-    //             .catch(err => {
-    //                 result({
-    //                     errorCode: err?.errno,
-    //                     message: err?.sqlMessage,
-    //                 });
-    //             });
-    //     });
-    // }
-    // public async delete(vehicleId: number): Promise<IErrorResponse> {
-    //     return new Promise<IErrorResponse>((result) => {
-    //         const sql: string = "DELETE FROM vehicle WHERE vehicle_id = ?;";
+    public async delete(vehicleId: number): Promise<IErrorResponse> {
+        return new Promise<IErrorResponse>(async resolve => {
+            const currentVehicle = await this.getById(vehicleId, { loadChildren: true });
+            let imagePathsToDelete = [];
 
-    //         this.db.execute(sql, [vehicleId])
-    //             .then(async res => {
-    //                 const data: any = res;
-    //                 result({
-    //                     errorCode: 0,
-    //                     message: `Deleted ${data[0].affectedRows} rows.`,
-    //                 });
-    //             })
-    //             .catch(err => {
-    //                 result({
-    //                     errorCode: err?.errno,
-    //                     message: err?.sqlMessage,
-    //                 });
-    //             });
-    //     });
-    // }
+            this.db.beginTransaction()
+                .then(async () => {
+                    if (await this.deleteVehicleRefuelHistory(vehicleId)) {
+                        return;
+                    }
+                    throw {
+                        errno: -100,
+                        sqlMessage: 'Could not delete vehicle records in refuel history.',
+                    };
+                })
+                .then(async () => {
+                    const deletePhotos = await this.deleteVehiclePhotos(vehicleId);
+
+                    if (deletePhotos === false) {
+                        throw {
+                            errno: -100,
+                            sqlMessage: 'Could not delete vehicle photos. Files will not be deleted.',
+                        };
+                    }
+                    imagePathsToDelete = deletePhotos;
+                })
+                .then(async () => {
+                    const result = await this.deleteVehicleRecord(vehicleId);
+
+                    if (result === true) {
+                        return;
+                    }
+                    throw result;
+                })
+                .then(async () => {
+                    await this.db.commit();
+                })
+                .then(() => {
+                    for (const path of imagePathsToDelete) {
+                        this.deletePhotoAndResizedVersions(path);
+                    }
+                    return true;
+                })
+                .then(() => {
+                    resolve({
+                        errorCode: 0,
+                        message: "Vehicle deleted.",
+                    });
+                })
+                .catch(async err => {
+                    await this.db.rollback();
+
+                    resolve({
+                        errorCode: err?.errno,
+                        message: err?.sqlMessage,
+                    });
+                });
+        });
+    }
+    private async deleteVehicleRefuelHistory(vehicleId: number) {
+        return new Promise<boolean>(async resolve => {
+            this.db.execute(
+                `DELETE FROM refuel_history WHERE vehicle_id = ?;`,
+                [vehicleId,]
+            ).then(
+                () => {
+                    resolve(true);
+                }
+            ).catch(
+                err => {
+                    resolve(false);
+                }
+            );
+        });
+    }
+
+    public async deletePhotoByVehicleId(vehicleId: number): Promise<IErrorResponse | null> {
+        return new Promise<IErrorResponse | null>(async resolve => {
+            const [rows] = await this.db.execute(
+                `SELECT image_path FROM photo WHERE vehicle_id = ?;`,
+                [vehicleId],
+            );
+            if ((rows as any[])?.length) {
+
+                const filesToDelete: string[] = (rows as any[]).map(row => row?.image_path as string);
+
+                const imagePath = filesToDelete[0];
+                this.db.execute(
+                    `DELETE FROM photo WHERE vehicle_id =?;`,
+                    [vehicleId]
+                )
+                    .then(() => {
+                        this.deletePhotoAndResizedVersions(imagePath);
+                        resolve({
+                            errorCode: 0,
+                            message: 'Photo deleted',
+                        });
+                        return;
+                    })
+                    .catch(err => {
+                        resolve({
+                            errorCode: err?.errno,
+                            message: err?.sqlMessage,
+                        });
+                        return;
+                    });
+            }
+            resolve(null);
+            return
+        });
+    }
+
+
+    private async deleteVehiclePhotos(vehicleId: number): Promise<string[] | false> {
+        return new Promise<string[] | false>(async resolve => {
+            const [rows] = await this.db.execute(
+                `SELECT image_path FROM photo WHERE vehicle_id = ?;`,
+                [vehicleId],
+            );
+
+            if (!Array.isArray(rows) || rows.length === 0) {
+                resolve([]);
+                return;
+            }
+
+            const filesToDelete: string[] = (rows as any[]).map(row => row?.image_path as string);
+
+            this.db.execute(`
+                DELETE FROM
+                    photo
+                WHERE
+                    vehicle_id = ?;`,
+                [vehicleId]
+            ).then(
+                () => {
+                    resolve(filesToDelete);
+                }
+            ).catch(
+                () => {
+                    resolve(false);
+                }
+            );
+        });
+    }
+    private async deleteVehicleRecord(vehicleId: number) {
+        return new Promise<IErrorResponse | true>(resolve => {
+            this.db.execute(`
+                DELETE FROM
+                    vehicle
+                WHERE
+                    vehicle_id = ?;`,
+                [vehicleId,]
+            ).then(
+                () => {
+                    resolve(true);
+                }
+            ).catch(
+                err => {
+                    resolve({
+                        errorCode: err?.errno,
+                        message: err?.sqlMessage,
+                    });
+                }
+            );
+        });
+    }
+    private async deletePhotoAndResizedVersions(imagePath: string) {
+        try {
+            fs.unlinkSync(imagePath);
+
+            for (const resizeSpecification of Config.fileUploadOptions.photos.resizings) {
+                const parsedFilename = path.parse(imagePath);
+                const directory = parsedFilename.dir;
+                const namePart = parsedFilename.name;
+                const extPart = parsedFilename.ext;
+
+                const resizedVersionsPath = directory + "/" + namePart + resizeSpecification.sufix + extPart;
+
+                fs.unlinkSync(resizedVersionsPath);
+            }
+            let parsedFileDir = path.parse(imagePath).dir;
+            const configDir = Config.fileUploadOptions.uploadDestinationDirectory +
+                (Config.fileUploadOptions.uploadDestinationDirectory.endsWith('/') ? '' : '/');
+            parsedFileDir = parsedFileDir.replace(configDir, "");
+            rimraf(configDir + parsedFileDir.split("/")[0], function () { console.log("Directory deleted."); });
+        } catch (e) { }
+    }
 
     public async addVehiclePhoto(vehicleId: number, uploadPhoto: IUploadPhoto): Promise<VehicleModel | IErrorResponse | null> {
         return new Promise<VehicleModel | IErrorResponse | null>(resolve => {

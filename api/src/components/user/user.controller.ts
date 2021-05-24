@@ -100,7 +100,7 @@ export default class UserController extends BaseController {
             );
 
             const mailOptions: Mail.Options = {
-                to: userData.username,
+                to: userData.email,
                 subject: "Account registration",
                 html: `
                 <!doctype html>
@@ -158,7 +158,7 @@ export default class UserController extends BaseController {
             );
 
             const mailOptions: Mail.Options = {
-                to: userData.username,
+                to: userData.email,
                 subject: "Account verified",
                 html: `
                 <!doctype html>
@@ -208,7 +208,7 @@ export default class UserController extends BaseController {
         const result: User | IErrorResponse = await this.services.userService.create(item as ICreateUser, { loadVerified: true });
 
         if (!(result instanceof User)) {
-            if (result.message.includes("uq_user_username")) {
+            if (result.message.includes("uq_user_user_email")) {
                 return res.status(400).send({
                     errorCode: result.errorCode,
                     message: "An account already exists with that email"

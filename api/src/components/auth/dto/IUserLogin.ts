@@ -2,34 +2,30 @@ import Ajv from "ajv";
 
 const ajv = new Ajv();
 
-interface ICreateAdministrator {
+interface IUserLogin {
     email: string;
     password: string;
 }
 
-const ICreateAdministratorSchema = {
+const IUserLoginSchemaValidator = ajv.compile({
     type: "object",
     properties: {
         email: {
             type: "string",
             minLength: 5,
-            maxLength: 32
+            maxLength: 255,
         },
         password: {
             type: "string",
             minLength: 5,
-            maxLength: 128
-        }
+            maxLength: 128,
+        },
     },
     required: [
         "email",
         "password"
     ],
     additionalProperties: false,
-}
-
-const ICreateAdministratorSchemaValidator = ajv.compile(ICreateAdministratorSchema);
-
-export { ICreateAdministratorSchema };
-export { ICreateAdministratorSchemaValidator };
-export { ICreateAdministrator };
+});
+export { IUserLoginSchemaValidator };
+export { IUserLogin };

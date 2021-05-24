@@ -16,7 +16,7 @@ export default class AdministratorService extends BaseService<Administrator> {
     ): Promise<Administrator> {
         const item: Administrator = new Administrator();
         item.administratorId = Number(data?.administrator_id);
-        item.username = data?.username;
+        item.email = data?.administrator_email;
         item.passwordHash = data?.password_hash;
 
         return item;
@@ -35,18 +35,26 @@ export default class AdministratorService extends BaseService<Administrator> {
         return super.getByIdFromTable<AdministratorAdapterOptions>("administrator", adminId, options);
     }
 
+    public async getByEmail(email: string, options: Partial<AdministratorAdapterOptions> = {}): Promise<Administrator | null> {
+        const result = await super.getByFieldIdFromTable<AdministratorAdapterOptions>('administrator', 'administrator_email', email, options);
+        if (!Array.isArray(result) || result.length === 0) {
+            return null;
+        }
+        return result[0];
+    }
+
     public async create(data: ICreateAdministrator): Promise<Administrator | IErrorResponse> {
         return new Promise<Administrator | IErrorResponse>((result) => {
             const sql: string = `
                 INSERT
                     administrator
                 SET
-                    username = ?,
+                    administrator_email = ?,
                     password_hash = ?;`;
 
             const passwordHash = bcypt.hashSync(data.password, 12);
 
-            this.db.execute(sql, [data.username, passwordHash])
+            this.db.execute(sql, [data.email, passwordHash])
                 .then(async res => {
                     const resultData: any = { ...res };
                     const newAdminId: number = Number(resultData[0]?.insertId);

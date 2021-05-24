@@ -19,7 +19,7 @@ export default class UserService extends BaseService<User> {
     ): Promise<User> {
         const item: User = new User();
         item.userId = Number(data?.user_id);
-        item.username = data?.username;
+        item.email = data?.user_email;
         item.firstName = data?.first_name;
         item.lastName = data?.last_name;
         item.phoneNumber = data?.phone_number;
@@ -97,6 +97,14 @@ export default class UserService extends BaseService<User> {
         })
     }
 
+    public async getByEmail(email: string, options: Partial<UserAdapterOptions> = { loadVerified: true }): Promise<User | null> {
+        const result = await super.getByFieldIdFromTable<UserAdapterOptions>('user', 'user_email', email, options);
+        if (!Array.isArray(result) || result.length === 0) {
+            return null;
+        }
+        return result[0];
+    }
+
     public async create(data: ICreateUser, options: Partial<UserAdapterOptions> = { loadVerified: false }): Promise<User | IErrorResponse> {
         return new Promise<User | IErrorResponse>((result) => {
 
@@ -107,7 +115,7 @@ export default class UserService extends BaseService<User> {
                 INSERT
                     user
                 SET
-                    username = ?,
+                    user_email = ?,
                     password_hash = ?,
                     first_name = ?,
                     last_name = ?,
@@ -116,7 +124,7 @@ export default class UserService extends BaseService<User> {
                     language = ?,
                     verification_code = ?;`,
                 [
-                    data.username,
+                    data.email,
                     passwordHash,
                     data.firstName,
                     data.lastName,

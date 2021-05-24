@@ -3,7 +3,7 @@ import Ajv from "ajv";
 const ajv = new Ajv();
 
 interface ICreateUser {
-    username: string;
+    email: string;
     password: string;
     firstName: string;
     lastName: string;
@@ -15,10 +15,10 @@ interface ICreateUser {
 const ICreateUserSchema = {
     type: "object",
     properties: {
-        username: {
+        email: {
             type: "string",
-            minLength: 2,
-            maxLength: 64
+            minLength: 5,
+            maxLength: 255
         },
         password: {
             type: "string",
@@ -51,7 +51,7 @@ const ICreateUserSchema = {
 
     },
     required: [
-        "username",
+        "email",
         "password",
         "firstName",
         "lastName",

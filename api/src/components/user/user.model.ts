@@ -5,7 +5,7 @@ export default class User implements IModel {
     userId: number;
     firstName: string;
     lastName: string;
-    username: string;
+    email: string;
     passwordHash: string;
     phoneNumber: string;
     currency: 'RSD' | 'EUR' | 'USD';

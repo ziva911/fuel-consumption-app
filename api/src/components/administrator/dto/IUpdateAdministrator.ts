@@ -11,7 +11,7 @@ const IUpdateAdministratorSchema = {
     properties: {
         password: {
             type: "string",
-            minLength: 2,
+            minLength: 5,
             maxLength: 128
         }
     },

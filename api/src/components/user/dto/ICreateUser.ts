@@ -22,18 +22,18 @@ const ICreateUserSchema = {
         },
         password: {
             type: "string",
-            minLength: 2,
+            minLength: 5,
             maxLength: 128
         },
         firstName: {
             type: "string",
             minLength: 2,
-            maxLength: 128
+            maxLength: 32
         },
         lastName: {
             type: "string",
             minLength: 2,
-            maxLength: 128
+            maxLength: 32
         },
         phoneNumber: {
             type: "string",
@@ -52,7 +52,12 @@ const ICreateUserSchema = {
     },
     required: [
         "username",
-        "password"
+        "password",
+        "firstName",
+        "lastName",
+        "phoneNumber",
+        "currency",
+        "language"
     ],
     additionalProperties: false,
 }

@@ -12,12 +12,12 @@ const ICreateAdministratorSchema = {
     properties: {
         username: {
             type: "string",
-            minLength: 2,
-            maxLength: 64
+            minLength: 5,
+            maxLength: 32
         },
         password: {
             type: "string",
-            minLength: 2,
+            minLength: 5,
             maxLength: 128
         }
     },

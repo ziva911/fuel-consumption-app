@@ -1,20 +1,20 @@
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import IModelAdapterOptions from '../../common/IModelAdapterOptions.interface';
 import BaseService from '../../services/BaseService';
-import AdministratorModel from './administrator.model';
+import Administrator from './administrator.model';
 import { ICreateAdministrator } from './dto/ICreateAdministrator';
 import * as bcypt from 'bcrypt';
 import { IUpdateAdministrator } from './dto/IUpdateAdministrator';
 
-class AdministratorModelAdapterOptions implements IModelAdapterOptions { }
+class AdministratorAdapterOptions implements IModelAdapterOptions { }
 
-export default class AdministratorService extends BaseService<AdministratorModel> {
+export default class AdministratorService extends BaseService<Administrator> {
 
     async adaptToModel(
         data: any,
-        options: Partial<AdministratorModelAdapterOptions>
-    ): Promise<AdministratorModel> {
-        const item: AdministratorModel = new AdministratorModel();
+        options: Partial<AdministratorAdapterOptions>
+    ): Promise<Administrator> {
+        const item: Administrator = new Administrator();
         item.administratorId = Number(data?.administrator_id);
         item.username = data?.username;
         item.passwordHash = data?.password_hash;
@@ -23,20 +23,20 @@ export default class AdministratorService extends BaseService<AdministratorModel
     }
 
     public async getAll(
-        options: Partial<AdministratorModelAdapterOptions> = { loadChildren: true }
-    ): Promise<AdministratorModel[]> {
-        return this.getAllFromTable<AdministratorModelAdapterOptions>("administrator", options);
+        options: Partial<AdministratorAdapterOptions> = { loadChildren: true }
+    ): Promise<Administrator[]> {
+        return this.getAllFromTable<AdministratorAdapterOptions>("administrator", options);
     }
 
     public async getById(
         adminId: number,
-        options: Partial<AdministratorModelAdapterOptions> = { loadChildren: true }
-    ): Promise<AdministratorModel | null> {
-        return super.getByIdFromTable<AdministratorModelAdapterOptions>("administrator", adminId, options);
+        options: Partial<AdministratorAdapterOptions> = { loadChildren: true }
+    ): Promise<Administrator | null> {
+        return super.getByIdFromTable<AdministratorAdapterOptions>("administrator", adminId, options);
     }
 
-    public async create(data: ICreateAdministrator): Promise<AdministratorModel | IErrorResponse> {
-        return new Promise<AdministratorModel | IErrorResponse>((result) => {
+    public async create(data: ICreateAdministrator): Promise<Administrator | IErrorResponse> {
+        return new Promise<Administrator | IErrorResponse>((result) => {
             const sql: string = `
                 INSERT
                     administrator
@@ -45,6 +45,7 @@ export default class AdministratorService extends BaseService<AdministratorModel
                     password_hash = ?;`;
 
             const passwordHash = bcypt.hashSync(data.password, 12);
+
             this.db.execute(sql, [data.username, passwordHash])
                 .then(async res => {
                     const resultData: any = { ...res };
@@ -60,8 +61,8 @@ export default class AdministratorService extends BaseService<AdministratorModel
         });
     }
 
-    public async update(adminId: number, data: IUpdateAdministrator): Promise<AdministratorModel | IErrorResponse> {
-        return new Promise<AdministratorModel | IErrorResponse>((result) => {
+    public async update(adminId: number, data: IUpdateAdministrator): Promise<Administrator | IErrorResponse> {
+        return new Promise<Administrator | IErrorResponse>((result) => {
             const sql: string = `
                 UPDATE
                     administrator

@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { ICreateAdministrator, ICreateAdministratorSchemaValidator } from './dto/ICreateAdministrator';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import BaseController from '../../services/BaseController';
-import AdministratorModel from './administrator.model';
+import Administrator from './administrator.model';
 import { IUpdateAdministratorSchemaValidator, IUpdateAdministrator } from './dto/IUpdateAdministrator';
 
 export default class AdministratorController extends BaseController {
@@ -19,7 +19,7 @@ export default class AdministratorController extends BaseController {
             return;
         }
 
-        const item: AdministratorModel | null = await this.services.administratorService.getById(id);
+        const item: Administrator | null = await this.services.administratorService.getById(id);
 
         if (item == null) {
             res.sendStatus(404);
@@ -37,7 +37,7 @@ export default class AdministratorController extends BaseController {
             return;
         }
 
-        const newAdmin: AdministratorModel | IErrorResponse = await this.services.administratorService.create(item as ICreateAdministrator);
+        const newAdmin: Administrator | IErrorResponse = await this.services.administratorService.create(item as ICreateAdministrator);
 
         res.send(newAdmin);
     }
@@ -56,7 +56,7 @@ export default class AdministratorController extends BaseController {
             return;
         }
 
-        const updatedAdmin: AdministratorModel | IErrorResponse = await this.services.administratorService.update(adminId, item as IUpdateAdministrator);
+        const updatedAdmin: Administrator | IErrorResponse = await this.services.administratorService.update(adminId, item as IUpdateAdministrator);
 
         if (updatedAdmin == null) {
             res.status(404).send("The brand with that id does not exist");

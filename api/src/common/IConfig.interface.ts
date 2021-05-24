@@ -1,5 +1,6 @@
 export default interface IConfig {
     server: {
+        domain: string,
         port: number,
         static: {
             path: string,
@@ -43,5 +44,14 @@ export default interface IConfig {
                 fit: 'cover' | 'contain'
             }[],
         }
+    },
+    mail: {
+        hostname: string,
+        port: number,
+        secure: boolean,
+        fromEmail: string,
+        username: string,
+        password: string,
+        debug: boolean
     }
 }

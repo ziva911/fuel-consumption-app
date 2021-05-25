@@ -17,7 +17,7 @@ export default class VehicleController extends BaseController {
         let userId;
         if (req.authorized?.role === 'user') {
             userId = Number(req.authorized?.id);
-            if (!userId) {
+            if (userId <= 0) {
                 res.sendStatus(401);
                 return;
             }
@@ -48,7 +48,7 @@ export default class VehicleController extends BaseController {
             return;
         }
         if (req.authorized?.role === 'user' && Number(vehicle.userId) !== Number(req.authorized?.id)) {
-            res.sendStatus(404);
+            res.status(401).send("Not your vehicle");
             return;
         }
         res.send(vehicle);

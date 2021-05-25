@@ -86,7 +86,42 @@ export default abstract class BaseService<ReturnModel extends IModel> {
                 sql = `${sql} WHERE ${fieldName} = ?;`;
             }
         }
+        const [rows, fields] = await this.db.execute(sql, [fieldValue]);
 
+        if (Array.isArray(rows)) {
+            for (const row of rows) {
+                items.push(
+                    await this.adaptToModel(
+                        row,
+                        options,
+                    )
+                );
+            }
+        }
+
+        return items;
+    }
+
+    protected async getByFieldIdFromTableWithOrderBy<AdapterOptions extends IModelAdapterOptions>(
+        tableName: string,
+        fieldName: string = null,
+        fieldValue: any = null,
+        orderByField: string = `${tableName}_id`,
+        orderByValue: any = `ASC`,
+        options: Partial<AdapterOptions> = {},
+    ): Promise<ReturnModel[]> {
+        const items: ReturnModel[] = [];
+
+        let sql: string = `SELECT * FROM ${tableName}`;
+
+        if (fieldName) {
+            if (fieldValue === null) {
+                sql = `${sql} WHERE ${fieldName} IS NULL`;
+            } else {
+                sql = `${sql} WHERE ${fieldName} = ?`;
+            }
+        }
+        sql = `${sql} ORDER BY ${orderByField} ${orderByValue};`
         const [rows, fields] = await this.db.execute(sql, [fieldValue]);
 
         if (Array.isArray(rows)) {

@@ -153,7 +153,6 @@ export default class UserService extends BaseService<User> {
                     first_name = ?,
                     last_name = ?,
                     phone_number = ?,
-                    currency = ?,
                     language = ?
                 WHERE
                     user_id = ?;`,
@@ -162,7 +161,6 @@ export default class UserService extends BaseService<User> {
                     data.firstName,
                     data.lastName,
                     data.phoneNumber,
-                    data.currency,
                     data.language,
                     userId
                 ])

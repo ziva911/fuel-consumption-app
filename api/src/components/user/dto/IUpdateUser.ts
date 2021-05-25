@@ -7,7 +7,6 @@ interface IUpdateUser {
     firstName: string;
     lastName: string;
     phoneNumber: string;
-    currency: 'RSD' | 'EUR' | 'USD';
     language: 'SR' | 'EN';
 }
 
@@ -34,10 +33,6 @@ const IUpdateUserSchema = {
             minLength: 7,
             maxLength: 15,
         },
-        currency: {
-            type: "string",
-            maxLength: 5
-        },
         language: {
             type: "string",
             maxLength: 5
@@ -49,7 +44,6 @@ const IUpdateUserSchema = {
         "firstName",
         "lastName",
         "phoneNumber",
-        "currency",
         "language"
     ],
     additionalProperties: false,

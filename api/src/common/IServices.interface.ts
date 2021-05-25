@@ -5,6 +5,7 @@ import AdministratorService from '../components/administrator/administrator.serv
 import UserService from '../components/user/user.service';
 import PhotoService from '../components/photo/photo.service';
 import VehicleService from '../components/vehicle/vehicle.service';
+import RefuelHistoryService from '../components/refuel_history/refuel-history.service';
 
 export default interface IServices {
     brandService: BrandService,
@@ -13,5 +14,6 @@ export default interface IServices {
     photoService: PhotoService,
     vehicleService: VehicleService,
     administratorService: AdministratorService,
-    userService: UserService
+    userService: UserService,
+    refuelHistoryService: RefuelHistoryService
 }

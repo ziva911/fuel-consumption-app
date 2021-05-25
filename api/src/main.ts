@@ -23,6 +23,8 @@ import UserService from "./components/user/user.service";
 import PhotoService from "./components/photo/photo.service";
 import VehicleService from './components/vehicle/vehicle.service';
 import AuthRouter from './components/auth/auth.router';
+import RefuelHistoryRouter from "./components/refuel_history/refuel-history.router";
+import RefuelHistoryService from "./components/refuel_history/refuel-history.service";
 
 async function main() {
 
@@ -91,6 +93,7 @@ async function main() {
         photoService: new PhotoService(resources),
         administratorService: new AdministratorService(resources),
         userService: new UserService(resources),
+        refuelHistoryService: new RefuelHistoryService(resources)
     }
 
     Router.setupRoutes(
@@ -104,6 +107,7 @@ async function main() {
             new UserRouter(),
             new AuthRouter(),
             new VehicleRouter(),
+            new RefuelHistoryRouter(),
         ]
     );
     app.use((err, req, res, next) => {

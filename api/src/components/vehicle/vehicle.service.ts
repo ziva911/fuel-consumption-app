@@ -86,6 +86,32 @@ export default class VehicleService extends BaseService<VehicleModel> {
         return super.getByIdFromTable("vehicle", vehicleId, options);
     }
 
+    async updateVehicleMileageCurrent(vehicleId: number, mileageCurrent: number): Promise<IErrorResponse | false> {
+        return new Promise<IErrorResponse | false>((result) => {
+
+            this.db.execute(`
+                UPDATE
+                    vehicle
+                SET
+                    mileage_current = ?
+                WHERE
+                    vehicle_id = ?;`,
+                [
+                    mileageCurrent,
+                    vehicleId
+                ])
+                .then(async _ => {
+                    result({
+                        errorCode: 0,
+                        message: "Vehicle successfully updated"
+                    });
+                })
+                .catch(err => {
+                    result(false);
+                });
+        });
+    }
+
     async create(data: ICreateVehicle, uploadPhoto: IUploadPhoto): Promise<VehicleModel | IErrorResponse> {
         return new Promise<VehicleModel | IErrorResponse>((resolve) => {
             this.db.beginTransaction()

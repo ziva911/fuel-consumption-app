@@ -27,10 +27,20 @@ export default class BrandModelRouter implements IRouter {
             AuthMiddleware.getVerifier("administrator"),
             brandModelController.create.bind(brandModelController)
         );
+        app.post(
+            "/api/model/:mid/photo",
+            AuthMiddleware.getVerifier("administrator"),
+            brandModelController.addModelPhoto.bind(brandModelController)
+        );
         app.put(
             "/api/model/:id",
             AuthMiddleware.getVerifier("administrator"),
             brandModelController.updateById.bind(brandModelController)
+        );
+        app.put(
+            "/api/model/:mid/photo",
+            AuthMiddleware.getVerifier("administrator"),
+            brandModelController.updateModelPhoto.bind(brandModelController)
         );
         app.delete(
             "/api/model/:id",

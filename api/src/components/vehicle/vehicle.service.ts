@@ -423,7 +423,7 @@ export default class VehicleService extends BaseService<VehicleModel> {
         catch (e) { }
     }
 
-    public async addVehiclePhoto(vehicleId: number, uploadPhoto: IUploadPhoto): Promise<VehicleModel | IErrorResponse | null> {
+    async addVehiclePhoto(vehicleId: number, uploadPhoto: IUploadPhoto): Promise<VehicleModel | IErrorResponse | null> {
         return new Promise<VehicleModel | IErrorResponse | null>(resolve => {
             this.db.beginTransaction()
                 .then(

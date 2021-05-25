@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import { ICreateAdministrator, ICreateAdministratorSchemaValidator } from './dto/ICreateAdministrator';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import BaseController from '../../services/BaseController';
@@ -7,11 +7,11 @@ import { IUpdateAdministratorSchemaValidator, IUpdateAdministrator } from './dto
 
 export default class AdministratorController extends BaseController {
 
-    async getAll(req: Request, res: Response, next: NextFunction) {
+    async getAll(req: Request, res: Response) {
         res.send(await this.services.administratorService.getAll());
     }
 
-    async getById(req: Request, res: Response, next: NextFunction) {
+    async getById(req: Request, res: Response) {
         const id: number = Number(req.params?.id);
 
         if (!id) {
@@ -29,7 +29,7 @@ export default class AdministratorController extends BaseController {
         res.send(item);
     }
 
-    async create(req: Request, res: Response, next: NextFunction) {
+    async create(req: Request, res: Response) {
         const item = req.body;
 
         if (!ICreateAdministratorSchemaValidator(item)) {
@@ -42,7 +42,7 @@ export default class AdministratorController extends BaseController {
         res.send(newAdmin);
     }
 
-    async updateById(req: Request, res: Response, next: NextFunction) {
+    async updateById(req: Request, res: Response) {
         const item = req.body;
         const adminId = Number(req.params.id);
 
@@ -66,7 +66,7 @@ export default class AdministratorController extends BaseController {
         res.send(updatedAdmin);
     }
 
-    async deleteById(req: Request, res: Response, next: NextFunction) {
+    async deleteById(req: Request, res: Response) {
         const adminId = Number(req.params.id);
 
         if (adminId <= 0) {

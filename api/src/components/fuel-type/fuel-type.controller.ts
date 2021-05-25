@@ -1,17 +1,17 @@
+import { Request, Response } from 'express';
+import IErrorResponse from '../../common/IErrorResponse.interface';
+import BaseController from '../../services/BaseController';
 import FuelTypeModel from './fuel-type.model';
 import { ICreateFuelType, ICreateFuelTypeSchemaValidator } from './dto/ICreateFuelType';
 import { IUpdateFuelType, IUpdateFuelTypeSchemaValidator } from './dto/IUpdateFuelType';
-import IErrorResponse from '../../common/IErrorResponse.interface';
-import BaseController from '../../services/BaseController';
-import { Request, Response, NextFunction } from 'express';
 
 export default class FuelTypeController extends BaseController {
 
-    async getAll(req: Request, res: Response, next: NextFunction) {
+    async getAll(req: Request, res: Response) {
         res.send(await this.services.fuelTypeService.getAll());
     }
 
-    async getById(req: Request, res: Response, next: NextFunction) {
+    async getById(req: Request, res: Response) {
         const id: number = Number(req.params?.id);
 
         if (!id) {
@@ -29,7 +29,7 @@ export default class FuelTypeController extends BaseController {
         res.send(item);
     }
 
-    async create(req: Request, res: Response, next: NextFunction) {
+    async create(req: Request, res: Response) {
         const item = req.body;
 
         if (!ICreateFuelTypeSchemaValidator(item)) {
@@ -42,7 +42,7 @@ export default class FuelTypeController extends BaseController {
         res.send(newFuelType);
     }
 
-    async updateById(req: Request, res: Response, next: NextFunction) {
+    async updateById(req: Request, res: Response) {
         const item = req.body;
         const id = Number(req.params.id);
 
@@ -66,7 +66,7 @@ export default class FuelTypeController extends BaseController {
         res.send(updatedFuelType);
     }
 
-    async deleteById(req: Request, res: Response, next: NextFunction) {
+    async deleteById(req: Request, res: Response) {
         const id = Number(req.params.id);
 
         if (id <= 0) {

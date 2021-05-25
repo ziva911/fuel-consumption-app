@@ -8,10 +8,9 @@ export default class FuelTypeRouter implements IRouter {
 
     setupRoutes(app: Application, resources: IApplicationResources) {
 
-        // Controller
         const fuelTypeController: FuelTypeController = new FuelTypeController(resources);
 
-        // Routing
+        // Fuel type routing
         app.get(
             "/api/fuel-type",
             AuthMiddleware.getVerifier("user", "administrator"),

@@ -9,7 +9,7 @@ import BaseController from '../../services/BaseController';
 
 export default class AuthController extends BaseController {
 
-    public async userLogin(req: Request, res: Response) {
+    async userLogin(req: Request, res: Response) {
 
         if (!IUserLoginSchemaValidator(req.body)) {
             return res.status(400).send(IUserLoginSchemaValidator.errors);
@@ -59,7 +59,7 @@ export default class AuthController extends BaseController {
         });
     }
 
-    public async administratorLogin(req: Request, res: Response) {
+    async administratorLogin(req: Request, res: Response) {
 
         if (!IAdministratorLoginSchemaValidator(req.body)) {
             return res.status(400).send(IAdministratorLoginSchemaValidator.errors);

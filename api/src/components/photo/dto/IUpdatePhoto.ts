@@ -3,7 +3,6 @@ import Ajv from "ajv";
 const ajv = new Ajv();
 
 interface IUpdatePhoto {
-    id: number;
     imagePath: string;
     brandModelId: number;
     manufactureYear: number;
@@ -13,20 +12,16 @@ interface IUpdatePhoto {
 const IUpdatePhotoSchema = {
     type: "object",
     properties: {
-        id: {
-            type: "number",
-            minimum: 1
-        },
         imagePath: {
             type: "string",
             maxLength: 255
         },
         brandModelId: {
-            type: "number",
+            type: ["integer"],
             minimum: 1
         },
         manufactureYear: {
-            type: "number",
+            type: ["integer"],
             minimum: 1800,
             maximum: (new Date()).getFullYear()
         },
@@ -37,7 +32,10 @@ const IUpdatePhotoSchema = {
         }
     },
     required: [
-        "imagePath"
+        "imagePath",
+        "brandModelId",
+        "manufactureYear",
+        "paintColor"
     ],
     additionalProperties: true,
 }

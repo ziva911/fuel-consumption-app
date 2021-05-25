@@ -13,10 +13,7 @@ class UserAdapterOptions implements IModelAdapterOptions {
 
 export default class UserService extends BaseService<User> {
 
-    async adaptToModel(
-        data: any,
-        options: Partial<UserAdapterOptions>
-    ): Promise<User> {
+    async adaptToModel(data: any, options: Partial<UserAdapterOptions>): Promise<User> {
         const item: User = new User();
         item.userId = Number(data?.user_id);
         item.email = data?.user_email;
@@ -38,23 +35,15 @@ export default class UserService extends BaseService<User> {
         return item;
     }
 
-    public async getAll(
-        options: Partial<UserAdapterOptions> = { loadVerified: true }
-    ): Promise<User[]> {
+    async getAll(options: Partial<UserAdapterOptions> = { loadVerified: true }): Promise<User[]> {
         return this.getAllFromTable<UserAdapterOptions>("user", options);
     }
 
-    public async getById(
-        userId: number,
-        options: Partial<UserAdapterOptions> = { loadVerified: false }
-    ): Promise<User | null> {
+    async getById(userId: number, options: Partial<UserAdapterOptions> = { loadVerified: false }): Promise<User | null> {
         return super.getByIdFromTable<UserAdapterOptions>("user", userId, options);
     }
 
-    public async getUserByVerificationCode(
-        verificationCode: string,
-        options: Partial<UserAdapterOptions> = { loadVerified: true }
-    ): Promise<User | IErrorResponse> {
+    async getUserByVerificationCode(verificationCode: string, options: Partial<UserAdapterOptions> = { loadVerified: true }): Promise<User | IErrorResponse> {
         return new Promise<User | IErrorResponse>((result) => {
             this.getOneByFieldsValueFromTable<UserAdapterOptions>("user", [{ name: "verification_code", value: verificationCode }], options)
                 .then(res => {
@@ -75,8 +64,9 @@ export default class UserService extends BaseService<User> {
                         [
                             true,
                             res.userId
-                        ]).then(
-                            async () => {
+                        ])
+                        .then(
+                            async _ => {
                                 result(await this.getById(res.userId));
                             })
                         .catch(
@@ -97,7 +87,7 @@ export default class UserService extends BaseService<User> {
         })
     }
 
-    public async getByEmail(email: string, options: Partial<UserAdapterOptions> = { loadVerified: true }): Promise<User | null> {
+    async getByEmail(email: string, options: Partial<UserAdapterOptions> = { loadVerified: true }): Promise<User | null> {
         const result = await super.getByFieldIdFromTable<UserAdapterOptions>('user', 'user_email', email, options);
         if (!Array.isArray(result) || result.length === 0) {
             return null;
@@ -105,7 +95,7 @@ export default class UserService extends BaseService<User> {
         return result[0];
     }
 
-    public async create(data: ICreateUser, options: Partial<UserAdapterOptions> = { loadVerified: false }): Promise<User | IErrorResponse> {
+    async create(data: ICreateUser, options: Partial<UserAdapterOptions> = { loadVerified: false }): Promise<User | IErrorResponse> {
         return new Promise<User | IErrorResponse>((result) => {
 
             const passwordHash = bcypt.hashSync(data.password, 12);
@@ -150,20 +140,8 @@ export default class UserService extends BaseService<User> {
         });
     }
 
-    public async update(userId: number, data: IUpdateUser): Promise<User | IErrorResponse> {
+    async update(userId: number, data: IUpdateUser): Promise<User | IErrorResponse> {
         return new Promise<User | IErrorResponse>((result) => {
-            const sql: string = `
-                UPDATE
-                    user
-                SET
-                    password_hash = ?,
-                    first_name = ?,
-                    last_name = ?,
-                    phone_number = ?,
-                    currency = ?,
-                    language = ?
-                WHERE
-                    user_id = ?;`;
 
             const passwordHash = bcypt.hashSync(data.password, 12);
 
@@ -189,7 +167,7 @@ export default class UserService extends BaseService<User> {
                     userId
                 ])
                 .then(
-                    async res => {
+                    async _ => {
                         result(await this.getById(userId));
                     }
                 )
@@ -204,15 +182,10 @@ export default class UserService extends BaseService<User> {
         });
     }
 
-    public async delete(userId: number): Promise<IErrorResponse> {
+    async delete(userId: number): Promise<IErrorResponse> {
         return new Promise<IErrorResponse>((result) => {
-            const sql: string = `
-                DELETE FROM
-                    user
-                WHERE
-                    user_id = ?;`;
 
-            this.db.execute(sql, [userId])
+            this.db.execute(`DELETE FROM user WHERE user_id = ?;`, [userId])
                 .then(async res => {
                     const data: any = res;
                     result({
@@ -228,5 +201,4 @@ export default class UserService extends BaseService<User> {
                 });
         });
     }
-
 }

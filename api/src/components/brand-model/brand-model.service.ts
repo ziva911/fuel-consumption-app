@@ -5,6 +5,9 @@ import { IUpdateBrandModel } from "./dto/IUpdateBrandModel";
 import BrandModel from "./brand-model.model";
 import Brand from "../brand/brand.model";
 import IModelAdapterOptions from "../../common/IModelAdapterOptions.interface";
+import { ICreatePhoto, IUploadPhoto } from "../photo/dto/ICreatePhoto";
+import Photo from '../photo/photo.model';
+import { IUpdatePhoto } from "../photo/dto/IUpdatePhoto";
 
 class BrandModelAdapterOptions implements IModelAdapterOptions {
     loadParent: boolean = true; // BrandModel's parent is Brand class
@@ -69,6 +72,105 @@ export default class BrandModelService extends BaseService<BrandModel> {
                     });
                 });
         });
+    }
+
+    async addModelPhoto(data: ICreatePhoto, uploadPhoto: IUploadPhoto): Promise<Photo | IErrorResponse | null> {
+        return new Promise<Photo | IErrorResponse | null>(resolve => {
+            this.db.beginTransaction()
+                .then(() => {
+                    this.db.execute(`
+                                INSERT
+                                    photo
+                                SET
+                                    image_path = ?,
+                                    brand_model_id = ?,
+                                    manufacture_year = ?,
+                                    paint_color = ?;`,
+                        [
+                            uploadPhoto.imagePath,
+                            data.brandModelId,
+                            data.manufactureYear,
+                            data.paintColor
+                        ])
+                        .then(
+                            async (res: any) => {
+                                const newPhotoId: number = (res[0]?.insertId) as number;
+                                this.db.commit()
+                                    .then(async () => {
+                                        resolve(await this.services.photoService.getById(newPhotoId, { loadChildren: true }));
+                                    }).catch(err => {
+                                        resolve({
+                                            errorCode: err?.errno,
+                                            message: err?.sqlMessage,
+                                        });
+                                    });
+                            })
+                        .catch(err => {
+                            resolve({
+                                errorCode: err?.errno,
+                                message: err?.sqlMessage,
+                            });
+                        })
+                })
+                .catch(err => {
+                    resolve({
+                        errorCode: err?.errno,
+                        message: err?.sqlMessage,
+                    });
+                })
+        })
+
+
+    }
+
+    async updateModelPhoto(data: IUpdatePhoto, uploadPhoto: IUploadPhoto): Promise<Photo | IErrorResponse | null> {
+        // check if there is any photo with req data to updata, and if not redirect to create.
+        const photo = await this.services.photoService.getPhotoByBrandModelAndYearAndColor(data.brandModelId, data.manufactureYear, data.paintColor, { loadChildren: false });
+        if (!photo) {
+            return this.addModelPhoto(data as ICreatePhoto, uploadPhoto);
+        }
+        return new Promise<Photo | IErrorResponse | null>(resolve => {
+            this.db.beginTransaction()
+                .then(() => {
+                    this.db.execute(`
+                        UPDATE
+                            photo
+                        SET
+                            image_path = ?
+                        WHERE
+                            photo_id = ?;`,
+                        [
+                            uploadPhoto.imagePath,
+                            photo.id
+                        ])
+                        .then(
+                            async _ => {
+                                this.db.commit()
+                                    .then(async () => {
+                                        resolve(await this.services.photoService.getById(photo.id, { loadChildren: true }));
+                                    }).catch(err => {
+                                        resolve({
+                                            errorCode: err?.errno,
+                                            message: err?.sqlMessage,
+                                        });
+                                    });
+                            })
+                        .catch(err => {
+                            resolve({
+                                errorCode: err?.errno,
+                                message: err?.sqlMessage,
+                            });
+                        })
+                })
+                .catch(err => {
+                    resolve({
+                        errorCode: err?.errno,
+                        message: err?.sqlMessage,
+                    });
+                })
+        })
+
+
     }
 
     async update(brandModelId: number, data: IUpdateBrandModel): Promise<BrandModel | IErrorResponse> {

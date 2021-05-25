@@ -2,7 +2,6 @@ import Ajv from "ajv";
 
 const ajv = new Ajv();
 
-
 interface IAdministratorLogin {
     email: string;
     password: string;

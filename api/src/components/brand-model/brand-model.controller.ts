@@ -4,6 +4,8 @@ import BrandModel from './brand-model.model';
 import BaseController from '../../services/BaseController';
 import { ICreateBrandModel, ICreateBrandModelSchemaValidator } from './dto/ICreateBrandModel';
 import { IUpdateBrandModel, IUpdateBrandModelSchemaValidator } from './dto/IUpdateBrandModel';
+import { ICreatePhoto } from '../photo/dto/ICreatePhoto';
+import { IUpdatePhoto } from '../photo/dto/IUpdatePhoto';
 
 export default class BrandModelController extends BaseController {
 
@@ -52,6 +54,23 @@ export default class BrandModelController extends BaseController {
         res.send(newBrandModel);
     }
 
+    async addModelPhoto(req: Request, res: Response) {
+        // parse data from req
+        const item = req.body?.data;
+        const brandModelId: number = Number(req.params?.mid);
+        if (!brandModelId || brandModelId <= 0) {
+            res.sendStatus(404);
+            return;
+        }
+
+        //upload photo and its path into db
+        const uploadPhotos = await this.getUploadPhotos(req, res);
+        if (uploadPhotos.length === 0) {
+            return;
+        }
+        res.send(await this.services.brandModelService.addModelPhoto(item as ICreatePhoto, uploadPhotos[0]));
+    }
+
     async updateById(req: Request, res: Response) {
         const item = req.body;
         const brandModelId = Number(req.params.id);
@@ -73,6 +92,23 @@ export default class BrandModelController extends BaseController {
             return;
         }
         res.send(updatedBrandModel);
+    }
+
+    async updateModelPhoto(req: Request, res: Response) {
+        // parse data from req
+        const item = req.body?.data;
+        const brandModelId: number = Number(req.params?.mid);
+        if (!brandModelId || brandModelId <= 0) {
+            res.sendStatus(404);
+            return;
+        }
+
+        //upload photo and its path into db
+        const uploadPhotos = await this.getUploadPhotos(req, res);
+        if (uploadPhotos.length === 0) {
+            return;
+        }
+        res.send(await this.services.brandModelService.updateModelPhoto(item as IUpdatePhoto, uploadPhotos[0]));
     }
 
     async deleteById(req: Request, res: Response) {

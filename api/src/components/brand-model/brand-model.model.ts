@@ -1,9 +1,9 @@
 import IModel from '../../common/IModel.interface';
-import BrandModel from '../brand/brand.model';
+import Brand from '../brand/brand.model';
 
-export default class BrandModelModel implements IModel {
+export default class BrandModel implements IModel {
     id: number;
     name: string;
     brandId: number;
-    brand: BrandModel | null = null;
+    brand: Brand | null = null;
 };

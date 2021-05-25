@@ -1,28 +1,26 @@
-import VehicleModel from "./vehicle.model";
-import { ICreateVehicle } from "./dto/ICreateVehicle";
-import { IUpdateVehicle } from "./dto/IUpdateVehicle";
-import IErrorResponse from "../../common/IErrorResponse.interface";
-import BaseService from "../../services/BaseService";
-import IModelAdapterOptions from "../../common/IModelAdapterOptions.interface";
-import Photo from "../photo/photo.model";
-import { IUploadPhoto } from "../photo/dto/ICreatePhoto";
-import BrandModelModel from '../brand-model/brand-model.model';
-import FuelTypeModel from '../fuel-type/fuel-type.model';
-import * as fs from 'fs';
-import Config from '../../config/dev';
+
 import * as path from 'path';
 import * as rimraf from "rimraf";
+import * as fs from 'fs';
+import Config from '../../config/dev';
+import IErrorResponse from "../../common/IErrorResponse.interface";
+import IModelAdapterOptions from "../../common/IModelAdapterOptions.interface";
+import { ICreateVehicle } from "./dto/ICreateVehicle";
+import { IUpdateVehicle } from "./dto/IUpdateVehicle";
+import { IUploadPhoto } from "../photo/dto/ICreatePhoto";
+import BaseService from "../../services/BaseService";
+import VehicleModel from "./vehicle.model";
+import BrandModelModel from '../brand-model/brand-model.model';
+import FuelTypeModel from '../fuel-type/fuel-type.model';
+import Photo from "../photo/photo.model";
 
 class VehicleModelAdapterOptions implements IModelAdapterOptions {
     loadParent: boolean = false;
-    loadChildren: boolean = true; // child vozila automobila su klase tipa model brenda, vrsta goriva i photo
+    loadChildren: boolean = true; // vehicles "children" are classes BrandModel, FuelType & Photo
 }
 export default class VehicleService extends BaseService<VehicleModel> {
 
-    async adaptToModel(
-        data: any,
-        options: Partial<VehicleModelAdapterOptions>
-    ): Promise<VehicleModel> {
+    async adaptToModel(data: any, options: Partial<VehicleModelAdapterOptions>): Promise<VehicleModel> {
         const item: VehicleModel = new VehicleModel();
         item.vehicleId = Number(data?.vehicle_id);
         item.internalName = data?.internal_name;
@@ -30,12 +28,12 @@ export default class VehicleService extends BaseService<VehicleModel> {
         item.paintColor = data?.paint_color;
         item.mileageStart = Number(data?.mileage_start);
         item.mileageCurrent = Number(data?.mileage_current);
-        item.createdAt = data?.created_at; // YYYY-MM-DD HH:MM:SS.ffffff
+        item.createdAt = data?.created_at;
         item.modifiedAt = data?.modified_at;
         item.userId = Number(data?.user_id);
-
         item.fuelTypeId = Number(data?.fuel_type_id);
         item.brandModelId = Number(data?.brand_model_id);
+
         if (options?.loadChildren) {
             let photo: Photo = null;
             photo = (await this.getPhotoByVehicleId(Number(item.vehicleId)))[0];
@@ -76,21 +74,19 @@ export default class VehicleService extends BaseService<VehicleModel> {
         return this.services.photoService.getPhotoByBrandModelAndYearAndColor(brandModelId, manufactureYear, paintColor, { loadChildren: true });
     }
 
-    public async getAllByUserId(
-        userId: number,
-        options: Partial<VehicleModelAdapterOptions> = { loadChildren: true }
-    ): Promise<VehicleModel[]> {
+    async getAllByUserId(userId: number, options: Partial<VehicleModelAdapterOptions> = { loadChildren: true }): Promise<VehicleModel[]> {
         return this.getByFieldIdFromTable<VehicleModelAdapterOptions>("vehicle", "user_id", userId, options);
     }
 
-    public async getById(
-        vehicleId: number,
-        options: Partial<VehicleModelAdapterOptions> = { loadChildren: true })
-        : Promise<VehicleModel | null> {
+    async getAll(options: Partial<VehicleModelAdapterOptions> = { loadChildren: true }): Promise<VehicleModel[]> {
+        return this.getAllFromTable<VehicleModelAdapterOptions>("vehicle", options);
+    }
+
+    async getById(vehicleId: number, options: Partial<VehicleModelAdapterOptions> = { loadChildren: true }): Promise<VehicleModel | null> {
         return super.getByIdFromTable("vehicle", vehicleId, options);
     }
 
-    public async create(data: ICreateVehicle, uploadPhoto: IUploadPhoto): Promise<VehicleModel | IErrorResponse> {
+    async create(data: ICreateVehicle, uploadPhoto: IUploadPhoto): Promise<VehicleModel | IErrorResponse> {
         return new Promise<VehicleModel | IErrorResponse>((resolve) => {
             this.db.beginTransaction()
                 .then(() => {
@@ -115,48 +111,52 @@ export default class VehicleService extends BaseService<VehicleModel> {
                             data.fuelTypeId,
                             data.brandModelId,
                             data.userId
-                        ],
-                    )
-                        .then(async (res: any) => {
-                            const newVehicleId: number = (res[0]?.insertId) as number;
-                            const promises = [];
-                            if (uploadPhoto) {
-                                promises.push(
-                                    this.db.execute(`
-                                    INSERT
-                                        photo
-                                    SET
-                                        image_path = ?,
-                                        vehicle_id = ?;`,
-                                        [
-                                            uploadPhoto.imagePath,
-                                            newVehicleId
-                                        ]
-                                    )
-                                );
-                            }
+                        ])
+                        .then(
+                            async (res: any) => {
+                                const newVehicleId: number = (res[0]?.insertId) as number;
+                                const promises = [];
+                                if (uploadPhoto) {
+                                    promises.push(
+                                        this.db.execute(`
+                                            INSERT
+                                                photo
+                                            SET
+                                                image_path = ?,
+                                                vehicle_id = ?;`,
+                                            [
+                                                uploadPhoto.imagePath,
+                                                newVehicleId
+                                            ]
+                                        )
+                                    );
+                                }
 
-                            Promise
-                                .all(promises)
-                                .then(() => {
-                                    this.db.commit()
-                                        .then(async () => {
-                                            resolve(await this.getById(newVehicleId, { loadChildren: true }));
+                                Promise.all(promises)
+                                    .then(() => {
+                                        this.db.commit()
+                                            .then(async () => {
+                                                resolve(await this.getById(newVehicleId, { loadChildren: true }));
+                                            }).catch(err => {
+                                                resolve({
+                                                    errorCode: err?.errno,
+                                                    message: err?.sqlMessage,
+                                                });
+                                            });
+                                    })
+                                    .catch(err => {
+                                        resolve({
+                                            errorCode: err?.errno,
+                                            message: err?.sqlMessage,
                                         });
-                                })
-                                .catch(err => {
-                                    resolve({
-                                        errorCode: err?.errno,
-                                        message: err?.sqlMessage,
                                     });
-                                })
-                        })
+                            })
                         .catch(err => {
                             resolve({
                                 errorCode: err?.errno,
                                 message: err?.sqlMessage,
                             });
-                        })
+                        });
                 })
                 .catch(err => {
                     resolve({
@@ -167,7 +167,8 @@ export default class VehicleService extends BaseService<VehicleModel> {
                 });
         });
     }
-    public async update(vehicleId: number, data: IUpdateVehicle, uploadPhoto: IUploadPhoto): Promise<VehicleModel | IErrorResponse> {
+
+    async update(vehicleId: number, data: IUpdateVehicle, uploadPhoto: IUploadPhoto): Promise<VehicleModel | IErrorResponse> {
         return new Promise<VehicleModel | IErrorResponse>(async (resolve) => {
             const currentVehicle = await this.getById(vehicleId, {
                 loadChildren: true,
@@ -211,7 +212,8 @@ export default class VehicleService extends BaseService<VehicleModel> {
                                             ]
                                         )
                                     );
-                                } else {
+                                }
+                                else {
                                     promises.push(
                                         this.db.execute(`
                                             UPDATE
@@ -234,6 +236,12 @@ export default class VehicleService extends BaseService<VehicleModel> {
                                     this.db.commit()
                                         .then(async () => {
                                             resolve(await this.getById(vehicleId, { loadChildren: true }));
+                                        })
+                                        .catch(err => {
+                                            resolve({
+                                                errorCode: err?.errno,
+                                                message: err?.sqlMessage,
+                                            });
                                         });
                                 })
                                 .catch(err => {
@@ -260,7 +268,7 @@ export default class VehicleService extends BaseService<VehicleModel> {
         });
     }
 
-    public async delete(vehicleId: number): Promise<IErrorResponse> {
+    async delete(vehicleId: number): Promise<IErrorResponse> {
         return new Promise<IErrorResponse>(async resolve => {
             const currentVehicle = await this.getById(vehicleId, { loadChildren: true });
             let imagePathsToDelete = [];
@@ -277,7 +285,6 @@ export default class VehicleService extends BaseService<VehicleModel> {
                 })
                 .then(async () => {
                     const deletePhotos = await this.deleteVehiclePhotos(vehicleId);
-
                     if (deletePhotos === false) {
                         throw {
                             errno: -100,
@@ -288,7 +295,6 @@ export default class VehicleService extends BaseService<VehicleModel> {
                 })
                 .then(async () => {
                     const result = await this.deleteVehicleRecord(vehicleId);
-
                     if (result === true) {
                         return;
                     }
@@ -319,38 +325,30 @@ export default class VehicleService extends BaseService<VehicleModel> {
                 });
         });
     }
+
     private async deleteVehicleRefuelHistory(vehicleId: number) {
         return new Promise<boolean>(async resolve => {
-            this.db.execute(
-                `DELETE FROM refuel_history WHERE vehicle_id = ?;`,
-                [vehicleId,]
-            ).then(
-                () => {
-                    resolve(true);
-                }
-            ).catch(
-                err => {
-                    resolve(false);
-                }
-            );
+            this.db.execute(`DELETE FROM refuel_history WHERE vehicle_id = ?;`, [vehicleId])
+                .then(
+                    () => {
+                        resolve(true);
+                    }
+                ).catch(
+                    err => {
+                        resolve(false);
+                    }
+                );
         });
     }
 
-    public async deletePhotoByVehicleId(vehicleId: number): Promise<IErrorResponse | null> {
+    async deletePhotoByVehicleId(vehicleId: number): Promise<IErrorResponse | null> {
         return new Promise<IErrorResponse | null>(async resolve => {
-            const [rows] = await this.db.execute(
-                `SELECT image_path FROM photo WHERE vehicle_id = ?;`,
-                [vehicleId],
-            );
+            const [rows] = await this.db.execute(`SELECT image_path FROM photo WHERE vehicle_id = ?;`, [vehicleId]);
+
             if ((rows as any[])?.length) {
-
                 const filesToDelete: string[] = (rows as any[]).map(row => row?.image_path as string);
-
                 const imagePath = filesToDelete[0];
-                this.db.execute(
-                    `DELETE FROM photo WHERE vehicle_id =?;`,
-                    [vehicleId]
-                )
+                this.db.execute(`DELETE FROM photo WHERE vehicle_id =?;`, [vehicleId])
                     .then(() => {
                         this.deletePhotoAndResizedVersions(imagePath);
                         resolve({
@@ -372,13 +370,9 @@ export default class VehicleService extends BaseService<VehicleModel> {
         });
     }
 
-
     private async deleteVehiclePhotos(vehicleId: number): Promise<string[] | false> {
         return new Promise<string[] | false>(async resolve => {
-            const [rows] = await this.db.execute(
-                `SELECT image_path FROM photo WHERE vehicle_id = ?;`,
-                [vehicleId],
-            );
+            const [rows] = await this.db.execute(`SELECT image_path FROM photo WHERE vehicle_id = ?;`, [vehicleId]);
 
             if (!Array.isArray(rows) || rows.length === 0) {
                 resolve([]);
@@ -387,102 +381,81 @@ export default class VehicleService extends BaseService<VehicleModel> {
 
             const filesToDelete: string[] = (rows as any[]).map(row => row?.image_path as string);
 
-            this.db.execute(`
-                DELETE FROM
-                    photo
-                WHERE
-                    vehicle_id = ?;`,
-                [vehicleId]
-            ).then(
-                () => {
-                    resolve(filesToDelete);
-                }
-            ).catch(
-                () => {
-                    resolve(false);
-                }
-            );
+            this.db.execute(`DELETE FROM photo WHERE vehicle_id = ?;`, [vehicleId])
+                .then(() => { resolve(filesToDelete); })
+                .catch(() => { resolve(false); });
         });
     }
+
     private async deleteVehicleRecord(vehicleId: number) {
         return new Promise<IErrorResponse | true>(resolve => {
-            this.db.execute(`
-                DELETE FROM
-                    vehicle
-                WHERE
-                    vehicle_id = ?;`,
-                [vehicleId,]
-            ).then(
-                () => {
-                    resolve(true);
-                }
-            ).catch(
-                err => {
+            this.db.execute(`DELETE FROM vehicle WHERE vehicle_id = ?;`, [vehicleId])
+                .then(() => { resolve(true); })
+                .catch(err => {
                     resolve({
                         errorCode: err?.errno,
                         message: err?.sqlMessage,
                     });
-                }
-            );
+                });
         });
     }
+
     private async deletePhotoAndResizedVersions(imagePath: string) {
         try {
+            // delete original image
             fs.unlinkSync(imagePath);
-
+            // delete image resizings
             for (const resizeSpecification of Config.fileUploadOptions.photos.resizings) {
                 const parsedFilename = path.parse(imagePath);
                 const directory = parsedFilename.dir;
                 const namePart = parsedFilename.name;
                 const extPart = parsedFilename.ext;
-
                 const resizedVersionsPath = directory + "/" + namePart + resizeSpecification.sufix + extPart;
-
                 fs.unlinkSync(resizedVersionsPath);
             }
+            // delete directory
             let parsedFileDir = path.parse(imagePath).dir;
             const configDir = Config.fileUploadOptions.uploadDestinationDirectory +
                 (Config.fileUploadOptions.uploadDestinationDirectory.endsWith('/') ? '' : '/');
             parsedFileDir = parsedFileDir.replace(configDir, "");
             rimraf(configDir + parsedFileDir.split("/")[0], function () { console.log("Directory deleted."); });
-        } catch (e) { }
+        }
+        catch (e) { }
     }
 
     public async addVehiclePhoto(vehicleId: number, uploadPhoto: IUploadPhoto): Promise<VehicleModel | IErrorResponse | null> {
         return new Promise<VehicleModel | IErrorResponse | null>(resolve => {
             this.db.beginTransaction()
-                .then(() => {
-                    const promises = [];
+                .then(
+                    () => {
+                        const promises = [];
 
-                    promises.push(
-                        this.db.execute(`
+                        promises.push(
+                            this.db.execute(`
                             INSERT INTO
                                 photo (vehicle_id, image_path)
                             VALUES
                                 (?, ?)
                             ON DUPLICATE KEY UPDATE
                               image_path = VALUES(image_path);`,
-                            [vehicleId, uploadPhoto.imagePath]
-                        ));
-                    Promise
-                        .all(promises)
-                        .then(async () => {
-                            await this.db.commit();
-                        })
-                        .then(async () => {
-                            resolve(await this.getById(vehicleId, {
-                                loadChildren: true
-                            }));
-                        })
-                        .catch(async err => {
-                            await this.db.rollback();
-
-                            resolve({
-                                errorCode: err?.errno,
-                                message: err?.sqlMessage,
+                                [vehicleId, uploadPhoto.imagePath]
+                            ));
+                        Promise.all(promises)
+                            .then(async () => { await this.db.commit(); })
+                            .then(
+                                async () => {
+                                    resolve(await this.getById(vehicleId, {
+                                        loadChildren: true
+                                    }));
+                                })
+                            .catch(async err => {
+                                await this.db.rollback();
+                                resolve({
+                                    errorCode: err?.errno,
+                                    message: err?.sqlMessage,
+                                });
                             });
-                        });
-                });
-        })
+                    });
+        });
     }
 }

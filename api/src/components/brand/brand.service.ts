@@ -1,26 +1,22 @@
-import BrandModel from "./brand.model";
 import IErrorResponse from "../../common/IErrorResponse.interface";
+import IModelAdapterOptions from '../../common/IModelAdapterOptions.interface';
 import BaseService from "../../services/BaseService";
 import { ICreateBrand } from "./dto/ICreateBrand";
 import { IUpdateBrand } from "./dto/IUpdateBrand";
-import BrandModelModel from "../brand-model/brand-model.model";
-import IModelAdapterOptions from '../../common/IModelAdapterOptions.interface';
+import Brand from "./brand.model";
+import BrandModel from "../brand-model/brand-model.model";
 
-class BrandModelAdapterOptions implements IModelAdapterOptions {
+class BrandAdapterOptions implements IModelAdapterOptions {
     loadParent: boolean = false;
-    loadChildren: boolean = true; // child brenda automobila su klase tipa model automobila
+    loadChildren: boolean = true; // Brand's "children" are classes BrandModel
 }
-export default class BrandService extends BaseService<BrandModel> {
+export default class BrandService extends BaseService<Brand> {
 
-    async adaptToModel(
-        data: any,
-        options: Partial<BrandModelAdapterOptions>
-    ): Promise<BrandModel> {
-        const item: BrandModel = new BrandModel();
+    async adaptToModel(data: any, options: Partial<BrandAdapterOptions>): Promise<Brand> {
+        const item: Brand = new Brand();
         item.id = Number(data?.brand_id);
         item.name = data?.brand_name;
         item.logo = data?.brand_logo;
-
         if (options.loadChildren) {
             item.models = [...await this.getModelsByBrandId(item.id)];
         }
@@ -29,33 +25,31 @@ export default class BrandService extends BaseService<BrandModel> {
         }
         return item;
     }
-    private getModelsByBrandId(brandId: number): Promise<BrandModelModel[]> {
+
+    private async getModelsByBrandId(brandId: number): Promise<BrandModel[]> {
         return this.services.brandModelService.getAllByBrandId(brandId, { loadParent: false });
     }
 
-    public async getAll(
-        options: Partial<BrandModelAdapterOptions> = { loadChildren: true }
-    ): Promise<BrandModel[]> {
-        return this.getAllFromTable<BrandModelAdapterOptions>("brand", options);
+    async getAll(options: Partial<BrandAdapterOptions> = { loadChildren: true }): Promise<Brand[]> {
+        return this.getAllFromTable<BrandAdapterOptions>("brand", options);
     }
 
-    public async getById(
-        brandId: number,
-        options: Partial<BrandModelAdapterOptions> = { loadChildren: true }
-    ): Promise<BrandModel | null> {
-        return super.getByIdFromTable<BrandModelAdapterOptions>("brand", brandId, options);
+    async getById(brandId: number, options: Partial<BrandAdapterOptions> = { loadChildren: true }): Promise<Brand | null> {
+        return super.getByIdFromTable<BrandAdapterOptions>("brand", brandId, options);
     }
 
-    public async create(data: ICreateBrand): Promise<BrandModel | IErrorResponse> {
-        return new Promise<BrandModel | IErrorResponse>((result) => {
-            const sql: string = `
+    async create(data: ICreateBrand): Promise<Brand | IErrorResponse> {
+        return new Promise<Brand | IErrorResponse>((result) => {
+            this.db.execute(`
                 INSERT
                     brand
                 SET
                     brand_name = ?,
-                    brand_logo = ?;`;
-
-            this.db.execute(sql, [data.name, data.logo])
+                    brand_logo = ?;`,
+                [
+                    data.name,
+                    data.logo
+                ])
                 .then(async res => {
                     const resultData: any = { ...res };
                     const newBrandId: number = Number(resultData[0]?.insertId);
@@ -70,19 +64,22 @@ export default class BrandService extends BaseService<BrandModel> {
         });
     }
 
-    public async update(brandId: number, data: IUpdateBrand): Promise<BrandModel | IErrorResponse> {
-        return new Promise<BrandModel | IErrorResponse>((result) => {
-            const sql: string = `
+    async update(brandId: number, data: IUpdateBrand): Promise<Brand | IErrorResponse> {
+        return new Promise<Brand | IErrorResponse>((result) => {
+
+            this.db.execute(`
                 UPDATE
                     brand
                 SET
                     brand_name = ?,
                     brand_logo = ?
                 WHERE
-                    brand_id = ?;`;
-
-            this.db.execute(sql, [data.name, data.logo, brandId])
-                .then(async res => {
+                    brand_id = ?;`,
+                [
+                    data.name,
+                    data.logo, brandId
+                ])
+                .then(async _ => {
                     result(await this.getById(brandId, { loadChildren: true }));
                 })
                 .catch(err => {
@@ -93,15 +90,10 @@ export default class BrandService extends BaseService<BrandModel> {
                 });
         });
     }
-    public async delete(brandId: number): Promise<IErrorResponse> {
-        return new Promise<IErrorResponse>((result) => {
-            const sql: string = `
-                DELETE FROM
-                    brand
-                WHERE
-                    brand_id = ?;`;
 
-            this.db.execute(sql, [brandId])
+    async delete(brandId: number): Promise<IErrorResponse> {
+        return new Promise<IErrorResponse>((result) => {
+            this.db.execute(`DELETE FROM brand WHERE brand_id = ?;`, [brandId])
                 .then(async res => {
                     const data: any = res;
                     result({

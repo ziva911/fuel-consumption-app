@@ -22,6 +22,7 @@ import UserRouter from "./components/user/user.router";
 import UserService from "./components/user/user.service";
 import PhotoService from "./components/photo/photo.service";
 import VehicleService from './components/vehicle/vehicle.service';
+import AuthRouter from './components/auth/auth.router';
 
 async function main() {
 
@@ -101,6 +102,7 @@ async function main() {
             new FuelTypeRouter(),
             new AdministratorRouter(),
             new UserRouter(),
+            new AuthRouter(),
             new VehicleRouter(),
         ]
     );

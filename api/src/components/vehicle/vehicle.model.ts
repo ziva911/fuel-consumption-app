@@ -15,6 +15,6 @@ export default class VehicleModel implements IModel {
     fuelType: FuelTypeModel | null = null;
     brandModelId: number;
     brandModel: BrandModelModel | null = null;
-    createdAt: Date; // YYYY-MM-DD HH:MM:SS.ffffff
+    createdAt: Date;
     modifiedAt: Date;
 };

@@ -71,6 +71,7 @@ export default interface IConfig {
     },
     auth: {
         user: AuthTokenOptions,
-        administrator: AuthTokenOptions
+        administrator: AuthTokenOptions,
+        allowRequestsWithoutValidToken: boolean
     }
 }

@@ -70,30 +70,31 @@ const Config: IConfig = {
             issuer: "FuelConsumptionApp",
             algorithm: "RS256",
             authToken: {
-                duration: 60 * 60 * 24,
+                duration: 60 * 60 * 24 * 7,
                 publicKey: readFileSync("keystore/user-auth.public", "ascii"),
                 privateKey: readFileSync("keystore/user-auth.private", "ascii")
             },
             refreshToken: {
-                duration: 60 * 60 * 24,
-                publicKey: readFileSync("keystore/user-auth-refresh.public", "ascii"),
-                privateKey: readFileSync("keystore/user-auth-refresh.private", "ascii")
+                duration: 60 * 60 * 24 * 365,
+                publicKey: readFileSync("keystore/user-refresh.public", "ascii"),
+                privateKey: readFileSync("keystore/user-refresh.private", "ascii")
             }
         },
         administrator: {
             issuer: "FuelConsumptionApp",
             algorithm: "RS256",
             authToken: {
-                duration: 60 * 60 * 24,
+                duration: 60 * 60 * 24 * 7,
                 publicKey: readFileSync("keystore/administrator-auth.public", "ascii"),
                 privateKey: readFileSync("keystore/administrator-auth.private", "ascii")
             },
             refreshToken: {
-                duration: 60 * 60 * 24,
-                publicKey: readFileSync("keystore/administrator-auth-refresh.public", "ascii"),
-                privateKey: readFileSync("keystore/administrator-auth-refresh.private", "ascii")
+                duration: 60 * 60 * 24 * 365,
+                publicKey: readFileSync("keystore/administrator-refresh.public", "ascii"),
+                privateKey: readFileSync("keystore/administrator-refresh.private", "ascii")
             }
-        }
+        },
+        allowRequestsWithoutValidToken: false
     }
 }
 

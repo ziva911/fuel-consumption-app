@@ -6,6 +6,7 @@ import ITokenData from './dto/ITokenData.interface';
 import { IUserLogin, IUserLoginSchemaValidator } from './dto/IUserLogin';
 import { IAdministratorLogin, IAdministratorLoginSchemaValidator } from './dto/IAdministratorLogin';
 import BaseController from '../../services/BaseController';
+import { IRefreshToken, IRefreshTokenSchemaValidator } from './dto/IRefreshToken';
 
 export default class AuthController extends BaseController {
 
@@ -108,4 +109,42 @@ export default class AuthController extends BaseController {
             "refreshToken": refreshToken,
         });
     }
+
+    async userRefresh(req: Request, res: Response) {
+        this.refreshTokenByRole('user')(req, res);
+    }
+
+    async administratorRefresh(req: Request, res: Response) {
+        this.refreshTokenByRole('administrator')(req, res);
+    }
+
+    private refreshTokenByRole(role: "user" | "administrator"): (req: Request, res: Response) => void {
+        return (req: Request, res: Response) => {
+            if (!IRefreshTokenSchemaValidator(req.body)) {
+                return res.status(400).send(IRefreshTokenSchemaValidator.errors);
+            }
+            const tokenString: string = (req.body as IRefreshToken).refreshToken;
+            try {
+                const existingData = jwt.verify(tokenString, Config.auth[role].refreshToken.publicKey) as ITokenData;
+                const newTokenData: ITokenData = {
+                    id: existingData.id,
+                    identity: existingData.identity,
+                    role: existingData.role
+                }
+                const authToken = jwt.sign(newTokenData, Config.auth[role].authToken.privateKey, {
+                    algorithm: Config.auth[role].algorithm,
+                    issuer: Config.auth[role].issuer,
+                    expiresIn: Config.auth[role].authToken.duration,
+                });
+
+                res.send({
+                    authToken: authToken,
+                    refreshToken: null,
+                });
+            } catch (err) {
+                return res.status(400).send("Token validation error " + err?.message);
+            }
+        }
+    }
 }
+

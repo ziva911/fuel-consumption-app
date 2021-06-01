@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import VehicleModel from './vehicle.model';
-import { ICreateVehicle, ICreateVehicleSchemaValidator } from './dto/ICreateVehicle';
-import { IUpdateVehicle, IUpdateVehicleSchemaValidator } from './dto/IUpdateVehicle';
+import ICreateVehicle, { ICreateVehicleSchemaValidator } from './dto/ICreateVehicle';
+import IUpdateVehicle, { IUpdateVehicleSchemaValidator } from './dto/IUpdateVehicle';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import BaseController from '../../services/BaseController';
 
@@ -60,14 +60,14 @@ export default class VehicleController extends BaseController {
         if (req.files && Object.keys(req.files).length) {
             uploadPhoto = await this.getUploadPhotos(req, res);
         }
-        const itemString = req.body?.data as string;
-        const item = JSON.parse(itemString);
+        let item: ICreateVehicle;
+
         // get info about user
         if (req.authorized?.role === "user") {
-            item.userId = req.authorized?.id
+            item = { userId: +req.authorized?.id, ...req.body };
         }
         if (req.authorized?.role === "administrator") {
-            item.userId = req.params?.uid
+            item = { userId: +req.params?.uid, ...req.body };
         }
 
         // validate req and insert into database
@@ -112,8 +112,15 @@ export default class VehicleController extends BaseController {
         if (req.files && Object.keys(req.files).length) {
             uploadPhoto = await this.getUploadPhotos(req, res);
         }
-        const itemString = req.body?.data as string;
-        const item = JSON.parse(itemString);
+        let item: IUpdateVehicle;
+        if (req.authorized?.role === "user") {
+            item = { userId: +req.authorized?.id, ...req.body };
+
+        }
+        if (req.authorized?.role === "administrator") {
+            item = { userId: +req.params?.uid, ...req.body };
+        }
+
         const vehicleId = Number(req.params.id);
         if (vehicleId <= 0) {
             res.status(400).send(["The vehicle ID must be a numerical value larger than 0."]);

@@ -56,7 +56,8 @@ export default class BrandModelController extends BaseController {
 
     async addModelPhoto(req: Request, res: Response) {
         // parse data from req
-        const item = req.body?.data;
+        const item = JSON.parse(req.body?.data);
+
         const brandModelId: number = Number(req.params?.mid);
         if (!brandModelId || brandModelId <= 0) {
             res.sendStatus(404);

@@ -30,10 +30,13 @@ async function main() {
 
     const app: express.Application = express();
 
-    fs.mkdirSync(path.dirname(Config.logger.path), {
-        mode: 0o755,
-        recursive: true
-    });
+    if (!fs.existsSync(path.dirname(Config.logger.path))) {
+        fs.mkdirSync(path.dirname(Config.logger.path), {
+            mode: 0o755,
+            recursive: true
+        });
+    }
+
 
     app.use(morgan(":date[iso]\t:remote-addr\t:method\t:url\t:status\t:res[content-length] bytes\t:response-time ms", {
         stream: fs.createWriteStream(Config.logger.path)

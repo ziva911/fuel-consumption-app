@@ -8,9 +8,9 @@ interface ICreateVehicle {
     paintColor: string,
     mileageStart: number,
     fuelTypeId: number,
-    mileageCurrent: number,
+    mileageCurrent?: number,
     brandModelId: number,
-    userId: number
+    userId?: number
 }
 
 const ICreateVehicleSchema = {
@@ -57,7 +57,6 @@ const ICreateVehicleSchema = {
         "paintColor",
         "mileageStart",
         "fuelTypeId",
-        "mileageCurrent",
         "brandModelId",
         "userId",
     ],
@@ -68,4 +67,4 @@ const ICreateVehicleSchemaValidator = ajv.compile(ICreateVehicleSchema);
 
 export { ICreateVehicleSchema };
 export { ICreateVehicleSchemaValidator };
-export { ICreateVehicle };
+export default ICreateVehicle;

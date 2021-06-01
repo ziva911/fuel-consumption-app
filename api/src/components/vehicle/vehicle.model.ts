@@ -11,9 +11,10 @@ export default class VehicleModel implements IModel {
     mileageStart: number;
     mileageCurrent: number;
     imagePath: string;
-    fuelTypeId: number;
+    fuelExtra: number;
+    fuelTypeId: number | null = null;
     fuelType: FuelTypeModel | null = null;
-    brandModelId: number;
+    brandModelId: number | null = null;
     brandModel: BrandModelModel | null = null;
     createdAt: Date;
     modifiedAt: Date;

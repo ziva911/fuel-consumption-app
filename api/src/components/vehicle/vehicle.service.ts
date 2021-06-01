@@ -5,8 +5,8 @@ import * as fs from 'fs';
 import Config from '../../config/dev';
 import IErrorResponse from "../../common/IErrorResponse.interface";
 import IModelAdapterOptions from "../../common/IModelAdapterOptions.interface";
-import { ICreateVehicle } from "./dto/ICreateVehicle";
-import { IUpdateVehicle } from "./dto/IUpdateVehicle";
+import ICreateVehicle from "./dto/ICreateVehicle";
+import IUpdateVehicle from "./dto/IUpdateVehicle";
 import { IUploadPhoto } from "../photo/dto/ICreatePhoto";
 import BaseService from "../../services/BaseService";
 import VehicleModel from "./vehicle.model";
@@ -33,6 +33,7 @@ export default class VehicleService extends BaseService<VehicleModel> {
         item.userId = Number(data?.user_id);
         item.fuelTypeId = Number(data?.fuel_type_id);
         item.brandModelId = Number(data?.brand_model_id);
+        item.fuelExtra = Number(data?.fuel_extra);
 
         if (options?.loadChildren) {
             let photo: Photo = null;

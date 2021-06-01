@@ -15,12 +15,12 @@ export default class AuthRouter implements IRouter {
         application.post("/api/auth/user/refresh", authController.userRefresh.bind(authController));
         application.post("/api/auth/administrator/refresh", authController.administratorRefresh.bind(authController))
         application.get(
-            "/auth/user/ok",
+            "/api/auth/user/ok",
             AuthMiddleware.getVerifier("user"),
             authController.sendOk.bind(authController)
         );
         application.get(
-            "/auth/administrator/ok",
+            "/api/auth/administrator/ok",
             AuthMiddleware.getVerifier("administrator"),
             authController.sendOk.bind(authController)
         );

@@ -5,7 +5,7 @@ const ajv = new Ajv();
 interface IUpdateVehicle {
     internalName: string | null,
     paintColor: string,
-    userId: number
+    userId?: number
 }
 
 const IUpdateVehicleSchema = {
@@ -37,4 +37,4 @@ const IUpdateVehicleSchemaValidator = ajv.compile(IUpdateVehicleSchema);
 
 export { IUpdateVehicleSchema };
 export { IUpdateVehicleSchemaValidator };
-export { IUpdateVehicle };
+export default IUpdateVehicle;

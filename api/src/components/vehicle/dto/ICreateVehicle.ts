@@ -18,7 +18,6 @@ const ICreateVehicleSchema = {
     properties: {
         internalName: {
             type: "string",
-            minLength: 1,
             maxLength: 100,
         },
         manufactureYear: {

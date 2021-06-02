@@ -13,7 +13,6 @@ const IUpdateVehicleSchema = {
     properties: {
         internalName: {
             type: ["string", "null"],
-            minLength: 1,
             maxLength: 100,
         },
         paintColor: {

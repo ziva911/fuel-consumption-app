@@ -61,13 +61,13 @@ export default class VehicleController extends BaseController {
             uploadPhoto = await this.getUploadPhotos(req, res);
         }
         let item: ICreateVehicle;
-
+        const data = JSON.parse(req.body.data);
         // get info about user
         if (req.authorized?.role === "user") {
-            item = { userId: +req.authorized?.id, ...req.body };
+            item = { ...data, userId: +req.authorized?.id, };
         }
         if (req.authorized?.role === "administrator") {
-            item = { userId: +req.params?.uid, ...req.body };
+            item = { ...data, userId: +req.params?.uid, };
         }
 
         // validate req and insert into database
@@ -75,7 +75,7 @@ export default class VehicleController extends BaseController {
             res.status(400).send(ICreateVehicleSchemaValidator.errors);
             return;
         }
-        const newVehicle: VehicleModel | IErrorResponse = await this.services.vehicleService.create(item as ICreateVehicle, uploadPhoto);
+        const newVehicle: VehicleModel | IErrorResponse = await this.services.vehicleService.create(item as ICreateVehicle, uploadPhoto[0]);
         res.send(newVehicle);
     }
 

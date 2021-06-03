@@ -1,0 +1,40 @@
+.pageHolder {
+  .vehicleInfo-container {
+    .vehicleInfo {
+      display: flex;
+      flex-direction: column;
+      align-items: normal;
+      justify-content: space-evenly;
+      text-align: left;
+      * {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .default-photo-container {
+      & > Row {
+        height: 100%;
+      }
+      display: grid;
+      grid-template-rows: 1fr auto;
+      .default-photo {
+        * {
+          width: 100% !important;
+        }
+      }
+    }
+  }
+  .refuel-array-container {
+    margin-top: 36px;
+    .refuel-array {
+      .refuel-array-elem {
+        border: 1px solid gray;
+        border-radius: 15px;
+        margin-bottom: 15px;
+      }
+    }
+    .refuel-array-statistics {
+    }
+  }
+}

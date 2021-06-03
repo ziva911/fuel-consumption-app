@@ -1,5 +1,10 @@
 import { Col, Container, Row, Image, Form, Button } from "react-bootstrap";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import VehicleModel from "../../../../../backend/api/src/components/vehicle/vehicle.model";
+import RefuelHistory from "../../../../../backend/api/src/components/refuel_history/refuel-history.model";
+>>>>>>> master
 =======
 import VehicleModel from "../../../../../backend/api/src/components/vehicle/vehicle.model";
 import RefuelHistory from "../../../../../backend/api/src/components/refuel_history/refuel-history.model";
@@ -14,9 +19,14 @@ import { ReactComponent as DefaultPhoto } from "../../Shared/default_photo.svg";
 import { createRef } from "react";
 import { Link } from "react-router-dom";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { CheckLg, XLg } from "react-bootstrap-icons";
 import { FaTrashAlt } from "react-icons/fa";
 import VehicleModel from "../../../../api/src/components/vehicle/vehicle.model";
+=======
+import { CheckLg, XLg, TrashFill } from "react-bootstrap-icons";
+import { FaTrashAlt } from "react-icons/fa";
+>>>>>>> master
 =======
 import { CheckLg, XLg, TrashFill } from "react-bootstrap-icons";
 import { FaTrashAlt } from "react-icons/fa";

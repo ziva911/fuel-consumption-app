@@ -1,15 +1,21 @@
 import { Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import * as path from "path";
 import { ApiConfiguration } from "../../../Config/api.config";
 import { ReactComponent as DefaultPhoto } from "../../../Shared/default_photo.svg";
 import VehicleModel from "../../../../../api/src/components/vehicle/vehicle.model";
 =======
+=======
+>>>>>>> master
 import VehicleModel from "../../../../../../backend/api/src/components/vehicle/vehicle.model";
 import * as path from "path";
 import { ApiConfiguration } from "../../../Config/api.config";
 import { ReactComponent as DefaultPhoto } from "../../../Shared/default_photo.svg";
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 interface VehiclesArrayElementProperties {
   vehicle: VehicleModel;

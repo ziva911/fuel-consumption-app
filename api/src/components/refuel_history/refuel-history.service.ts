@@ -163,7 +163,6 @@ export default class RefuelHistoryService extends BaseService<RefuelHistory> {
             this.db.execute(`DELETE FROM refuel_history WHERE refuel_history_id = ?;`, [refuelHistoryId])
                 .then(async res => {
                     const data: any = res;
-                    console.log(res)
                     result({
                         errorCode: 0,
                         message: `Deleted ${data[0].affectedRows} rows.`,

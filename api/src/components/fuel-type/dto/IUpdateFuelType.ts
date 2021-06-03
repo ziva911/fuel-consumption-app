@@ -26,4 +26,4 @@ const IUpdateFuelTypeSchemaValidator = ajv.compile(IUpdateFuelTypeSchema);
 
 export { IUpdateFuelTypeSchema };
 export { IUpdateFuelTypeSchemaValidator };
-export { IUpdateFuelType };
+export default IUpdateFuelType;

@@ -2,9 +2,9 @@ import IErrorResponse from '../../common/IErrorResponse.interface';
 import IModelAdapterOptions from '../../common/IModelAdapterOptions.interface';
 import BaseService from '../../services/BaseService';
 import User from './user.model';
-import { ICreateUser } from './dto/ICreateUser';
+import ICreateUser from './dto/ICreateUser';
 import * as bcypt from 'bcrypt';
-import { IUpdateUser } from './dto/IUpdateUser';
+import IUpdateUser from './dto/IUpdateUser';
 import { v4 as uuidv4 } from 'uuid';
 
 class UserAdapterOptions implements IModelAdapterOptions {
@@ -110,8 +110,6 @@ export default class UserService extends BaseService<User> {
                     first_name = ?,
                     last_name = ?,
                     phone_number = ?,
-                    currency = ?,
-                    language = ?,
                     verification_code = ?;`,
                 [
                     data.email,
@@ -119,8 +117,6 @@ export default class UserService extends BaseService<User> {
                     data.firstName,
                     data.lastName,
                     data.phoneNumber,
-                    data.currency,
-                    data.language,
                     randomNameSegment
                 ])
                 .then(
@@ -152,8 +148,7 @@ export default class UserService extends BaseService<User> {
                     password_hash = ?,
                     first_name = ?,
                     last_name = ?,
-                    phone_number = ?,
-                    language = ?
+                    phone_number = ?
                 WHERE
                     user_id = ?;`,
                 [
@@ -161,7 +156,6 @@ export default class UserService extends BaseService<User> {
                     data.firstName,
                     data.lastName,
                     data.phoneNumber,
-                    data.language,
                     userId
                 ])
                 .then(

@@ -1,5 +1,5 @@
 import { Row, Col, Card, Form, Button } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import EventRegistry from "../../Api/EventRegistry";
 import BasePage, { BasePageProperties } from "../BasePage/BasePage";
 import RefuelHistoryService from "../../Services/RefuelHistoryService";
@@ -68,15 +68,15 @@ export default class AddRefuelHistoryPage extends BasePage<AddRefuelHistoryPageP
 
   private createNewRefuelHistory() {
     const today = new Date().toISOString().split("T")[0];
-    const newVehicle: ICreateRefuelHistory = {
+    const newRefuelRecord: ICreateRefuelHistory = {
       date: today,
       quantity: 0,
       totalCost: 0,
       isFull: false,
-      mileageCurrent: 0,
       vehicleId: 0,
+      mileageCurrent: 0,
     };
-    return newVehicle;
+    return newRefuelRecord;
   }
 
   componentDidMount() {
@@ -188,6 +188,9 @@ export default class AddRefuelHistoryPage extends BasePage<AddRefuelHistoryPageP
         const newRefuel = this.state.refuel as ICreateRefuelHistory;
         return (
           <Row>
+            <Link to={`/vehicle/${this.state.vehicleId}`}>
+              <span>{"<<"}</span>Back
+            </Link>
             <Col sm={12} md={{ span: 6, offset: 3 }} lg={{ span: 4, offset: 4 }}>
               <Card>
                 <Card.Body>

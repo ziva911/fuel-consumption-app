@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import BaseController from '../../services/BaseController';
 import FuelTypeModel from './fuel-type.model';
-import { ICreateFuelType, ICreateFuelTypeSchemaValidator } from './dto/ICreateFuelType';
-import { IUpdateFuelType, IUpdateFuelTypeSchemaValidator } from './dto/IUpdateFuelType';
+import ICreateFuelType, { ICreateFuelTypeSchemaValidator } from './dto/ICreateFuelType';
+import IUpdateFuelType, { IUpdateFuelTypeSchemaValidator } from './dto/IUpdateFuelType';
 
 export default class FuelTypeController extends BaseController {
 

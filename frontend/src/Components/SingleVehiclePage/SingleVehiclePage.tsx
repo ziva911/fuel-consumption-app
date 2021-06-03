@@ -27,10 +27,12 @@ class SingleVehiclePageState {
 }
 export default class SingleVehiclePage extends BasePage<SingleVehiclePageProperties> {
   state: SingleVehiclePageState;
-  hiddenFileInput: any;
+  hiddenFileInputEdit: any;
+  hiddenFileInputAdd: any;
   constructor(props: SingleVehiclePageProperties) {
     super(props);
-    this.hiddenFileInput = createRef();
+    this.hiddenFileInputEdit = createRef();
+    this.hiddenFileInputAdd = createRef();
     this.state = {
       title: "",
       vehicleInfo: null,
@@ -94,13 +96,22 @@ export default class SingleVehiclePage extends BasePage<SingleVehiclePagePropert
     }
     RefuelHistoryService.attemptDeleteRefuelHistoryRecord(vehicleId, refuelHistoryId).then((res) => this.getVehicleData());
   }
-  handleUploadClick = () => {
-    this.hiddenFileInput?.current.click();
+
+  private handleUploadClickEdit = () => {
+    this.hiddenFileInputEdit?.current.click();
   };
+
+  private handleUploadClickAdd = () => {
+    this.hiddenFileInputAdd?.current.click();
+  };
+
   renderMain(): JSX.Element {
     const vehicle = this.state.vehicleInfo;
     return (
       <>
+        <Link to={`/vehicle`}>
+          <span>{"<<"}</span>Back
+        </Link>
         <h1>{this.state.title}</h1>
         {vehicle ? (
           <Container className="pageHolder">
@@ -112,10 +123,10 @@ export default class SingleVehiclePage extends BasePage<SingleVehiclePagePropert
                   </Row>
                   <Row>
                     <Col>
-                      <Button onClick={this.handleUploadClick}>Edit image</Button>
+                      <Button onClick={this.handleUploadClickEdit}>Edit image</Button>
                       <Form.File
                         type="file"
-                        ref={this.hiddenFileInput}
+                        ref={this.hiddenFileInputEdit}
                         style={{ display: "none" }}
                         className="custom-file-label"
                         id="inputGroupFile01"
@@ -133,7 +144,15 @@ export default class SingleVehiclePage extends BasePage<SingleVehiclePagePropert
                     <DefaultPhoto className="default-photo" fill={"" + vehicle.paintColor} viewBox="0 0 1000 800" />
                   </Row>
                   <Row>
-                    <Col>Add image</Col>
+                    <Button onClick={this.handleUploadClickAdd}>Add image</Button>
+                    <Form.File
+                      type="file"
+                      ref={this.hiddenFileInputAdd}
+                      style={{ display: "none" }}
+                      className="custom-file-label"
+                      id="inputGroupFile02"
+                      onChange={(e: any) => this.uploadPhotoToVehicle(vehicle.vehicleId, e.target.files)}
+                    />
                   </Row>
                 </Col>
               )}
@@ -162,7 +181,7 @@ export default class SingleVehiclePage extends BasePage<SingleVehiclePagePropert
                 </Row>
               </Col>
             </Row>
-            <Row>
+            <Row className="refuel-history-button-container">
               <Link to={`/vehicle/${vehicle.vehicleId}/history`}>
                 <Button variant="danger">New refuel?</Button>
               </Link>
@@ -199,7 +218,7 @@ export default class SingleVehiclePage extends BasePage<SingleVehiclePagePropert
                 <Col className="refuel-statistics">Refuel Statistics TODO</Col>
               </Row>
             ) : (
-              <Row>No records of previous refueling</Row>
+              <Row className="no-refuel-history">No records of previous refueling</Row>
             )}
           </Container>
         ) : (

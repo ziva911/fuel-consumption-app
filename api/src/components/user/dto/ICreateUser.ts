@@ -8,8 +8,8 @@ interface ICreateUser {
     firstName: string;
     lastName: string;
     phoneNumber: string;
-    currency: 'RSD' | 'EUR' | 'USD';
-    language: 'SR' | 'EN';
+    currency?: 'RSD' | 'EUR' | 'USD';
+    language?: 'SR' | 'EN';
 }
 
 const ICreateUserSchema = {
@@ -56,8 +56,6 @@ const ICreateUserSchema = {
         "firstName",
         "lastName",
         "phoneNumber",
-        "currency",
-        "language"
     ],
     additionalProperties: false,
 }
@@ -66,4 +64,4 @@ const ICreateUserSchemaValidator = ajv.compile(ICreateUserSchema);
 
 export { ICreateUserSchema };
 export { ICreateUserSchemaValidator };
-export { ICreateUser };
+export default ICreateUser;

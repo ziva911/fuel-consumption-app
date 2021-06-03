@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import BaseController from '../../services/BaseController';
 import Brand from './brand.model';
-import { ICreateBrand, ICreateBrandSchemaValidator } from './dto/ICreateBrand';
-import { IUpdateBrand, IUpdateBrandSchemaValidator } from './dto/IUpdateBrand';
+import ICreateBrand, { ICreateBrandSchemaValidator } from './dto/ICreateBrand';
+import IUpdateBrand, { IUpdateBrandSchemaValidator } from './dto/IUpdateBrand';
 
 export default class BrandController extends BaseController {
 

@@ -1,11 +1,11 @@
 import IErrorResponse from "../../common/IErrorResponse.interface";
 import BaseService from "../../services/BaseService";
-import { ICreateBrandModel } from "./dto/ICreateBrandModel";
-import { IUpdateBrandModel } from "./dto/IUpdateBrandModel";
+import ICreateBrandModel from "./dto/ICreateBrandModel";
+import IUpdateBrandModel from "./dto/IUpdateBrandModel";
 import BrandModel from "./brand-model.model";
 import Brand from "../brand/brand.model";
 import IModelAdapterOptions from "../../common/IModelAdapterOptions.interface";
-import { ICreatePhoto, IUploadPhoto } from "../photo/dto/ICreatePhoto";
+import ICreatePhoto, { IUploadPhoto } from "../photo/dto/ICreatePhoto";
 import Photo from '../photo/photo.model';
 import { IUpdatePhoto } from "../photo/dto/IUpdatePhoto";
 

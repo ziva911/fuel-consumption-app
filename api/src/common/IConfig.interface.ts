@@ -14,6 +14,7 @@ interface AuthTokenOptions {
     algorithm: Algorithm
 }
 export default interface IConfig {
+    clientDomain: string,
     server: {
         domain: string,
         port: number,

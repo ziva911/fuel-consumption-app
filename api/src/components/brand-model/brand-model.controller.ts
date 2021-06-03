@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import BrandModel from './brand-model.model';
 import BaseController from '../../services/BaseController';
-import { ICreateBrandModel, ICreateBrandModelSchemaValidator } from './dto/ICreateBrandModel';
-import { IUpdateBrandModel, IUpdateBrandModelSchemaValidator } from './dto/IUpdateBrandModel';
-import { ICreatePhoto } from '../photo/dto/ICreatePhoto';
+import ICreateBrandModel, { ICreateBrandModelSchemaValidator } from './dto/ICreateBrandModel';
+import IUpdateBrandModel, { IUpdateBrandModelSchemaValidator } from './dto/IUpdateBrandModel';
+import ICreatePhoto from '../photo/dto/ICreatePhoto';
 import { IUpdatePhoto } from '../photo/dto/IUpdatePhoto';
 
 export default class BrandModelController extends BaseController {

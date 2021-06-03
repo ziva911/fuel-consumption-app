@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { ICreateUser, ICreateUserSchemaValidator } from './dto/ICreateUser';
+import ICreateUser, { ICreateUserSchemaValidator } from './dto/ICreateUser';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import BaseController from '../../services/BaseController';
 import User from './user.model';
-import { IUpdateUserSchemaValidator, IUpdateUser } from './dto/IUpdateUser';
+import IUpdateUser, { IUpdateUserSchemaValidator } from './dto/IUpdateUser';
 import * as nodemailer from 'nodemailer';
 import Config from '../../config/dev';
 import Mail = require('nodemailer/lib/mailer');
@@ -276,7 +276,7 @@ export default class UserController extends BaseController {
             if (mailSent.errorCode !== 0) {
                 console.log(`"Verified" email could not be sent. Error: ` + mailSent.message);
             }
-            return res.send(result);
+            return res.redirect(Config.clientDomain + '/user/login');;
         }
     }
 }

@@ -31,4 +31,4 @@ const ICreateBrandModelSchemaValidator = ajv.compile(ICreateBrandModelSchema);
 
 export { ICreateBrandModelSchema };
 export { ICreateBrandModelSchemaValidator };
-export { ICreateBrandModel };
+export default ICreateBrandModel;

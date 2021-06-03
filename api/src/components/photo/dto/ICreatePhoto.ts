@@ -45,5 +45,5 @@ const ICreatePhotoSchemaValidator = ajv.compile(ICreatePhotoSchema);
 
 export { ICreatePhotoSchema };
 export { ICreatePhotoSchemaValidator };
-export { ICreatePhoto };
 export { IUploadPhoto };
+export default ICreatePhoto;

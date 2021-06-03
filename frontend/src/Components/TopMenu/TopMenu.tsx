@@ -10,18 +10,8 @@ export default class TopMenu extends Component<TopMenuProperties> {
       return (
         <Nav className="justify-content-center">
           <Nav.Item>
-            <Link className="nav-link" to="/">
-              Home
-            </Link>
-          </Nav.Item>
-          <Nav.Item>
             <Link className="nav-link" to="/dashboard">
               Dashboard
-            </Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Link className="nav-link" to="/profile">
-              My account
             </Link>
           </Nav.Item>
           <Nav.Item>
@@ -78,6 +68,11 @@ export default class TopMenu extends Component<TopMenuProperties> {
         <Nav.Item>
           <Link className="nav-link" to="/user/login">
             Log in
+          </Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Link className="nav-link" to="/administrator/login">
+            Log in Admin
           </Link>
         </Nav.Item>
         <Nav.Item>

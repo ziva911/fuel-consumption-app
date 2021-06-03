@@ -8,9 +8,10 @@ if (envResult.error) {
     throw "The environment path with additional information could not be parsed. Error: " + envResult.error;
 }
 const Config: IConfig = {
+    clientDomain: "http://localhost:3000",
     server: {
-        domain: "http://localhost:4000",
-        port: 4000,
+        domain: "http://localhost:40080",
+        port: 40080,
         static: {
             path: "static/",
             route: "/static",

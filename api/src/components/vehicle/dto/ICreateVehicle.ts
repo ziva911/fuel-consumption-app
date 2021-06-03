@@ -8,7 +8,6 @@ interface ICreateVehicle {
     paintColor: string,
     mileageStart: number,
     fuelTypeId: number,
-    mileageCurrent?: number,
     brandModelId: number,
     userId?: number
 }
@@ -36,10 +35,6 @@ const ICreateVehicleSchema = {
         fuelTypeId: {
             type: ["integer"],
             minimum: 1,
-        },
-        mileageCurrent: {
-            type: ["integer"],
-            minimum: 0,
         },
         brandModelId: {
             type: ["integer"],

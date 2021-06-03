@@ -10,7 +10,6 @@ export default class VehicleModel implements IModel {
     manufactureYear: number;
     paintColor: string | null = null;
     mileageStart: number;
-    mileageCurrent: number;
     imagePath: string;
     refuelHistory: RefuelHistory[] | null = [];
     fuelTypeId: number | null = null;

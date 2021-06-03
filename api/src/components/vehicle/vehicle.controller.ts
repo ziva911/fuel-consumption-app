@@ -75,7 +75,8 @@ export default class VehicleController extends BaseController {
             res.status(400).send(ICreateVehicleSchemaValidator.errors);
             return;
         }
-        const newVehicle: VehicleModel | IErrorResponse = await this.services.vehicleService.create(item as ICreateVehicle, uploadPhoto[0]);
+        const newVehicle: VehicleModel | IErrorResponse =
+            await this.services.vehicleService.create(item as ICreateVehicle, uploadPhoto ? uploadPhoto[0] : null);
         res.send(newVehicle);
     }
 

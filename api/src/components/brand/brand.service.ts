@@ -1,8 +1,8 @@
 import IErrorResponse from "../../common/IErrorResponse.interface";
 import IModelAdapterOptions from '../../common/IModelAdapterOptions.interface';
 import BaseService from "../../services/BaseService";
-import { ICreateBrand } from "./dto/ICreateBrand";
-import { IUpdateBrand } from "./dto/IUpdateBrand";
+import ICreateBrand from "./dto/ICreateBrand";
+import IUpdateBrand from "./dto/IUpdateBrand";
 import Brand from "./brand.model";
 import BrandModel from "../brand-model/brand-model.model";
 

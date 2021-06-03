@@ -16,6 +16,15 @@ import AdministratorLogout from "../AdministratorLogout/AdministratorLogout";
 import ProfilePage from "../ProfilePage/ProfilePage";
 import AddVehiclePage from "../AddVehiclePage/AddVehiclePage";
 import AddRefuelHistoryPage from "../AddRefuelHistoryPage/AddRefuelHistoryPage";
+import UserRegister from "../UserRegister/UserRegister";
+import UserEdit from "../UserEdit/UserEdit";
+import DashboardPage from "../Dashboard/DashboardPage";
+import DashboardList from "../Dashboard/DashboardList";
+import DashboardVehiclePage from "../Dashboard/DashboardVehicles/DashboardVehicles";
+import DashboardBrandPage from "../Dashboard/DashboardBrand/DashboardBrand";
+import DashboardFuelTypePage from "../Dashboard/DashboardFuelType/DashboardFuelType";
+import BrandEditPage from "../Dashboard/DashboardBrand/BrandEditPage/BrandEditPage";
+import AddModelPhoto from "../Dashboard/DashboardBrand/BrandEditPage/AddModelPhoto";
 
 class ApplicationState {
   authorizedRole: "user" | "administrator" | "visitor" = "visitor";
@@ -36,12 +45,12 @@ export default class Application extends Component<ApplicationProperties> {
 
   componentDidMount() {
     EventRegistry.on("AUTH_EVENT", this.authEventHandler.bind(this));
-
-    this.checkRole("user").then((res) => {
-      if (!res) {
-        this.checkRole("administrator");
-      }
-    });
+    if (this.state.authorizedRole === "user") {
+      this.checkRole("user");
+    }
+    if (this.state.authorizedRole === "administrator") {
+      this.checkRole("administrator");
+    }
   }
 
   componentWillUnmount() {
@@ -77,6 +86,10 @@ export default class Application extends Component<ApplicationProperties> {
             EventRegistry.emit("AUTH_EVENT", role + "_login");
             resolve(true);
           }
+          this.setState({
+            authorizedRole: "visitor",
+          });
+          EventRegistry.emit("AUTH_EVENT", "force_login");
           resolve(false);
         })
         .catch(() => {});
@@ -123,7 +136,42 @@ export default class Application extends Component<ApplicationProperties> {
                 </Route>
                 <Route exact path="/profile" component={ProfilePage} />
                 <Route exact path="/user/login" component={UserLogin} />
+                <Route exact path="/user/register" component={UserRegister} />
+                <Route
+                  exact
+                  path="/user/edit"
+                  render={(props: any) => {
+                    return <UserEdit {...props} />;
+                  }}
+                />
                 <Route exact path="/user/logout" component={UserLogout} />
+
+                <Route exact path="/dashboard">
+                  <DashboardPage sidebar={<DashboardList />} />
+                </Route>
+                <Route exact path="/dashboard/vehicle">
+                  <DashboardVehiclePage sidebar={<DashboardList />} />
+                </Route>
+                <Route exact path="/dashboard/brand">
+                  <DashboardBrandPage sidebar={<DashboardList />} />
+                </Route>
+                <Route
+                  exact
+                  path="/dashboard/brand/:bid?"
+                  render={(props: any) => {
+                    return <BrandEditPage {...props} sidebar={<DashboardList />} />;
+                  }}
+                ></Route>
+                <Route
+                  exact
+                  path="/dashboard/brand/:bid?/model/:mid?"
+                  render={(props: any) => {
+                    return <AddModelPhoto {...props} sidebar={<DashboardList />} />;
+                  }}
+                ></Route>
+                <Route exact path="/dashboard/fuel-type">
+                  <DashboardFuelTypePage sidebar={<DashboardList />} />
+                </Route>
                 <Route exact path="/administrator/login" component={AdministratorLogin} />
                 <Route exact path="/administrator/logout" component={AdministratorLogout} />
               </Switch>

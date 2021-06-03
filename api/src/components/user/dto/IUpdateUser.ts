@@ -7,7 +7,7 @@ interface IUpdateUser {
     firstName: string;
     lastName: string;
     phoneNumber: string;
-    language: 'SR' | 'EN';
+    language?: 'SR' | 'EN';
 }
 
 const IUpdateUserSchema = {
@@ -44,7 +44,6 @@ const IUpdateUserSchema = {
         "firstName",
         "lastName",
         "phoneNumber",
-        "language"
     ],
     additionalProperties: false,
 }
@@ -53,4 +52,4 @@ const IUpdateUserSchemaValidator = ajv.compile(IUpdateUserSchema);
 
 export { IUpdateUserSchema };
 export { IUpdateUserSchemaValidator };
-export { IUpdateUser };
+export default IUpdateUser;

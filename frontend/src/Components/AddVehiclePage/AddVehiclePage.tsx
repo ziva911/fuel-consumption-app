@@ -1,5 +1,5 @@
 import { Row, Col, Card, Form, Button } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import EventRegistry from "../../Api/EventRegistry";
 import VehicleService from "../../Services/VehicleService";
 import BasePage, { BasePageProperties } from "../BasePage/BasePage";
@@ -83,6 +83,7 @@ export default class AddVehiclePage extends BasePage<AddVehiclePageProperties> {
         });
       }
       const vehicleBrands = res.filter((brand) => brand.models.length);
+      this.chosenBrand = vehicleBrands[0];
       this.setState({
         vehicleBrands: vehicleBrands,
       });
@@ -138,6 +139,8 @@ export default class AddVehiclePage extends BasePage<AddVehiclePageProperties> {
   componentDidUpdate(prevProps: AddVehiclePageProperties, prevState: AddVehiclePageState) {
     if (prevProps.match?.params.vid !== this.props.match?.params.vid || prevProps.location?.state !== this.props.location?.state) {
       this.getVehicleData();
+      this.getBrandData();
+      this.getFuelTypeData();
     }
   }
   componentWillUnmount() {
@@ -279,6 +282,9 @@ export default class AddVehiclePage extends BasePage<AddVehiclePageProperties> {
     const newVehicle = this.state.vehicle as ICreateVehicle;
     return (
       <Row>
+        <Link to={`/vehicle`}>
+          <span>{"<<"}</span>Back
+        </Link>
         <Col sm={12} md={{ span: 6, offset: 3 }} lg={{ span: 4, offset: 4 }}>
           <Card>
             <Card.Body>
@@ -328,6 +334,7 @@ export default class AddVehiclePage extends BasePage<AddVehiclePageProperties> {
                         as="select"
                         id="modelInput"
                         value={newVehicle?.brandModelId ?? this.chosenBrand.models[0]?.id}
+                        defaultValue={this.state.vehicleBrands[0]?.models[0]?.id}
                         onChange={this.onChangeInput("brandModelId").bind(this)}
                       >
                         {this.chosenBrand

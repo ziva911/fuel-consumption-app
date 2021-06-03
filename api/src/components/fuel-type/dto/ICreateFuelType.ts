@@ -25,4 +25,4 @@ const ICreateFuelTypeSchemaValidator = ajv.compile(ICreateFuelTypeSchema);
 
 export { ICreateFuelTypeSchema };
 export { ICreateFuelTypeSchemaValidator };
-export { ICreateFuelType };
+export default ICreateFuelType;

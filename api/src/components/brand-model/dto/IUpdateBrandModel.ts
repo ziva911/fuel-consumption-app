@@ -34,4 +34,4 @@ const IUpdateBrandModelSchemaValidator = ajv.compile(IUpdateBrandModelSchema);
 
 export { IUpdateBrandModelSchema };
 export { IUpdateBrandModelSchemaValidator };
-export { IUpdateBrandModel };
+export default IUpdateBrandModel;

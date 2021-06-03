@@ -1,8 +1,8 @@
 import FuelTypeModel from "./fuel-type.model";
 import IErrorResponse from "../../common/IErrorResponse.interface";
 import BaseService from "../../services/BaseService";
-import { ICreateFuelType } from "./dto/ICreateFuelType";
-import { IUpdateFuelType } from "./dto/IUpdateFuelType";
+import ICreateFuelType from "./dto/ICreateFuelType";
+import IUpdateFuelType from "./dto/IUpdateFuelType";
 
 export default class FuelTypeService extends BaseService<FuelTypeModel> {
 

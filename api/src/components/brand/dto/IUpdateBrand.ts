@@ -3,7 +3,7 @@ import Ajv from "ajv";
 const ajv = new Ajv();
 
 interface IUpdateBrand {
-    id: number;
+    id?: number;
     name: string;
     logo: string;
 }
@@ -34,4 +34,4 @@ const IUpdateBrandSchemaValidator = ajv.compile(IUpdateBrandSchema);
 
 export { IUpdateBrandSchema };
 export { IUpdateBrandSchemaValidator };
-export { IUpdateBrand };
+export default IUpdateBrand;

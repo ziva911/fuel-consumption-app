@@ -28,7 +28,6 @@ export default class VehicleService extends BaseService<VehicleModel> {
         item.manufactureYear = data?.manufacture_year;
         item.paintColor = data?.paint_color;
         item.mileageStart = Number(data?.mileage_start);
-        item.mileageCurrent = Number(data?.mileage_current);
         item.createdAt = data?.created_at;
         item.modifiedAt = data?.modified_at;
         item.userId = Number(data?.user_id);
@@ -90,32 +89,6 @@ export default class VehicleService extends BaseService<VehicleModel> {
 
     async getById(vehicleId: number, options: Partial<VehicleModelAdapterOptions> = { loadChildren: true }): Promise<VehicleModel | null> {
         return super.getByIdFromTable("vehicle", vehicleId, options);
-    }
-
-    async updateVehicleMileageCurrent(vehicleId: number, mileageCurrent: number): Promise<IErrorResponse | false> {
-        return new Promise<IErrorResponse | false>((result) => {
-
-            this.db.execute(`
-                UPDATE
-                    vehicle
-                SET
-                    mileage_current = ?
-                WHERE
-                    vehicle_id = ?;`,
-                [
-                    mileageCurrent,
-                    vehicleId
-                ])
-                .then(async _ => {
-                    result({
-                        errorCode: 0,
-                        message: "Vehicle successfully updated"
-                    });
-                })
-                .catch(err => {
-                    result(false);
-                });
-        });
     }
 
     async updateFuelExtra(vehicleId: number, fuelExtra: number): Promise<IErrorResponse | false> {

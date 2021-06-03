@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { ApiConfiguration } from '../Config/api.config';
 type ApiMethod = 'get' | 'post' | 'put' | 'delete';
-type ApiRole = 'user' | 'administrator';
+export type ApiRole = 'user' | 'administrator';
 type ApiResponseStatus = 'ok' | 'error' | 'login';
 
 export interface ApiResponse {

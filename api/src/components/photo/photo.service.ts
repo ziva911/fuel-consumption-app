@@ -1,6 +1,6 @@
 import IErrorResponse from "../../common/IErrorResponse.interface";
 import BaseService from "../../services/BaseService";
-import { ICreatePhoto } from "./dto/ICreatePhoto";
+import ICreatePhoto from "./dto/ICreatePhoto";
 import { IUpdatePhoto } from "./dto/IUpdatePhoto";
 import Photo from "./photo.model";
 import IModelAdapterOptions from "../../common/IModelAdapterOptions.interface";

@@ -42,7 +42,7 @@ export default class VehicleController extends BaseController {
             return;
         }
         // find vehicle in db and check if it is owned by current user
-        const vehicle: VehicleModel | null = await this.services.vehicleService.getById(vehicleId, { loadChildren: true });
+        const vehicle: VehicleModel | null = await this.services.vehicleService.getById(vehicleId, { loadChildren: true, loadHistory: true });
         if (vehicle == null) {
             res.sendStatus(404);
             return;

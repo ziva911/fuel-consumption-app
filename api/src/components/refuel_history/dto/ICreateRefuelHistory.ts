@@ -3,7 +3,7 @@ import Ajv from "ajv";
 const ajv = new Ajv();
 
 interface ICreateRefuelHistory {
-    date: Date;
+    date: string;
     quantity: number;
     totalCost: number;
     isFull: boolean;
@@ -51,4 +51,4 @@ const ICreateRefuelHistorySchemaValidator = ajv.compile(ICreateRefuelHistorySche
 
 export { ICreateRefuelHistorySchema };
 export { ICreateRefuelHistorySchemaValidator };
-export { ICreateRefuelHistory };
+export default ICreateRefuelHistory;

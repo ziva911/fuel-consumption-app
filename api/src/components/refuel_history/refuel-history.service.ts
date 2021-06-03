@@ -2,8 +2,8 @@ import IErrorResponse from '../../common/IErrorResponse.interface';
 import IModelAdapterOptions from "../../common/IModelAdapterOptions.interface";
 import BaseService from "../../services/BaseService";
 import RefuelHistory from './refuel-history.model';
-import { ICreateRefuelHistory } from './dto/ICreateRefuelHistory';
-import { IUpdateRefuelHistory } from './dto/IUpdateRefuelHistory';
+import ICreateRefuelHistory from './dto/ICreateRefuelHistory';
+import IUpdateRefuelHistory from './dto/IUpdateRefuelHistory';
 
 class RefuelHistoryAdapterOptions implements IModelAdapterOptions { }
 
@@ -24,7 +24,7 @@ export default class RefuelHistoryService extends BaseService<RefuelHistory> {
     }
 
     async getByVehicleId(vehicleId: number, options: Partial<RefuelHistoryAdapterOptions> = { loadChildren: false }): Promise<RefuelHistory[]> {
-        return this.getByFieldIdFromTableWithOrderBy<RefuelHistoryAdapterOptions>("refuel_history", "vehicle_id", vehicleId, "created_at", "DESC", options);
+        return this.getByFieldIdFromTableWithOrderBy<RefuelHistoryAdapterOptions>("refuel_history", "vehicle_id", vehicleId, "date", "DESC", options);
     }
 
     async getAll(options: Partial<RefuelHistoryAdapterOptions> = { loadChildren: false }): Promise<RefuelHistory[]> {
@@ -163,6 +163,7 @@ export default class RefuelHistoryService extends BaseService<RefuelHistory> {
             this.db.execute(`DELETE FROM refuel_history WHERE refuel_history_id = ?;`, [refuelHistoryId])
                 .then(async res => {
                     const data: any = res;
+                    console.log(res)
                     result({
                         errorCode: 0,
                         message: `Deleted ${data[0].affectedRows} rows.`,

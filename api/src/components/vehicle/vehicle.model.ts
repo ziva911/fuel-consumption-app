@@ -1,6 +1,7 @@
 import IModel from '../../common/IModel.interface';
 import BrandModelModel from '../brand-model/brand-model.model';
 import FuelTypeModel from '../fuel-type/fuel-type.model';
+import RefuelHistory from '../refuel_history/refuel-history.model';
 
 export default class VehicleModel implements IModel {
     vehicleId: number;
@@ -11,7 +12,7 @@ export default class VehicleModel implements IModel {
     mileageStart: number;
     mileageCurrent: number;
     imagePath: string;
-    fuelExtra: number;
+    refuelHistory: RefuelHistory[] | null = [];
     fuelTypeId: number | null = null;
     fuelType: FuelTypeModel | null = null;
     brandModelId: number | null = null;

@@ -34,4 +34,4 @@ const IUpdateRefuelHistorySchemaValidator = ajv.compile(IUpdateRefuelHistorySche
 
 export { IUpdateRefuelHistorySchema };
 export { IUpdateRefuelHistorySchemaValidator };
-export { IUpdateRefuelHistory };
+export default IUpdateRefuelHistory;

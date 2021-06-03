@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import BaseController from '../../services/BaseController';
 import VehicleModel from '../vehicle/vehicle.model';
-import { ICreateRefuelHistorySchemaValidator, ICreateRefuelHistory } from './dto/ICreateRefuelHistory';
-import { IUpdateRefuelHistory, IUpdateRefuelHistorySchemaValidator } from './dto/IUpdateRefuelHistory';
+import ICreateRefuelHistory, { ICreateRefuelHistorySchemaValidator } from './dto/ICreateRefuelHistory';
+import IUpdateRefuelHistory, { IUpdateRefuelHistorySchemaValidator } from './dto/IUpdateRefuelHistory';
 import RefuelHistory from './refuel-history.model';
 
 export default class RefuelHistoryController extends BaseController {
@@ -71,7 +71,13 @@ export default class RefuelHistoryController extends BaseController {
             return;
         }
         const newRefuelHistory: RefuelHistory | IErrorResponse = await this.services.refuelHistoryService.create(item as ICreateRefuelHistory);
-
+        // if (newRefuelHistory instanceof RefuelHistory) {
+        //     if (newRefuelHistory.isFull) {
+        //         await this.services.vehicleService.updateFuelExtra(vehicle.vehicleId, 0)
+        //     } else {
+        //         await this.services.vehicleService.updateFuelExtra(vehicle.vehicleId, vehicle.fuelExtra + newRefuelHistory.quantity)
+        //     }
+        // }
         res.send(newRefuelHistory);
     }
 
@@ -145,7 +151,8 @@ export default class RefuelHistoryController extends BaseController {
             res.status(401).send("Not your vehicle");
             return;
         }
-        res.send(await this.services.refuelHistoryService.deleteById(refuelHistoryId));
+        const deletedRecord = await this.services.refuelHistoryService.deleteById(refuelHistoryId);
+        res.send(deletedRecord);
     }
 
     async deleteAllVehicleHistory(req: Request, res: Response) {

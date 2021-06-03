@@ -16,6 +16,7 @@ import Photo from "../photo/photo.model";
 
 class VehicleModelAdapterOptions implements IModelAdapterOptions {
     loadParent: boolean = false;
+    loadHistory: boolean = false;
     loadChildren: boolean = true; // vehicles "children" are classes BrandModel, FuelType & Photo
 }
 export default class VehicleService extends BaseService<VehicleModel> {
@@ -33,7 +34,6 @@ export default class VehicleService extends BaseService<VehicleModel> {
         item.userId = Number(data?.user_id);
         item.fuelTypeId = Number(data?.fuel_type_id);
         item.brandModelId = Number(data?.brand_model_id);
-        item.fuelExtra = Number(data?.fuel_extra);
 
         if (options?.loadChildren) {
             let photo: Photo = null;
@@ -55,8 +55,13 @@ export default class VehicleService extends BaseService<VehicleModel> {
                 }
             }
         }
-
+        if (options?.loadHistory) {
+            item.refuelHistory = await this.getVehicleRefuelHistory(item.vehicleId)
+        } else delete item.refuelHistory;
         return item;
+    }
+    private async getVehicleRefuelHistory(vehicleId: number) {
+        return this.services.refuelHistoryService.getByVehicleId(vehicleId);
     }
 
     private async getPhotoByVehicleId(vehicleId: number) {
@@ -99,6 +104,32 @@ export default class VehicleService extends BaseService<VehicleModel> {
                     vehicle_id = ?;`,
                 [
                     mileageCurrent,
+                    vehicleId
+                ])
+                .then(async _ => {
+                    result({
+                        errorCode: 0,
+                        message: "Vehicle successfully updated"
+                    });
+                })
+                .catch(err => {
+                    result(false);
+                });
+        });
+    }
+
+    async updateFuelExtra(vehicleId: number, fuelExtra: number): Promise<IErrorResponse | false> {
+        return new Promise<IErrorResponse | false>((result) => {
+
+            this.db.execute(`
+                UPDATE
+                    vehicle
+                SET
+                    fuel_extra = ?
+                WHERE
+                    vehicle_id = ?;`,
+                [
+                    fuelExtra,
                     vehicleId
                 ])
                 .then(async _ => {

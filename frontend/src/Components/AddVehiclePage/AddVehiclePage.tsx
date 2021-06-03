@@ -1,15 +1,24 @@
 import { Row, Col, Card, Form, Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
+<<<<<<< HEAD
+=======
+import ICreateVehicle from "../../../../../backend/api/src/components/vehicle/dto/ICreateVehicle";
+import IUpdateVehicle from "../../../../../backend/api/src/components/vehicle/dto/IUpdateVehicle";
+import VehicleModel from "../../../../../backend/api/src/components/vehicle/vehicle.model";
+>>>>>>> master
 import EventRegistry from "../../Api/EventRegistry";
 import VehicleService from "../../Services/VehicleService";
 import BasePage, { BasePageProperties } from "../BasePage/BasePage";
 import BrandModelService from "../../Services/BrandModelService";
 import FuelTypeService from "../../Services/FuelTypeService";
 import { createRef } from "react";
+<<<<<<< HEAD
 import VehicleModel from "../../../../api/src/components/vehicle/vehicle.model";
 import IUpdateVehicle from "../../../../api/src/components/vehicle/dto/IUpdateVehicle";
 import ICreateVehicle from "../../../../api/src/components/vehicle/dto/ICreateVehicle";
 
+=======
+>>>>>>> master
 class AddVehiclePageProperties extends BasePageProperties {
   match?: {
     params: {

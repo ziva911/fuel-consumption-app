@@ -1,4 +1,9 @@
 import { Col, Container, Row, Image, Form, Button } from "react-bootstrap";
+<<<<<<< HEAD
+=======
+import VehicleModel from "../../../../../backend/api/src/components/vehicle/vehicle.model";
+import RefuelHistory from "../../../../../backend/api/src/components/refuel_history/refuel-history.model";
+>>>>>>> master
 import BasePage, { BasePageProperties } from "../BasePage/BasePage";
 import "./SingleVehiclePage.scss";
 import VehicleService from "../../Services/VehicleService";
@@ -8,9 +13,14 @@ import { getThumbPath } from "../VehiclesPage/VehiclesArrayElement/VehiclesArray
 import { ReactComponent as DefaultPhoto } from "../../Shared/default_photo.svg";
 import { createRef } from "react";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import { CheckLg, XLg } from "react-bootstrap-icons";
 import { FaTrashAlt } from "react-icons/fa";
 import VehicleModel from "../../../../api/src/components/vehicle/vehicle.model";
+=======
+import { CheckLg, XLg, TrashFill } from "react-bootstrap-icons";
+import { FaTrashAlt } from "react-icons/fa";
+>>>>>>> master
 class SingleVehiclePageProperties extends BasePageProperties {
   match?: {
     params: {

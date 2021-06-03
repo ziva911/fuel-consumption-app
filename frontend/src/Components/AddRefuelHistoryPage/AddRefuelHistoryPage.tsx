@@ -1,28 +1,12 @@
 import { Row, Col, Card, Form, Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-import ICreateRefuelHistory from "../../../../../backend/api/src/components/refuel_history/dto/ICreateRefuelHistory";
-import VehicleModel from "../../../../../backend/api/src/components/vehicle/vehicle.model";
->>>>>>> master
-=======
-import ICreateRefuelHistory from "../../../../../backend/api/src/components/refuel_history/dto/ICreateRefuelHistory";
-import VehicleModel from "../../../../../backend/api/src/components/vehicle/vehicle.model";
->>>>>>> master
 import EventRegistry from "../../Api/EventRegistry";
 import BasePage, { BasePageProperties } from "../BasePage/BasePage";
 import RefuelHistoryService from "../../Services/RefuelHistoryService";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-<<<<<<< HEAD
-<<<<<<< HEAD
 import VehicleModel from "../../../../api/src/components/vehicle/vehicle.model";
 import ICreateRefuelHistory from "../../../../api/src/components/refuel_history/dto/ICreateRefuelHistory";
-=======
->>>>>>> master
-=======
->>>>>>> master
 
 class AddRefuelHistoryPageProperties extends BasePageProperties {
   match?: {

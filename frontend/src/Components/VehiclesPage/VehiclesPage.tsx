@@ -2,26 +2,13 @@ import { Button, CardDeck, Col, Container, Row } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import BasePage from "../BasePage/BasePage";
 import { BasePageProperties } from "../BasePage/BasePage";
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-import VehicleModel from "../../../../../backend/api/src/components/vehicle/vehicle.model";
->>>>>>> master
-=======
-import VehicleModel from "../../../../../backend/api/src/components/vehicle/vehicle.model";
->>>>>>> master
 import VehicleService from "../../Services/VehicleService";
 import EventRegistry from "../../Api/EventRegistry";
 import VehiclesArrayElement from "./VehiclesArrayElement/VehiclesArrayElement";
 import ConfirmAction from "../Shared/ConfirmAction/ConfirmAction";
 import "./VehiclesPage.scss";
-<<<<<<< HEAD
-<<<<<<< HEAD
 import VehicleModel from "../../../../api/src/components/vehicle/vehicle.model";
-=======
->>>>>>> master
-=======
->>>>>>> master
+
 class VehiclesPageProperties extends BasePageProperties {
   match?: {
     params: {

@@ -4,9 +4,9 @@
 
 ![Entity relations](./materials/DB_erd.png)
 
-## Database Diagram
+## Database Model
 
-![Database diagram](./materials/DB_diagram.png)
+![Database modelm](./materials/DB_model.png)
 
 ## SQL
 

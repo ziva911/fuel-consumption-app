@@ -57,15 +57,6 @@ export default class RefuelHistoryService extends BaseService<RefuelHistory> {
                     };
                 })
                 .then(async () => {
-                    const result = await this.updateVehicleMileageCurrent(data.vehicleId, data.mileageCurrent);
-                    if (result === false) {
-                        throw {
-                            errno: -100,
-                            sqlMessage: 'Could not update vehicle current mileage.',
-                        };
-                    }
-                })
-                .then(async () => {
                     await this.db.commit();
                 })
                 .then(() => {
@@ -87,10 +78,6 @@ export default class RefuelHistoryService extends BaseService<RefuelHistory> {
                     });
                 });
         })
-    }
-
-    private async updateVehicleMileageCurrent(vehicleId: number, mileageCurrent: number): Promise<IErrorResponse | false> {
-        return this.services.vehicleService.updateVehicleMileageCurrent(vehicleId, mileageCurrent);
     }
 
     private async insertRefuelRecord(data: ICreateRefuelHistory): Promise<RefuelHistory | IErrorResponse> {

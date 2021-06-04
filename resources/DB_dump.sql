@@ -170,7 +170,7 @@ CREATE TABLE `refuel_history` (
   PRIMARY KEY (`refuel_history_id`),
   KEY `fk_refuel_history_vehicle_id` (`vehicle_id`),
   CONSTRAINT `fk_refuel_history_vehicle_id` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`vehicle_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,6 +179,7 @@ CREATE TABLE `refuel_history` (
 
 LOCK TABLES `refuel_history` WRITE;
 /*!40000 ALTER TABLE `refuel_history` DISABLE KEYS */;
+INSERT INTO `refuel_history` VALUES (24,'2021-06-04',14,156,1,121111,'2021-06-04 11:34:56',25);
 /*!40000 ALTER TABLE `refuel_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,7 +207,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `uq_user_user_email` (`user_email`),
   UNIQUE KEY `uq_user_phone_number` (`phone_number`),
   UNIQUE KEY `uq_user_verification_code` (`verification_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +216,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (32,'user1@localhost.com','Test ime','Test prezime','132456789','$2b$12$l.U8GWC2pjEnCF5ADOa9te6baPoagLImNd8jG5urb8PhA9QcYuL6m','2021-06-03 21:33:49','2021-06-03 21:28:50','USD','EN',1,'c71363f1-b224-45ae-8750-044d08adeb0f');
+INSERT INTO `user` VALUES (32,'user1@localhost.com','Test ime','Test prezime','132456789','$2b$12$l.U8GWC2pjEnCF5ADOa9te6baPoagLImNd8jG5urb8PhA9QcYuL6m','2021-06-03 21:33:49','2021-06-03 21:28:50','USD','EN',1,'c71363f1-b224-45ae-8750-044d08adeb0f'),(33,'ziva911@gmail.com','Nikola','Zivanovic','111111111','$2b$12$dOwzhPK/6o422yi2ENRzXOW0/B9616RqkzJaKWtchWfRom/MeVhwy','2021-06-04 13:00:23','2021-06-04 12:56:58','USD','EN',1,'f61ef920-cb5e-4797-b990-f9fe010cbaec');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -271,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-03 23:54:10
+-- Dump completed on 2021-06-04 15:16:00

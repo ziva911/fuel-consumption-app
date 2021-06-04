@@ -4308,7 +4308,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\": \"toza911@gmail.com\",\n    \"password\": \"12345\"\n}",
+									"raw": "{\n    \"email\": \"user1@localhost.com\",\n    \"password\": \"user1\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -4335,7 +4335,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"email\": \"toza911@gmail.com\",\n    \"password\": \"123456\"\n}",
+											"raw": "{\n    \"email\": \"user1@localhost.com\",\n    \"password\": \"user2\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -4397,7 +4397,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"email\": \"toza911@gmail.com\",\n    \"password\": \"12345\"\n}",
+											"raw": "{\n    \"email\": \"user1@localhost.com\",\n    \"password\": \"user1\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -4459,7 +4459,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"email\": \"toza911@gmaill.com\",\n    \"password\": \"12345\"\n}",
+											"raw": "{\n    \"email\": \"user2@localhost.com\",\n    \"password\": \"user1\"\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -6078,11 +6078,11 @@
 		},
 		{
 			"key": "AUTH_ADMIN_TOKEN",
-			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWRlbnRpdHkiOiJhZG1pbiIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjIyMzA0ODA3LCJleHAiOjE2MjIzOTEyMDcsImlzcyI6IkZ1ZWxDb25zdW1wdGlvbkFwcCJ9.XWNbCERYgyrH-8oaMevacy8HQ2Dq3xY6_PoqA_7Ca6dv3MjCrhvmCrZM_p769hXajEClS9PlkEgLtBLvUkqO9G8gXstir_OyQm3iLUyw-G5NGcvWgFv_6WomcW-ffQ8DRNjFLXPyAKCdySnWi5mTPr2EdvO8s0PhRbc1_EX6Khfr5cSaZWBc3RXJjIqNg_CYZBj1FmkD2ThDXkEWLGI-LqrInhZb5fkctd5gbhGCBO98ZnI9Syrd9RLnM-Kv9fiPMWPHeRnJjfrdm5cgbSqzSAtNnHgC2e2s_MzhQDWJCftsIyqgcDcHvbqLLH7k3gtLk3rteFSriMSHn3QiTuabIA"
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWRlbnRpdHkiOiJhZG1pbiIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjIyODEyMDk4LCJleHAiOjE2MjM0MTY4OTgsImlzcyI6IkZ1ZWxDb25zdW1wdGlvbkFwcCJ9.d3-gq0T5zFvqN6hjBC7-4oKbFxi0CQWy83P663wqt4TqRcztMZruqdxXthDOJ6tqiMjohX1kdtkRdQuD4i6skkUY6QXx2hWCYgvb6MmCw8rR2EzoF2whP3DAOYLvThzK0S91u-dNWSIGNj7KMWKHKubiV7y1GcBcIJcUq1PWyH0bYpW-fg7aXkEKOWF9R1oXwybVqdY19ZAKLo_oMv3hQCKMCeZjg0s7F91CtroNas23Hq1Ivp65xgj31qVjszjLTcXFcdjF0hgZfCL4Bi-HZPdvcddl12hWK4RY4lZp1GqCjnez6Sfoi0WfEVZEuzMYQpkxUk0GrYZFaobrxFO1bA"
 		},
 		{
 			"key": "AUTH_USER_TOKEN",
-			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImlkZW50aXR5IjoidG96YTkxMUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMjMwNDE4NiwiZXhwIjoxNjIyMzkwNTg2LCJpc3MiOiJGdWVsQ29uc3VtcHRpb25BcHAifQ.Inx7u4YektMQYz_RaqvxHCuQF5AHXIDREDll1wngcSfn8R_3VOSIUuHxEPHdZdNENHZ-rKP6sTmYNSoaObJlHBiwKMTa9Jl47uI30RmyzTucnPRTnYGyrqWWnqVLn1wlbBGo4nQP2WMP_8EGroAa-ji71e1k97Fk7fwTwMSBKas7jbdMBoJr3buymSHjOEqneceobHhl2vJPpcL0MwCAX0f8rIglddbuq6COc8AhiDYoIx7r4EOqPAbwLrohY9Y01qHcYqA25Rr4Isqss5shU5Buw-MCkD1WYh_bQtUtUTkrqEn4HH0M2eUp4UNmlKPfL1sl09nxatK7E_7-f7AXmw"
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzIsImlkZW50aXR5IjoidXNlcjFAbG9jYWxob3N0LmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjIyODEyNDQ1LCJleHAiOjE2MjM0MTcyNDUsImlzcyI6IkZ1ZWxDb25zdW1wdGlvbkFwcCJ9.I2VrvI6FQzeleRSU8Nmcwi5NaLVe-x-v6v1nQlBWqNMzT3ZuJbUdxqR44g9N04xAtu7xKPUqKawmd56WVadwsku3sIqXLCd66ajj7rJr33po1JpxqtGVc2y4p6imSGdFaSt63qorkPS8tRl0fugUoVW5BMRNm_CFzIgcOXzXMEDilTwkEsBSBT3_VIWNq7fUnSizMm0hhHLC7naAX5fALD9XJzq34CPOLIpS1PG6BNU3_mlgzLflz-j8Wb1l7Edlj9o2fHi0JRKjiAhZJ2e8Y-Vf8iHbI-sXyQJ3wS1AuVGXSf0osXyyul1SG4KxpJUYb0vtWloDmxnoXFHzWlAJ-A"
 		}
 	]
 }

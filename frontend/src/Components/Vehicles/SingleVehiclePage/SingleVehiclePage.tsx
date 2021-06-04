@@ -1,16 +1,16 @@
 import { Col, Container, Row, Image, Form, Button } from "react-bootstrap";
-import BasePage, { BasePageProperties } from "../BasePage/BasePage";
+import BasePage, { BasePageProperties } from "../../BasePage/BasePage";
 import "./SingleVehiclePage.scss";
-import VehicleService from "../../Services/VehicleService";
-import RefuelHistoryService from "../../Services/RefuelHistoryService";
-import { ApiConfiguration } from "../../Config/api.config";
-import { getThumbPath } from "../VehiclesPage/VehiclesArrayElement/VehiclesArrayElement";
-import { ReactComponent as DefaultPhoto } from "../../Shared/default_photo.svg";
+import VehicleService from "../../../Services/VehicleService";
+import RefuelHistoryService from "../../../Services/RefuelHistoryService";
+import { ApiConfiguration } from "../../../Config/api.config";
+import { getThumbPath } from "../VehiclesArrayElement/VehiclesArrayElement";
+import { ReactComponent as DefaultPhoto } from "../../../Shared/default_photo.svg";
 import { createRef } from "react";
 import { Link } from "react-router-dom";
 import { CheckLg, XLg } from "react-bootstrap-icons";
 import { FaTrashAlt } from "react-icons/fa";
-import VehicleModel from "../../../../api/src/components/vehicle/vehicle.model";
+import VehicleModel from "../../../../../api/src/components/vehicle/vehicle.model";
 
 class SingleVehiclePageProperties extends BasePageProperties {
   match?: {

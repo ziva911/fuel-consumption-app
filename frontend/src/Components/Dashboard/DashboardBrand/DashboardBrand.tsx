@@ -69,10 +69,10 @@ export default class DashboardBrandPage extends BasePage<DashboardBrandPagePrope
           {this.state.allBrands?.length
             ? this.state.allBrands.map((brand, index) => {
                 return (
-                  <div className="d-flex justify-content-between">
+                  <div key={"brand-name-" + brand.id} className="d-flex justify-content-between">
                     <Col>
-                      <Row className="mt-3 brand-logo" key={"brand-name-" + brand.id}>
-                        <img src={brand.logo} />
+                      <Row className="mt-3 brand-logo">
+                        <img src={brand.logo} alt={brand.name + "-brand-image"} />
                         {brand.name}
                       </Row>
                       {brand.models?.length ? (

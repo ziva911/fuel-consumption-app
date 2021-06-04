@@ -1,0 +1,6088 @@
+{
+	"info": {
+		"_postman_id": "5d9a85b0-b4f4-46de-ba8d-bd41bf1745f9",
+		"name": "FuelConsumptionApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Car Brands",
+			"item": [
+				{
+					"name": "Brand Models",
+					"item": [
+						{
+							"name": "Get all models of one brand",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/brand/:bid/model",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"brand",
+										":bid",
+										"model"
+									],
+									"variable": [
+										{
+											"key": "bid",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get all models of one brand OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{API_URL}}/brand/:bid/model",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"brand",
+												":bid",
+												"model"
+											],
+											"variable": [
+												{
+													"key": "bid",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "73"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"49-gsXkZ32WJOeqqPDXHURJd4i4WIo\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 24 May 2021 14:53:47 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"3 Series\",\n        \"brandId\": 1\n    },\n    {\n        \"id\": 3,\n        \"name\": \"X6\",\n        \"brandId\": 1\n    }\n]"
+								},
+								{
+									"name": "Get all models of one brand - Error no brand with id",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{API_URL}}/brand/:bid/model",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"brand",
+												":bid",
+												"model"
+											],
+											"variable": [
+												{
+													"key": "bid",
+													"value": "111"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "html",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/html; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "31"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1f-oPlfvqQbZb42M0suTx/tul5rRJU\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 24 May 2021 23:00:16 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "There is no brand with that ID."
+								}
+							]
+						},
+						{
+							"name": "Get model byId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/brand/model/:id",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"brand",
+										"model",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Get model byId - Error model not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{API_URL}}/brand/model/:id",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"brand",
+												"model",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "111"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "9"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 24 May 2021 23:03:39 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "Not Found"
+								},
+								{
+									"name": "Get model byId  OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{API_URL}}/brand/model/:id",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"brand",
+												"model",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "3"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "143"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"8f-YwPAZPvx7eES8AzDQFZd9wErksM\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 24 May 2021 14:54:30 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"brand\": {\n        \"id\": 1,\n        \"name\": \"BMW\",\n        \"logo\": \"https://brandslogo.net/wp-content/uploads/2015/09/bmw-flat-logo-vector-download.jpg\"\n    },\n    \"id\": 3,\n    \"name\": \"X6\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Create new model for one brand (administrator only)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{   \n    \"name\": \"Corsa\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/brand/:bid/model",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"brand",
+										":bid",
+										"model"
+									],
+									"variable": [
+										{
+											"key": "bid",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Create new model for one brand (administrator only) OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{   \n    \"name\": \"Corsa\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/brand/:bid/model",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"brand",
+												":bid",
+												"model"
+											],
+											"variable": [
+												{
+													"key": "bid",
+													"value": "6"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "152"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"98-haByhAQTMEuatOkcUM172w7i9XE\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 24 May 2021 15:04:28 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"brand\": {\n        \"id\": 6,\n        \"name\": \"Opel\",\n        \"logo\": \"https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/082016/untitled-1_168.jpg\"\n    },\n    \"id\": 7,\n    \"name\": \"Corsa\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Update  car model (administrator only)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AUTH_ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{  \n    \"brandId\" : 1, \n    \"name\": \"3 Series\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/model/:id",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"model",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "Update  car model (administrator only) -- no acess",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{   \n    \"name\": \"Corsa\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/model/:id",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"model",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "html",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/html; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "27"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1b-cGqBgFRBa5CmVUoT7XzmpRZR5Qg\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 03 Jun 2021 19:47:01 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "Access denied to this role."
+								},
+								{
+									"name": "Update  car model name (administrator only)",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{   \n    \"brandId\": 1,\n    \"name\": \"Corsa\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/brand/model/:id",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"brand",
+												"model",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "152"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"98-haByhAQTMEuatOkcUM172w7i9XE\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 24 May 2021 15:13:06 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"brand\": {\n        \"id\": 6,\n        \"name\": \"Opel\",\n        \"logo\": \"https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/082016/untitled-1_168.jpg\"\n    },\n    \"id\": 7,\n    \"name\": \"Corsa\"\n}"
+								}
+							]
+						},
+						{
+							"name": "delete  car model (administrator only)",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/model/:id",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"model",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "delete  car model (administrator only) OK",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/model/:id",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"model",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "43"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"2b-G1oQQOo+xNvExE6TuF5R6FbzF/Q\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 24 May 2021 15:19:38 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Deleted 1 rows.\"\n}"
+								},
+								{
+									"name": "delete  car model (administrator only) -- none found to delete",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/model/:id",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"model",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "17"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "43"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"2b-o07IOOcsAhQcg9QXAEM27hBqrDw\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 03 Jun 2021 19:50:36 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Deleted 0 rows.\"\n}"
+								},
+								{
+									"name": "delete  car model (administrator only) --- no acess to role",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/model/:id",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"model",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "html",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/html; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "27"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1b-cGqBgFRBa5CmVUoT7XzmpRZR5Qg\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 03 Jun 2021 19:50:04 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "Access denied to this role."
+								}
+							]
+						},
+						{
+							"name": "POST Add model photo (administrator only)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{AUTH_ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "data",
+											"value": "{\n    \"brandModelId\": 2,\n    \"manufactureYear\": 2017,\n    \"paintColor\": \"red\"\n}",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/home/nikola/Downloads/redcitroenC4.jpg"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/model/:mid/photo",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"model",
+										":mid",
+										"photo"
+									],
+									"variable": [
+										{
+											"key": "mid",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "POST Add model photo (administrator only) -- image too big",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "data",
+													"value": "{\n    \"brandModelId\": 2,\n    \"manufactureYear\": 2017,\n    \"paintColor\": \"red\"\n}",
+													"type": "text"
+												},
+												{
+													"key": "photo",
+													"type": "file",
+													"src": "/home/nikola/Downloads/redcitroenC4.jpg"
+												}
+											],
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/model/:mid/photo",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"model",
+												":mid",
+												"photo"
+											],
+											"variable": [
+												{
+													"key": "mid",
+													"value": "2"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "html",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/html; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "63"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"3f-BYUwaaAeTpKNu1wxQWZZLvzYLcs\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 03 Jun 2021 21:44:10 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "Error width image photo: Image width should less than 1920 px.."
+								},
+								{
+									"name": "POST Add model photo (administrator only) --- ok",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "data",
+													"value": "{\n    \"brandModelId\": 1,\n    \"manufactureYear\": 2010,\n    \"paintColor\": \"white\"\n}",
+													"type": "text"
+												},
+												{
+													"key": "photo",
+													"type": "file",
+													"src": "/home/nikola/Downloads/svm.png"
+												}
+											],
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/model/:mid/photo",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"model",
+												":mid",
+												"photo"
+											],
+											"variable": [
+												{
+													"key": "mid",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "189"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"bd-q9MRrgOF9OAv8P6cX39Ob47Yyjs\""
+										},
+										{
+											"key": "Date",
+											"value": "Thu, 03 Jun 2021 19:54:15 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"id\": 55,\n    \"imagePath\": \"static/uploads/4a70e822-93c1-467b-b275-bce5314b93de-2021/06/4a70e822-93c1-467b-b275-bce5314b93de-svm.png\",\n    \"brandModelId\": 1,\n    \"manufactureYear\": 2010,\n    \"paintColor\": \"white\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "GetAllBrands",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/brand",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"brand"
+							]
+						},
+						"description": "Request should list all brands currently in database"
+					},
+					"response": [
+						{
+							"name": "GetAllBrands - ok",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/brand",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"brand"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "518"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"206-6+xvcWiFjio9MlZsstakWniRgxI\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 14 May 2021 20:05:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"BMW\",\n        \"logo\": \"https://brandslogo.net/wp-content/uploads/2015/09/bmw-flat-logo-vector-download.jpg\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Citroen\",\n        \"logo\": \"https://mpng.subpng.com/20180712/ueq/kisspng-citron-c3-jaguar-cars-land-rover-citroen-berlingo-5b476cce84a599.4014900315314075665433.jpg\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Audi\",\n        \"logo\": \"https://i.pinimg.com/originals/50/52/30/505230d66c8c8d44e4cb490958d1e280.png\"\n    },\n    {\n        \"id\": 6,\n        \"name\": \"Opel\",\n        \"logo\": \"https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/082016/untitled-1_168.jpg\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Insert new brand (administrator only)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AUTH_ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Opel\",\n    \"logo\": \"https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/082016/untitled-1_168.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/brand",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"brand"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Insert new brand (administrator only) -- duplicate name",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Opel\",\n    \"logo\": \"https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/082016/untitled-1_168.jpg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/brand",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"brand"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "83"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"53-Rmq3+gKpuSpGiAORPFu6GNn8H+c\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 19:55:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 1062,\n    \"message\": \"Duplicate entry 'Opel' for key 'uq_brand_brand_name'\"\n}"
+						},
+						{
+							"name": "Insert new brand (administrator only) -- ok",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Opet\",\n    \"logo\": \"https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/082016/untitled-1_168.jpg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/brand",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"brand"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "132"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"84-9rVcc9jXidZJILO+qPIks94APDI\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 19:56:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"models\": [],\n    \"id\": 9,\n    \"name\": \"Opet\",\n    \"logo\": \"https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/082016/untitled-1_168.jpg\"\n}"
+						},
+						{
+							"name": "Insert new brand (administrator only) -- no acess to role",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Opel\",\n    \"logo\": \"https://d1yjjnpx0p53s8.cloudfront.net/styles/logo-thumbnail/s3/082016/untitled-1_168.jpg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/brand",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"brand"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-cGqBgFRBa5CmVUoT7XzmpRZR5Qg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 19:55:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Access denied to this role."
+						}
+					]
+				},
+				{
+					"name": "Update brand  (administrator only)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AUTH_ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mercedess\",\n    \"logo\": \"https://i.pinimg.com/originals/89/c3/bd/89c3bd5f88b725291aa70498f62fb1dd.png\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/brand/4",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"brand",
+								"4"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update brand  (administrator only) -- OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Mercedess\",\n    \"logo\": \"https://i.pinimg.com/originals/89/c3/bd/89c3bd5f88b725291aa70498f62fb1dd.png\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/brand/7",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"brand",
+										"7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "125"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7d-jkwfzAZ3XeJGplHqVrRt0tYNmcU\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 19:37:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"models\": [],\n    \"id\": 7,\n    \"name\": \"Mercedess\",\n    \"logo\": \"https://i.pinimg.com/originals/89/c3/bd/89c3bd5f88b725291aa70498f62fb1dd.png\"\n}"
+						},
+						{
+							"name": "Update brand  (administrator only) --- Not found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Mercedess\",\n    \"logo\": \"https://i.pinimg.com/originals/89/c3/bd/89c3bd5f88b725291aa70498f62fb1dd.png\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/brand/4",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"brand",
+										"4"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"25-Gsg28lhgXj/rjNLnv/wBO7UR7ss\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 19:37:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "The brand with that ID does not exist"
+						}
+					]
+				},
+				{
+					"name": "Delete brand (administrator only)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AUTH_ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/brand/7",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"brand",
+								"7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete brand (administrator only) -- none found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/brand/4",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"brand",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-o07IOOcsAhQcg9QXAEM27hBqrDw\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 19:39:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Deleted 0 rows.\"\n}"
+						},
+						{
+							"name": "Delete brand (administrator only) --- OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/brand/7",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"brand",
+										"7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-G1oQQOo+xNvExE6TuF5R6FbzF/Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 19:39:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Deleted 1 rows.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get brand by id (administrator only)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AUTH_ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/brand/3",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"brand",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get brand by id (administrator only) -- OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/brand/3",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"brand",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "152"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"98-zDuX2XmUo03MLCYFnp1vxtJR34Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 19:40:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"models\": [\n        {\n            \"id\": 4,\n            \"name\": \"A8\",\n            \"brandId\": 3\n        }\n    ],\n    \"id\": 3,\n    \"name\": \"Audi\",\n    \"logo\": \"https://i.pinimg.com/originals/50/52/30/505230d66c8c8d44e4cb490958d1e280.png\"\n}"
+						},
+						{
+							"name": "Get brand by id (administrator only) --- not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/brand/4",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"brand",
+										"4"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 19:41:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Fuel types",
+			"item": [
+				{
+					"name": "get  all fuel types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/fuel-type",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"fuel-type"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get  all fuel types OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/fuel-type",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"fuel-type"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "95"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5f-OxqXWgJMLrYUovorpNOg/kpebXo\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 May 2021 16:01:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"dizel\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"benzin\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"plin\"\n    },\n    {\n        \"id\": 6,\n        \"name\": \"gas\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "new fuel type (administrator only)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"gas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/fuel-type",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"fuel-type"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "new fuel type (administrator only) -- no acess to role",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"gas\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/fuel-type",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"fuel-type"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-cGqBgFRBa5CmVUoT7XzmpRZR5Qg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 19:57:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Access denied to this role."
+						},
+						{
+							"name": "new fuel type (administrator only) -- ok",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"gas\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/fuel-type",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"fuel-type"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "21"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"15-ziJ8mQwEIUGcnMPWrsxANd2MiVc\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 19:58:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 9,\n    \"name\": \"gas\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit fuel type (administrator only)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AUTH_ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"gass\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/fuel-type/:id",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"fuel-type",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit fuel type (administrator only) -- not found",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"gass\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/fuel-type/:id",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"fuel-type",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22-w62qo+GlFi2F5fxGBv8lNDqypy8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 19:58:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "There is no fuel type with that ID"
+						},
+						{
+							"name": "Edit fuel type (administrator only) OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"gas\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4000/api/fuel-type/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"api",
+										"fuel-type",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "22"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"16-JoYDCuYeZxCoQbO6W1w7Mv3aEsQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 May 2021 16:04:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 6,\n    \"name\": \"gass\"\n}"
+						}
+					]
+				},
+				{
+					"name": "delete fuel type by id (administrator only)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/fuel-type/:id",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"fuel-type",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "delete fuel type by id OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/fuel-type/:id",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"fuel-type",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-o07IOOcsAhQcg9QXAEM27hBqrDw\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 May 2021 16:05:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Deleted 0 rows.\"\n}"
+						},
+						{
+							"name": "delete fuel type by id (administrator only) -- no acess",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/fuel-type/:id",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"fuel-type",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-cGqBgFRBa5CmVUoT7XzmpRZR5Qg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 19:59:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Access denied to this role."
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Administrator",
+			"item": [
+				{
+					"name": "POST add administrator",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"admin\",\n    \"password\" : \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/administrator",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"administrator"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST add administrator OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"admin\",\n    \"password\" : \"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/administrator",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"administrator"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "118"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"76-vl+X3hcNrF/RFPTbLsnhedG6AF0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 May 2021 12:02:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 1,\n    \"username\": \"admin\",\n    \"passwordHash\": \"$2b$12$zGzQ3QkI/w/JsfjltbSDie9AR1NDBRZn74LNRF761d5gfEQQTO7wW\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GET all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/administrator",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"administrator"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET all administrator OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/administrator",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"administrator"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "120"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"78-u/1fpoLVLEjfoUBK3AkRbQ1h0as\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 May 2021 12:03:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"administratorId\": 1,\n        \"username\": \"admin\",\n        \"passwordHash\": \"$2b$12$zGzQ3QkI/w/JsfjltbSDie9AR1NDBRZn74LNRF761d5gfEQQTO7wW\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GET byId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/administrator/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"administrator",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET all administrator OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/administrator",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"administrator"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "120"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"78-u/1fpoLVLEjfoUBK3AkRbQ1h0as\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 May 2021 12:03:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"administratorId\": 1,\n        \"username\": \"admin\",\n        \"passwordHash\": \"$2b$12$zGzQ3QkI/w/JsfjltbSDie9AR1NDBRZn74LNRF761d5gfEQQTO7wW\"\n    }\n]"
+						},
+						{
+							"name": "GET byId OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/administrator/1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"administrator",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "118"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"76-vl+X3hcNrF/RFPTbLsnhedG6AF0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 May 2021 12:03:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 1,\n    \"username\": \"admin\",\n    \"passwordHash\": \"$2b$12$zGzQ3QkI/w/JsfjltbSDie9AR1NDBRZn74LNRF761d5gfEQQTO7wW\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT edit administrator password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"admin2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/administrator/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"administrator",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT edit administrator password OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"admin2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/administrator/1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"administrator",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "118"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"76-u2I0o6uuy34nAxFF3I06q39hA8k\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 May 2021 12:05:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 1,\n    \"username\": \"admin\",\n    \"passwordHash\": \"$2b$12$INDZsUR4fnlK4RTvBd0CIuNYrrj04LuvaEBfD/6igS1wvY8.IDyZq\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE an administrator",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/administrator/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"administrator",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE an administrator OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:4000/api/administrator/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4000",
+									"path": [
+										"api",
+										"administrator",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-G1oQQOo+xNvExE6TuF5R6FbzF/Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 May 2021 12:06:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Deleted 1 rows.\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "POST add user (administrator)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AUTH_ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user1@localhost.com\",\n    \"password\": \"user1\",\n    \"firstName\": \"Test ime\",\n    \"lastName\": \"Test prezime\",\n    \"phoneNumber\": \"132456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/user",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST add user -- no access",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"user2\",\n    \"password\": \"12345\",\n    \"firstName\": \"Nikola2\",\n    \"lastName\": \"Ziva2\",\n    \"phoneNumber\": \"132456789\",\n    \"currency\": \"USD\",\n    \"language\": \"EN\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/user",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-cGqBgFRBa5CmVUoT7XzmpRZR5Qg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 20:03:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Access denied to this role."
+						},
+						{
+							"name": "POST add user (administrator) --- no access to role",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"user@localhost.com\",\n    \"password\": \"user\",\n    \"firstName\": \"Test ime\",\n    \"lastName\": \"Test prezime\",\n    \"phoneNumber\": \"132456789\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/user",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-cGqBgFRBa5CmVUoT7XzmpRZR5Qg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 21:28:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Access denied to this role."
+						},
+						{
+							"name": "POST add user OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"user\",\n    \"password\": \"user\",\n    \"firstName\": \"Nikola\",\n    \"lastName\": \"Ziva\",\n    \"phoneNumber\": \"132456789\",\n    \"currency\": \"RSD\",\n    \"language\": \"SR\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/user",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "206"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ce-k+kUJ8coCZRMBBe/IuDBPAgzkBc\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 May 2021 12:42:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": 2,\n    \"username\": \"user\",\n    \"firstName\": \"Nikola\",\n    \"lastName\": \"Ziva\",\n    \"phoneNumber\": \"132456789\",\n    \"passwordHash\": \"$2b$12$5oizuapb9ei8YfGuCteTMujclCAdaPJrvhm.BVf/5v9keX/yfEyMa\",\n    \"currency\": \"RSD\",\n    \"language\": \"SR\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GET all (administrator only)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/user",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET all (administrator only) OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/user",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "576"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"240-5B1v1O6gt0VHeO286jOtt3DFMpU\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 May 2021 16:33:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"vehicles\": [\n            {\n                \"internalName\": \"noviauto2\",\n                \"paintColor\": \"crvena\",\n                \"fuelType\": {\n                    \"id\": 1,\n                    \"name\": \"dizel\"\n                },\n                \"brandModel\": {\n                    \"brand\": {\n                        \"id\": 1,\n                        \"name\": \"BMW\",\n                        \"logo\": \"https://brandslogo.net/wp-content/uploads/2015/09/bmw-flat-logo-vector-download.jpg\"\n                    },\n                    \"id\": 3,\n                    \"name\": \"X6\"\n                },\n                \"vehicleId\": 3,\n                \"manufactureYear\": 2010,\n                \"mileageStart\": 101010,\n                \"mileageCurrent\": 101010,\n                \"createdAt\": \"2021-05-23T15:11:03.000Z\",\n                \"userId\": 1,\n                \"imagePath\": null\n            }\n        ],\n        \"userId\": 1,\n        \"username\": \"toza911@gmail.com\",\n        \"firstName\": \"nikola\",\n        \"lastName\": \"ziva\",\n        \"phoneNumber\": \"0123456789\",\n        \"passwordHash\": \"nikola92\",\n        \"currency\": \"RSD\",\n        \"language\": \"EN\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GET byId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/user/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET user byId -- no access",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/user/1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user",
+										"1"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-cGqBgFRBa5CmVUoT7XzmpRZR5Qg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 20:04:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Access denied to this role."
+						},
+						{
+							"name": "GET byId User OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/user/1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "168"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a8-BztWXELPg4sARu05EvN3sp6uSlA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 May 2021 12:39:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": 1,\n    \"username\": \"toza911@gmail.com\",\n    \"firstName\": \"nikola\",\n    \"lastName\": \"ziva\",\n    \"phoneNumber\": \"0123456789\",\n    \"passwordHash\": \"nikola92\",\n    \"currency\": \"RSD\",\n    \"language\": \"EN\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT edit user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"12345\",\n    \"firstName\": \"Nikola\",\n    \"lastName\": \"Zivanovic\",\n    \"phoneNumber\": \"132456789\",\n    \"currency\": \"EUR\",\n    \"language\": \"EN\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/user/3",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT edit user OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"user\",\n    \"firstName\": \"Nikola\",\n    \"lastName\": \"Ziva\",\n    \"phoneNumber\": \"132456789\",\n    \"currency\": \"EUR\",\n    \"language\": \"EN\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/user/2",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "206"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ce-Izq9vtJXPELZX+AgTtnBsXPklMM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 May 2021 12:51:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": 2,\n    \"username\": \"user\",\n    \"firstName\": \"Nikola\",\n    \"lastName\": \"Ziva\",\n    \"phoneNumber\": \"132456789\",\n    \"passwordHash\": \"$2b$12$9gIJyGrLNbbtCA4yE4g36Og6ZrWjtSPgjJws.FJV9.b7A0X1sPXXy\",\n    \"currency\": \"EUR\",\n    \"language\": \"EN\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE a user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/user/2",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE a user OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/user/2",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-G1oQQOo+xNvExE6TuF5R6FbzF/Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 May 2021 12:53:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"message\": \"Deleted 1 rows.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "POST register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"toza911@gmail.com\",\n    \"password\": \"12345\",\n    \"firstName\": \"Nikola\",\n    \"lastName\": \"Zivanovic\",\n    \"phoneNumber\": \"132456788\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/user/register",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST register user OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"toza911@gmail.com\",\n    \"password\": \"12345\",\n    \"firstName\": \"Nikola\",\n    \"lastName\": \"Zivanovic\",\n    \"phoneNumber\": \"132456788\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/user/register",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "238"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ee-/sTWTv1P11X0E2zkqmSs3lgMQgE\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 24 May 2021 17:46:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"vehicles\": [],\n    \"userId\": 8,\n    \"username\": \"toza911@gmail.com\",\n    \"firstName\": \"Nikola\",\n    \"lastName\": \"Zivanovic\",\n    \"phoneNumber\": \"132456788\",\n    \"passwordHash\": \"$2b$12$e3oRCEiJP3RA6KgMhgwuXuF3FuCEYZ0Y6IL9A5TqizycmDS10.Qcm\",\n    \"currency\": \"USD\",\n    \"language\": \"EN\"\n}"
+						},
+						{
+							"name": "POST add user OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"user\",\n    \"password\": \"user\",\n    \"firstName\": \"Nikola\",\n    \"lastName\": \"Ziva\",\n    \"phoneNumber\": \"132456789\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/user",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "206"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ce-k+kUJ8coCZRMBBe/IuDBPAgzkBc\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 May 2021 12:42:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": 2,\n    \"username\": \"user\",\n    \"firstName\": \"Nikola\",\n    \"lastName\": \"Ziva\",\n    \"phoneNumber\": \"132456789\",\n    \"passwordHash\": \"$2b$12$5oizuapb9ei8YfGuCteTMujclCAdaPJrvhm.BVf/5v9keX/yfEyMa\",\n    \"currency\": \"RSD\",\n    \"language\": \"SR\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GET verify user - redirect from verification email to login page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/user/register/verification/:id",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"user",
+								"register",
+								"verification",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "d0171876-50b3-4aa2-9f99-0d57a6d67b15"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle",
+			"item": [
+				{
+					"name": "POST new vehicle photo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/home/nikola/Desktop/Screenshot from 2021-02-01 14-57-03.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_URL}}/vehicle/:id/photo",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"vehicle",
+								":id",
+								"photo"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST new vehicle photo OK -- ok",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/home/nikola/Desktop/Screenshot from 2021-02-01 14-57-03.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{API_URL}}/vehicle/:id/photo",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"vehicle",
+										":id",
+										"photo"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "409"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"199-4A19NwSbQuuHhmlUVDaiDfJzyC8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 23 May 2021 13:28:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"internalName\": \"random\",\n    \"paintColor\": \"crna\",\n    \"fuelType\": null,\n    \"brandModel\": null,\n    \"vehicleId\": 1,\n    \"manufactureYear\": 2012,\n    \"mileageStart\": 100000,\n    \"mileageCurrent\": 110000,\n    \"createdAt\": \"2021-05-12T18:29:45.000Z\",\n    \"userId\": 1,\n    \"fuelTypeId\": 2,\n    \"brandModelId\": 4,\n    \"photo\": {\n        \"id\": 1,\n        \"imagePath\": \"static/uploads/fc66ffd1-e0d0-43f4-9c2e-762ef2eb7f1c-2021/05/fc66ffd1-e0d0-43f4-9c2e-762ef2eb7f1c-Screenshotfrom2021-02-0114-57-03.png\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "GET byId vehicle",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/home/nikola/Desktop/Screenshot from 2021-02-01 14-57-03.png",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_URL}}/vehicle/:id",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"vehicle",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "24"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET byId vehicle --- access denied ",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/home/nikola/Desktop/Screenshot from 2021-02-01 14-57-03.png",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{API_URL}}/vehicle/:id",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"vehicle",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "24"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "16"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10-EA0YkzdZ66cptFyOsL4bMWROOfs\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 20:10:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Not your vehicle"
+						},
+						{
+							"name": "GET byId vehicle OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/home/nikola/Desktop/Screenshot from 2021-02-01 14-57-03.png",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{API_URL}}/vehicle/:id",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"vehicle",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "411"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19b-rxktDcUhalk3e7widsbpOp2J744\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 23 May 2021 13:31:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"internalName\": \"novi\",\n    \"paintColor\": \"bela\",\n    \"fuelType\": null,\n    \"brandModel\": null,\n    \"vehicleId\": 2,\n    \"manufactureYear\": 2008,\n    \"mileageStart\": 21000,\n    \"mileageCurrent\": 21000,\n    \"createdAt\": \"2021-05-23T14:25:31.000Z\",\n    \"userId\": 1,\n    \"fuelTypeId\": 1,\n    \"brandModelId\": 3,\n    \"photo\": {\n        \"id\": 8,\n        \"imagePath\": \"static/uploads/2c47912c-98e7-4e65-9da9-414cb9dfa3df-2021/05/2c47912c-98e7-4e65-9da9-414cb9dfa3df-Screenshotfrom2021-02-0114-57-03-small.png\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "POST create new vehicle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/vehicle",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"vehicle"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST create new vehicle OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "data",
+											"value": "{    \"internalName\": \"noviauto\",\n    \"manufactureYear\": 2010,\n    \"paintColor\": \"crvena\",\n    \"mileageStart\": 101010,\n    \"fuelTypeId\": 1,\n    \"mileageCurrent\": 101010,\n    \"brandModelId\": 3,\n    \"userId\": 1\n}",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": []
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/vehicle",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"vehicle"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "391"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"187-Mq+PYY3UsZfWPE2zFPfKZbPmLes\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 23 May 2021 14:11:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"internalName\": \"noviauto\",\n    \"paintColor\": \"crvena\",\n    \"fuelType\": {\n        \"id\": 1,\n        \"name\": \"dizel\"\n    },\n    \"brandModel\": {\n        \"brand\": {\n            \"id\": 1,\n            \"name\": \"BMW\",\n            \"logo\": \"https://brandslogo.net/wp-content/uploads/2015/09/bmw-flat-logo-vector-download.jpg\"\n        },\n        \"id\": 3,\n        \"name\": \"X6\"\n    },\n    \"vehicleId\": 3,\n    \"manufactureYear\": 2010,\n    \"mileageStart\": 101010,\n    \"mileageCurrent\": 101010,\n    \"createdAt\": \"2021-05-23T15:11:03.000Z\",\n    \"userId\": 1,\n    \"imagePath\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT  edit vehicle",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{    \"internalName\": \"novinovi\",   \n    \"paintColor\": \"bela\"\n}",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": []
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/vehicle/3",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"vehicle",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT  edit vehicle OK",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "data",
+											"value": "{    \"internalName\": \"novinovi\",   \n    \"paintColor\": \"bela\",\n    \"userId\": 1\n}",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/home/nikola/Desktop/Screenshot from 2021-02-01 14-57-03.png"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/vehicle/2",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"vehicle",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "518"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"206-JN0DDNcvIRDxle1EvuSOQfERpy8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 23 May 2021 15:25:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"internalName\": \"novinovi\",\n    \"paintColor\": \"bela\",\n    \"fuelType\": {\n        \"id\": 1,\n        \"name\": \"dizel\"\n    },\n    \"brandModel\": {\n        \"brand\": {\n            \"id\": 1,\n            \"name\": \"BMW\",\n            \"logo\": \"https://brandslogo.net/wp-content/uploads/2015/09/bmw-flat-logo-vector-download.jpg\"\n        },\n        \"id\": 3,\n        \"name\": \"X6\"\n    },\n    \"vehicleId\": 2,\n    \"manufactureYear\": 2008,\n    \"mileageStart\": 21000,\n    \"mileageCurrent\": 21000,\n    \"createdAt\": \"2021-05-23T14:25:31.000Z\",\n    \"userId\": 1,\n    \"imagePath\": \"static/uploads/cc0c6c78-0fa4-4218-92d5-40db8367f6f3-2021/05/cc0c6c78-0fa4-4218-92d5-40db8367f6f3-Screenshotfrom2021-02-0114-57-03.png\"\n}"
+						},
+						{
+							"name": "POST create new vehicle OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "data",
+											"value": "{    \"internalName\": \"noviauto\",\n    \"manufactureYear\": 2010,\n    \"paintColor\": \"crvena\",\n    \"mileageStart\": 101010,\n    \"fuelTypeId\": 1,\n    \"mileageCurrent\": 101010,\n    \"brandModelId\": 3,\n    \"userId\": 1\n}",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": []
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/vehicle",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"vehicle"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "391"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"187-Mq+PYY3UsZfWPE2zFPfKZbPmLes\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 23 May 2021 14:11:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"internalName\": \"noviauto\",\n    \"paintColor\": \"crvena\",\n    \"fuelType\": {\n        \"id\": 1,\n        \"name\": \"dizel\"\n    },\n    \"brandModel\": {\n        \"brand\": {\n            \"id\": 1,\n            \"name\": \"BMW\",\n            \"logo\": \"https://brandslogo.net/wp-content/uploads/2015/09/bmw-flat-logo-vector-download.jpg\"\n        },\n        \"id\": 3,\n        \"name\": \"X6\"\n    },\n    \"vehicleId\": 3,\n    \"manufactureYear\": 2010,\n    \"mileageStart\": 101010,\n    \"mileageCurrent\": 101010,\n    \"createdAt\": \"2021-05-23T15:11:03.000Z\",\n    \"userId\": 1,\n    \"imagePath\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE vehicle photo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/vehicle/2/photo",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"vehicle",
+								"2",
+								"photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE vehicle record",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/vehicle/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"vehicle",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET all user vehicles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/vehicle",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"vehicle"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET all user vehicles -- OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/vehicle",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"vehicle"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:3000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "964"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3c4-HUig+IomcYV2T/DJGINSAPGYr0c\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 20:12:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"internalName\": \"Proba\",\n        \"paintColor\": \"violet\",\n        \"fuelType\": {\n            \"id\": 3,\n            \"name\": \"plin\"\n        },\n        \"brandModel\": {\n            \"brand\": {\n                \"id\": 2,\n                \"name\": \"Citroen\",\n                \"logo\": \"https://mpng.subpng.com/20180712/ueq/kisspng-citron-c3-jaguar-cars-land-rover-citroen-berlingo-5b476cce84a599.4014900315314075665433.jpg\"\n            },\n            \"id\": 2,\n            \"name\": \"C4\"\n        },\n        \"vehicleId\": 22,\n        \"manufactureYear\": 2011,\n        \"mileageStart\": 213123,\n        \"mileageCurrent\": 132,\n        \"createdAt\": \"2021-06-02T18:29:02.000Z\",\n        \"userId\": 20,\n        \"imagePath\": null\n    },\n    {\n        \"internalName\": \"\",\n        \"paintColor\": \"white\",\n        \"fuelType\": {\n            \"id\": 2,\n            \"name\": \"benzin\"\n        },\n        \"brandModel\": {\n            \"brand\": {\n                \"id\": 1,\n                \"name\": \"BMW\",\n                \"logo\": \"https://brandslogo.net/wp-content/uploads/2015/09/bmw-flat-logo-vector-download.jpg\"\n            },\n            \"id\": 3,\n            \"name\": \"X6\"\n        },\n        \"vehicleId\": 24,\n        \"manufactureYear\": 2010,\n        \"mileageStart\": 5605615,\n        \"mileageCurrent\": 5605615,\n        \"createdAt\": \"2021-06-03T16:02:21.000Z\",\n        \"userId\": 20,\n        \"imagePath\": \"static/uploads/5cfc1bc5-2aed-43cf-96b7-513421ffdacc-2021/06/5cfc1bc5-2aed-43cf-96b7-513421ffdacc-Screenshotfrom2021-03-2619-42-38.png\"\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "POST user login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"toza911@gmail.com\",\n    \"password\": \"12345\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/auth/user/login",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "POST user login - Error wrong password",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"toza911@gmail.com\",\n    \"password\": \"123456\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/auth/user/login",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"auth",
+												"user",
+												"login"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "html",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/html; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "22"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"16-fEc1WArHk5yVgGP5ekfvNKEEvfU\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 24 May 2021 22:49:39 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "Invalid user password."
+								},
+								{
+									"name": "POST user login OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"toza911@gmail.com\",\n    \"password\": \"12345\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/auth/user/login",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"auth",
+												"user",
+												"login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1102"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"44e-GXrr3c78PS9HHYwRGvz/ChduCUI\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 24 May 2021 22:46:39 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"authToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImlkZW50aXR5IjoidG96YTkxMUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTg5NjM5OSwiZXhwIjoxNjIxOTgyNzk5LCJpc3MiOiJGdWVsQ29uc3VtcHRpb25BcHAifQ.HtK-Iwn-0kSnMXOiLpryHFsqUsM2qYmJZZgIMIalK-MnNRMW0hDUdoVr_fgdB0QBJUiC5nRpUSt1qWfsCrrCj0hR8MMzrIE3pzMCbhmtwmXFdirlKFRF28T7PrvR3JWXMxIyal8P--OzTL96PXQp6Pf6uiIHn1_jkSkDxEnPbrO740KeGPWuPgJfnPeFPFXLSarEtdhDd3KXzHmW2nc9vYvCts17tBRzHxIimy7PXR-_Mh-ni4x-0jIOkLiMhwRkUx8fEFUUMI-WuuC6YaOmYgpTWsgaSP2rWKjrT0qbAh5Y9nnGMjtj1x5e2Sde0nHC8KQuazdLDi4BVrzpZMmqrg\",\n    \"refreshToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImlkZW50aXR5IjoidG96YTkxMUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMTg5NjM5OSwiZXhwIjoxNjIxOTgyNzk5LCJpc3MiOiJGdWVsQ29uc3VtcHRpb25BcHAifQ.ma_b4HHDZ43_l9H5bKsmIOaFX1hrhS9e8lOi9NanOZ0Ui8B8S9S_zGyjfjkyX4KK8TtxUBfD3RxsT7qxiEkpUvWlR0mjbMw75j9NbTuEOSjn3tiZR68atKSmgFvL3uqrNQkiWk0OGaHcfx248JRxi7kcsThGDXrXkREDEuSlxx39s_WypVxwn05CytN5jut_CBX2PR4sTmDpkc-AGijmHioxBSLeP01EeqL-KEwTsvgaCi4zznU1sYg6hhLUNU07ebNnKNZBp4-BS0VoiS1DXsoKkZhXcT2NQBzntyKnrmiPqNI-me3gwF8VbrBrHm6V4pcdVWAVTz7A_ATqagzczw\"\n}"
+								},
+								{
+									"name": "POST user login - Error user not found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"toza911@gmaill.com\",\n    \"password\": \"12345\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/auth/user/login",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"auth",
+												"user",
+												"login"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "9"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 24 May 2021 22:48:52 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "Not Found"
+								}
+							]
+						},
+						{
+							"name": "POST user refresh",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"refreshToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImlkZW50aXR5IjoidG96YTkxMUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMjMwMzkwNSwiZXhwIjoxNjIyMzkwMzA1LCJpc3MiOiJGdWVsQ29uc3VtcHRpb25BcHAifQ.bAADdQnlh6oMJAeA1mq6-u2tpSDi842wt9ylBmnaAwsJfVJvk7D45FUkml7FvYnaSxkZpW8ZDqhBG1W7WWICUXMC5K8LX-r8MBcs_gDe01EYNFJ-6xUnn84L60bUe4eKcKKjd0LdS0VeZJXA9gpuVlMVkHJ0sfT-geWicadMPGa-00jtlBZEpnzQ6IgwHs496Ui30pukX_GRIegeCyLek8XewLKGLKSE5hh-2vmE43ZRhnJ-hLppMfmBl-w7NHnPga3MNunla7aO8sy-dHqi6dUR5jZgCAp_Uu1uJR3co8QB6HgPmkr0L7cmUtcl1eWJ3FSVRkVCf0_4_OCxdND3rA\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/auth/user/refresh",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"user",
+										"refresh"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "POST user refresh -- No refresh token provided",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"refreshToken\": \"\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/auth/user/refresh",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"auth",
+												"user",
+												"refresh"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "html",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/html; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "43"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"2b-aMLHTksXMf1XvlfR1L8uEZ8C+3w\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 29 May 2021 16:03:22 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "Token validation error jwt must be provided"
+								},
+								{
+									"name": "POST user refresh -- OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"refreshToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImlkZW50aXR5IjoidG96YTkxMUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMjMwMzkwNSwiZXhwIjoxNjIyMzkwMzA1LCJpc3MiOiJGdWVsQ29uc3VtcHRpb25BcHAifQ.bAADdQnlh6oMJAeA1mq6-u2tpSDi842wt9ylBmnaAwsJfVJvk7D45FUkml7FvYnaSxkZpW8ZDqhBG1W7WWICUXMC5K8LX-r8MBcs_gDe01EYNFJ-6xUnn84L60bUe4eKcKKjd0LdS0VeZJXA9gpuVlMVkHJ0sfT-geWicadMPGa-00jtlBZEpnzQ6IgwHs496Ui30pukX_GRIegeCyLek8XewLKGLKSE5hh-2vmE43ZRhnJ-hLppMfmBl-w7NHnPga3MNunla7aO8sy-dHqi6dUR5jZgCAp_Uu1uJR3co8QB6HgPmkr0L7cmUtcl1eWJ3FSVRkVCf0_4_OCxdND3rA\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/auth/user/refresh",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"auth",
+												"user",
+												"refresh"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "570"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"23a-EBYMk7S+FEFkc6UdSlbxlRWduH8\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 29 May 2021 16:03:06 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"authToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImlkZW50aXR5IjoidG96YTkxMUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMjMwNDE4NiwiZXhwIjoxNjIyMzkwNTg2LCJpc3MiOiJGdWVsQ29uc3VtcHRpb25BcHAifQ.Inx7u4YektMQYz_RaqvxHCuQF5AHXIDREDll1wngcSfn8R_3VOSIUuHxEPHdZdNENHZ-rKP6sTmYNSoaObJlHBiwKMTa9Jl47uI30RmyzTucnPRTnYGyrqWWnqVLn1wlbBGo4nQP2WMP_8EGroAa-ji71e1k97Fk7fwTwMSBKas7jbdMBoJr3buymSHjOEqneceobHhl2vJPpcL0MwCAX0f8rIglddbuq6COc8AhiDYoIx7r4EOqPAbwLrohY9Y01qHcYqA25Rr4Isqss5shU5Buw-MCkD1WYh_bQtUtUTkrqEn4HH0M2eUp4UNmlKPfL1sl09nxatK7E_7-f7AXmw\",\n    \"refreshToken\": null\n}"
+								},
+								{
+									"name": "POST user refresh -- Bad refreshToken",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"refreshToken\": \"123\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/auth/user/refresh",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"auth",
+												"user",
+												"refresh"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "html",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/html; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "36"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"24-keLDdZHTCVV+qEa5K/oyji0iGQQ\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 29 May 2021 16:03:41 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "Token validation error jwt malformed"
+								},
+								{
+									"name": "POST user refresh -- Invalid token",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"refreshToken\": \"eyaJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImlkZW50aXR5IjoidG96YTkxMUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMjMwMzkwNSwiZXhwIjoxNjIyMzkwMzA1LCJpc3MiOiJGdWVsQ29uc3VtcHRpb25BcHAifQ.bAADdQnlh6oMJAeA1mq6-u2tpSDi842wt9ylBmnaAwsJfVJvk7D45FUkml7FvYnaSxkZpW8ZDqhBG1W7WWICUXMC5K8LX-r8MBcs_gDe01EYNFJ-6xUnn84L60bUe4eKcKKjd0LdS0VeZJXA9gpuVlMVkHJ0sfT-geWicadMPGa-00jtlBZEpnzQ6IgwHs496Ui30pukX_GRIegeCyLek8XewLKGLKSE5hh-2vmE43ZRhnJ-hLppMfmBl-w7NHnPga3MNunla7aO8sy-dHqi6dUR5jZgCAp_Uu1uJR3co8QB6HgPmkr0L7cmUtcl1eWJ3FSVRkVCf0_4_OCxdND3rA\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/auth/user/refresh",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"auth",
+												"user",
+												"refresh"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "html",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/html; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "36"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"24-ciKjEPEGMd5tKsHpKavXMCyvFEA\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 29 May 2021 16:16:06 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "Token validation error invalid token"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Administrator",
+					"item": [
+						{
+							"name": "POST administrator login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"admin\",\n    \"password\": \"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/auth/administrator/login",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"administrator",
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "POST administrator login - Error administrator not found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"admina\",\n    \"password\": \"admin\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/auth/administrator/login",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"auth",
+												"administrator",
+												"login"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "9"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 24 May 2021 22:50:23 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "Not Found"
+								},
+								{
+									"name": "POST administrator login - Error wrong password",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"admin\",\n    \"password\": \"admina\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/auth/administrator/login",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"auth",
+												"administrator",
+												"login"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "html",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/html; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "31"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1f-6m/3ihwm3QpkaqHI5ehdTGQq6J0\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 24 May 2021 22:50:45 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "Invalid administrator password."
+								},
+								{
+									"name": "POST administrator login OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"admin\",\n    \"password\": \"admin\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/auth/administrator/login",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"auth",
+												"administrator",
+												"login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "1090"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"442-34jscAON7ue5/gDc1n7MnJzVovk\""
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 24 May 2021 22:43:14 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"authToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWRlbnRpdHkiOiJhZG1pbiIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjIxODk2MTk0LCJleHAiOjE2MjE5ODI1OTQsImlzcyI6IkZ1ZWxDb25zdW1wdGlvbkFwcCJ9.jLn-kSlxAd6ZX1F1z515jh1DJW9tf4xUYGOWLmqNxQ8Nc3pkq_s19eDNGIrpQRoZd1AfQjrIuGtDeCRgL_LaSV2_grtWqvDFMm7T9OTGWMrYVV4kqsduWzGxO1tALvAYkN-Bxu96X5KV6RmdRVbDhLZbTvMYes33uVHjni_bi74qQ0WC5tFZ_N82EDgIm-C2Wx_WGkwil7gFaUJoAqTyP4Qz4Na6R7ejYSWgDQu0L8_hjdBH2A0tcWMl2JuIDN7xBJ8C-4BZFY0NFFw4OwocJ2oGtRsiznZwFTYZbm5nhom22yGGt3suYLLCChZaa9MOXLp1eoszWafDPb9bRpp7Pg\",\n    \"refreshToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWRlbnRpdHkiOiJhZG1pbiIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjIxODk2MTk0LCJleHAiOjE2MjE5ODI1OTQsImlzcyI6IkZ1ZWxDb25zdW1wdGlvbkFwcCJ9.VRUAvHHUxl1xKiVRTgCNFRpihgLephS6pUO7Wb4MhO0AQodN-WAMu9r1gI4pN9TtWgZnPWF25Lroh0Js1JXctGlx_sVUaLFsXuML3SO4hvWWpksNszuRGmR40NIwxZJMVPed17XI0J37Ziwt83MYrrACk8TaEwmvEZ1g3Et7h9Pt2UBqx-P6F78Vtf_qvGAM-_tldP2LJ5b9MNN2aekw_bOGJV3OEsGgy13xc-ZbJRWqLXIeEWBR7WVzYAx01ANC0_NUlhr2tUgc82ExNv2-rbT2NJ5oRTzZQ2kZvxm7tEsj2J4_cKY8A3Z0WjUZM5qQCn5adg58Qehc-05Z9IYYhA\"\n}"
+								}
+							]
+						},
+						{
+							"name": "POST administrator refresh",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"refreshToken\" : \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWRlbnRpdHkiOiJhZG1pbiIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjIyMzA0ODA3LCJleHAiOjE2MjIzOTEyMDcsImlzcyI6IkZ1ZWxDb25zdW1wdGlvbkFwcCJ9.XWNbCERYgyrH-8oaMevacy8HQ2Dq3xY6_PoqA_7Ca6dv3MjCrhvmCrZM_p769hXajEClS9PlkEgLtBLvUkqO9G8gXstir_OyQm3iLUyw-G5NGcvWgFv_6WomcW-ffQ8DRNjFLXPyAKCdySnWi5mTPr2EdvO8s0PhRbc1_EX6Khfr5cSaZWBc3RXJjIqNg_CYZBj1FmkD2ThDXkEWLGI-LqrInhZb5fkctd5gbhGCBO98ZnI9Syrd9RLnM-Kv9fiPMWPHeRnJjfrdm5cgbSqzSAtNnHgC2e2s_MzhQDWJCftsIyqgcDcHvbqLLH7k3gtLk3rteFSriMSHn3QiTuabIA\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/auth/administrator/refresh",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"administrator",
+										"refresh"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "POST administrator refresh -- OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"refreshToken\" : \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWRlbnRpdHkiOiJhZG1pbiIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjIyMzA0ODA3LCJleHAiOjE2MjIzOTEyMDcsImlzcyI6IkZ1ZWxDb25zdW1wdGlvbkFwcCJ9.XWNbCERYgyrH-8oaMevacy8HQ2Dq3xY6_PoqA_7Ca6dv3MjCrhvmCrZM_p769hXajEClS9PlkEgLtBLvUkqO9G8gXstir_OyQm3iLUyw-G5NGcvWgFv_6WomcW-ffQ8DRNjFLXPyAKCdySnWi5mTPr2EdvO8s0PhRbc1_EX6Khfr5cSaZWBc3RXJjIqNg_CYZBj1FmkD2ThDXkEWLGI-LqrInhZb5fkctd5gbhGCBO98ZnI9Syrd9RLnM-Kv9fiPMWPHeRnJjfrdm5cgbSqzSAtNnHgC2e2s_MzhQDWJCftsIyqgcDcHvbqLLH7k3gtLk3rteFSriMSHn3QiTuabIA\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/auth/administrator/refresh",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"auth",
+												"administrator",
+												"refresh"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "564"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"234-4iZnBVEEhi0igZ7DapVmef92A1w\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 29 May 2021 16:14:23 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"authToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWRlbnRpdHkiOiJhZG1pbiIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjIyMzA0ODYzLCJleHAiOjE2MjIzOTEyNjMsImlzcyI6IkZ1ZWxDb25zdW1wdGlvbkFwcCJ9.XLgsuLqD3gIZOyHcbabGApMELVOFc986-XyilnqtiFmDDNtco1hOnP1JgJQHFVP9VSm_Nv-Rc9UNQFI6LOLOMefAAcU9YS5JnzJnqtaZD6ExO5Qge4Cz3rylINYSt2CRo02bnOlOTlARPT8mJHW9ZARe4H3I5tKR6193LPtH4fIy483mCtHjWpPu5ZhWTHG-ekoGZXfpngmywJRTolrBqccMWBuoMJDmmTLgWQPaNkUTsReccBfEInL71Dv-fQe3HVbP5IILU7CQCAViu9IlUnwB9Xh86g8efsEo1Uqng5zh0ueP6bXSM9Vj2OI0vsk_OZij75oZ0vDVB4yR2U9nGQ\",\n    \"refreshToken\": null\n}"
+								},
+								{
+									"name": "POST administrator refresh -- No token provided",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"refreshToken\" : \"\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/auth/administrator/refresh",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"auth",
+												"administrator",
+												"refresh"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "html",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/html; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "43"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"2b-aMLHTksXMf1XvlfR1L8uEZ8C+3w\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 29 May 2021 16:14:41 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "Token validation error jwt must be provided"
+								},
+								{
+									"name": "POST administrator refresh -- Invalid refresh token",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"refreshToken\" : \"eyaJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWRlbnRpdHkiOiJhZG1pbiIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjIyMzA0ODA3LCJleHAiOjE2MjIzOTEyMDcsImlzcyI6IkZ1ZWxDb25zdW1wdGlvbkFwcCJ9.XWNbCERYgyrH-8oaMevacy8HQ2Dq3xY6_PoqA_7Ca6dv3MjCrhvmCrZM_p769hXajEClS9PlkEgLtBLvUkqO9G8gXstir_OyQm3iLUyw-G5NGcvWgFv_6WomcW-ffQ8DRNjFLXPyAKCdySnWi5mTPr2EdvO8s0PhRbc1_EX6Khfr5cSaZWBc3RXJjIqNg_CYZBj1FmkD2ThDXkEWLGI-LqrInhZb5fkctd5gbhGCBO98ZnI9Syrd9RLnM-Kv9fiPMWPHeRnJjfrdm5cgbSqzSAtNnHgC2e2s_MzhQDWJCftsIyqgcDcHvbqLLH7k3gtLk3rteFSriMSHn3QiTuabIA\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/auth/administrator/refresh",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"auth",
+												"administrator",
+												"refresh"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "html",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/html; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "36"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"24-ciKjEPEGMd5tKsHpKavXMCyvFEA\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 29 May 2021 16:15:29 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "Token validation error invalid token"
+								},
+								{
+									"name": "POST administrator refresh -- Bad refresh token provided",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"refreshToken\" : \"123\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{API_URL}}/auth/administrator/refresh",
+											"host": [
+												"{{API_URL}}"
+											],
+											"path": [
+												"auth",
+												"administrator",
+												"refresh"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "html",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "http://localhost:3000"
+										},
+										{
+											"key": "Vary",
+											"value": "Origin"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/html; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "36"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"24-keLDdZHTCVV+qEa5K/oyji0iGQQ\""
+										},
+										{
+											"key": "Date",
+											"value": "Sat, 29 May 2021 16:15:02 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										}
+									],
+									"cookie": [],
+									"body": "Token validation error jwt malformed"
+								}
+							]
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "RefuelHistory",
+			"item": [
+				{
+					"name": "POST add new refuel history",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \"date\": \"2021-05-23\",\n    \"quantity\": 3,\n    \"totalCost\": 1500,\n    \"isFull\": true,\n    \"mileageCurrent\": 121211,\n    \"vehicleId\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/vehicle/:vid/history",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"vehicle",
+								":vid",
+								"history"
+							],
+							"variable": [
+								{
+									"key": "vid",
+									"value": "24"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST add new refuel history - Unauthorized user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{    \"date\": \"2021-05-23\",\n    \"quantity\": 3,\n    \"totalCost\": 1500,\n    \"isFull\": true,\n    \"mileageCurrent\": 1230123,\n    \"vehicleId\": 5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/vehicle/:vid/history",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"vehicle",
+										":vid",
+										"history"
+									],
+									"variable": [
+										{
+											"key": "vid",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "16"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10-EA0YkzdZ66cptFyOsL4bMWROOfs\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 25 May 2021 18:50:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Not your vehicle"
+						},
+						{
+							"name": "POST add new refuel history OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{    \"date\": \"2021-05-23\",\n    \"quantity\": 3,\n    \"totalCost\": 1500,\n    \"isFull\": true,\n    \"mileageCurrent\": 1230123,\n    \"vehicleId\": 5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/vehicle/:vid/history",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"vehicle",
+										":vid",
+										"history"
+									],
+									"variable": [
+										{
+											"key": "vid",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "178"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b2-5SX8Zt1cKw/spBXbCatL3rbpuaI\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 25 May 2021 18:49:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"modifiedAt\": null,\n    \"refuelHistoryId\": 4,\n    \"date\": \"2021-05-22T23:00:00.000Z\",\n    \"isFull\": 1,\n    \"mileageCurrent\": 1230123,\n    \"quantity\": 3,\n    \"totalCost\": 1500,\n    \"createdAt\": \"2021-05-25T19:49:40.000Z\"\n}"
+						},
+						{
+							"name": "POST add new refuel history - NOT FOUND",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{    \"date\": \"2021-05-23\",\n    \"quantity\": 3,\n    \"totalCost\": 1500,\n    \"isFull\": true,\n    \"mileageCurrent\": 1230123,\n    \"vehicleId\": 5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/vehicle/:vid/history",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"vehicle",
+										":vid",
+										"history"
+									],
+									"variable": [
+										{
+											"key": "vid",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "30"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1e-JUM23fpIEMnPGA4wxTiFzVlVrP4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 25 May 2021 18:50:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Vehicle with that ID not found"
+						}
+					]
+				},
+				{
+					"name": "GET vehicle refuel history",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/vehicle/:vid/history",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"vehicle",
+								":vid",
+								"history"
+							],
+							"variable": [
+								{
+									"key": "vid",
+									"value": "24"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET vehicle refuel history - NOT FOUND",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/vehicle/:vid/history",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"vehicle",
+										":vid",
+										"history"
+									],
+									"variable": [
+										{
+											"key": "vid",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "30"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1e-JUM23fpIEMnPGA4wxTiFzVlVrP4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 25 May 2021 18:52:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Vehicle with that ID not found"
+						},
+						{
+							"name": "GET vehicle refuel history - Unauthorized user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/vehicle/:vid/history",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"vehicle",
+										":vid",
+										"history"
+									],
+									"variable": [
+										{
+											"key": "vid",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "16"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10-EA0YkzdZ66cptFyOsL4bMWROOfs\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 25 May 2021 18:51:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Not your vehicle"
+						},
+						{
+							"name": "GET vehicle refuel history - OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/vehicle/:vid/history",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"vehicle",
+										":vid",
+										"history"
+									],
+									"variable": [
+										{
+											"key": "vid",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "717"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2cd-OohsuVvx32a75j8IIUhHMUxPeyA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 25 May 2021 18:53:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"modifiedAt\": null,\n        \"refuelHistoryId\": 4,\n        \"date\": \"2021-05-22T23:00:00.000Z\",\n        \"isFull\": 1,\n        \"mileageCurrent\": 1230123,\n        \"quantity\": 3,\n        \"totalCost\": 1500,\n        \"createdAt\": \"2021-05-25T19:49:40.000Z\"\n    },\n    {\n        \"modifiedAt\": null,\n        \"refuelHistoryId\": 3,\n        \"date\": \"2021-05-22T23:00:00.000Z\",\n        \"isFull\": 1,\n        \"mileageCurrent\": 1230123,\n        \"quantity\": 3,\n        \"totalCost\": 1500,\n        \"createdAt\": \"2021-05-25T19:48:35.000Z\"\n    },\n    {\n        \"modifiedAt\": null,\n        \"refuelHistoryId\": 2,\n        \"date\": \"2021-05-22T23:00:00.000Z\",\n        \"isFull\": 1,\n        \"mileageCurrent\": 1230123,\n        \"quantity\": 3,\n        \"totalCost\": 1500,\n        \"createdAt\": \"2021-05-25T19:48:21.000Z\"\n    },\n    {\n        \"modifiedAt\": null,\n        \"refuelHistoryId\": 1,\n        \"date\": \"2021-05-22T23:00:00.000Z\",\n        \"isFull\": 1,\n        \"mileageCurrent\": 1230123,\n        \"quantity\": 3,\n        \"totalCost\": 1500,\n        \"createdAt\": \"2021-05-25T19:46:25.000Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "EDIT refuel history by ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \"date\": \"2021-05-23\",\n    \"quantity\": 3,\n    \"totalCost\": 1500,\n    \"isFull\": true,\n    \"mileageCurrent\": 1230123,\n    \"vehicleId\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/vehicle/:vid/history/:id",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"vehicle",
+								":vid",
+								"history",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "vid",
+									"value": "3"
+								},
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST add new refuel history - NOT FOUND",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{    \"date\": \"2021-05-23\",\n    \"quantity\": 3,\n    \"totalCost\": 1500,\n    \"isFull\": true,\n    \"mileageCurrent\": 1230123,\n    \"vehicleId\": 5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/vehicle/:vid/history",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"vehicle",
+										":vid",
+										"history"
+									],
+									"variable": [
+										{
+											"key": "vid",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "30"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1e-JUM23fpIEMnPGA4wxTiFzVlVrP4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 25 May 2021 18:50:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Vehicle with that ID not found"
+						},
+						{
+							"name": "POST add new refuel history - Unauthorized user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{    \"date\": \"2021-05-23\",\n    \"quantity\": 3,\n    \"totalCost\": 1500,\n    \"isFull\": true,\n    \"mileageCurrent\": 1230123,\n    \"vehicleId\": 5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/vehicle/:vid/history",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"vehicle",
+										":vid",
+										"history"
+									],
+									"variable": [
+										{
+											"key": "vid",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "16"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"10-EA0YkzdZ66cptFyOsL4bMWROOfs\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 25 May 2021 18:50:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "Not your vehicle"
+						},
+						{
+							"name": "POST add new refuel history OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{    \"date\": \"2021-05-23\",\n    \"quantity\": 3,\n    \"totalCost\": 1500,\n    \"isFull\": true,\n    \"mileageCurrent\": 1230123,\n    \"vehicleId\": 5\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/vehicle/:vid/history",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"vehicle",
+										":vid",
+										"history"
+									],
+									"variable": [
+										{
+											"key": "vid",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "178"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b2-5SX8Zt1cKw/spBXbCatL3rbpuaI\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 25 May 2021 18:49:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"modifiedAt\": null,\n    \"refuelHistoryId\": 4,\n    \"date\": \"2021-05-22T23:00:00.000Z\",\n    \"isFull\": 1,\n    \"mileageCurrent\": 1230123,\n    \"quantity\": 3,\n    \"totalCost\": 1500,\n    \"createdAt\": \"2021-05-25T19:49:40.000Z\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{AUTH_USER_TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_URL",
+			"value": "http://localhost:40080/api"
+		},
+		{
+			"key": "AUTH_ADMIN_TOKEN",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWRlbnRpdHkiOiJhZG1pbiIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjIyMzA0ODA3LCJleHAiOjE2MjIzOTEyMDcsImlzcyI6IkZ1ZWxDb25zdW1wdGlvbkFwcCJ9.XWNbCERYgyrH-8oaMevacy8HQ2Dq3xY6_PoqA_7Ca6dv3MjCrhvmCrZM_p769hXajEClS9PlkEgLtBLvUkqO9G8gXstir_OyQm3iLUyw-G5NGcvWgFv_6WomcW-ffQ8DRNjFLXPyAKCdySnWi5mTPr2EdvO8s0PhRbc1_EX6Khfr5cSaZWBc3RXJjIqNg_CYZBj1FmkD2ThDXkEWLGI-LqrInhZb5fkctd5gbhGCBO98ZnI9Syrd9RLnM-Kv9fiPMWPHeRnJjfrdm5cgbSqzSAtNnHgC2e2s_MzhQDWJCftsIyqgcDcHvbqLLH7k3gtLk3rteFSriMSHn3QiTuabIA"
+		},
+		{
+			"key": "AUTH_USER_TOKEN",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjAsImlkZW50aXR5IjoidG96YTkxMUBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTYyMjMwNDE4NiwiZXhwIjoxNjIyMzkwNTg2LCJpc3MiOiJGdWVsQ29uc3VtcHRpb25BcHAifQ.Inx7u4YektMQYz_RaqvxHCuQF5AHXIDREDll1wngcSfn8R_3VOSIUuHxEPHdZdNENHZ-rKP6sTmYNSoaObJlHBiwKMTa9Jl47uI30RmyzTucnPRTnYGyrqWWnqVLn1wlbBGo4nQP2WMP_8EGroAa-ji71e1k97Fk7fwTwMSBKas7jbdMBoJr3buymSHjOEqneceobHhl2vJPpcL0MwCAX0f8rIglddbuq6COc8AhiDYoIx7r4EOqPAbwLrohY9Y01qHcYqA25Rr4Isqss5shU5Buw-MCkD1WYh_bQtUtUTkrqEn4HH0M2eUp4UNmlKPfL1sl09nxatK7E_7-f7AXmw"
+		}
+	]
+}

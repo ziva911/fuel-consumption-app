@@ -1,35 +1,38 @@
-# Fuel Consumption App - Back End
+# Fuel Consumption App
 
 ## Student project
 
 Project for student exam on [Singidunum University], school year 2020/2021
 
-## Content
+## Repository Content
 
-This repository contains Back end source code for an app that tracks nad calculates vehicle fuel consumption.
-Repository with an example for front end layer, can find [here](https://github.com/ziva911/fuel-consumption-frontend.git).
+This repository contains source code for an app that tracks nad calculates vehicle fuel consumption.
+Github repository with source code, can be found [here](https://github.com/ziva911/fuel-consumption-app.git).
 
-- Directory [api](./api/README.MD) contains source code for Node.js back end app (API)
+- Directory [api](./api) contains source code for Node.js back end app (API)
+- Directory [frontend](./frontend) contains source code for React.js single page front end application.
+- Directory [documentation](./documentation/README.md) contains project documentation for this project, project theme text (/w project requirements), database model etc.
 
-- Directory [documentation](./documentation/README.MD) contains project documentation for this project, project theme text (/w project requirements), database model etc.
+## DB Documentation
 
-## TODO
+- Directory [documentation](./documentation/Database-Model.md) also contains documentation files with use case diagram, database model, database entity relations diagram and specific information about every table in db.
 
-Add DB erd and model into ./documentation/materials
+## Resources
 
-## TODO-2
+- Directory [resources](./resources) contains resources required for project building, including SQL dump with database demo data, example login credentials etc.
 
-Add separate info for each tabke in DB into ./documentation/DB_model.md
+## Graphic UI
 
-- Directory [resources](./resources/README.MD) contains resources required for project building, including SQL dump with database demo data, scripts for task automatization etc.
+- Directory [Graphic UI](./resources/Graphic_UI) contains simple sketches of example for application UI.
 
-## TODO-3
+## Postman collection
 
-Add Postman collections to ./resources
+- Directory [resources](./resources) also contains Postman collection for importing and testing application API.
 
 ## Building manual
 
-Building app is being done in 2 steps:
+Building and running app is being done in 3 steps:
 
 1. Prepare MySQL/MariaDB database and import 'up to date' data from SQL dump database
-2. Start backend app from inside api directory
+2. Start backend app from inside api directory by running npm run dev
+3. Start frontend app from inside frontend directory by running npm start

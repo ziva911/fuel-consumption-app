@@ -4,7 +4,10 @@ dist
 api/node_modules
 api/coverage
 api/logs
+api/keystore
 api/static/uploads
+api/static/temp
+api/.env
 
 frontend/node_modules
 frontend/coverage

@@ -1,14 +1,14 @@
 import { Row, Col, Card, Form, Button } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
-import EventRegistry from "../../Api/EventRegistry";
-import VehicleService from "../../Services/VehicleService";
-import BasePage, { BasePageProperties } from "../BasePage/BasePage";
-import BrandModelService from "../../Services/BrandModelService";
-import FuelTypeService from "../../Services/FuelTypeService";
+import EventRegistry from "../../../Api/EventRegistry";
+import VehicleService from "../../../Services/VehicleService";
+import BasePage, { BasePageProperties } from "../../BasePage/BasePage";
+import BrandModelService from "../../../Services/BrandModelService";
+import FuelTypeService from "../../../Services/FuelTypeService";
 import { createRef } from "react";
-import VehicleModel from "../../../../api/src/components/vehicle/vehicle.model";
-import IUpdateVehicle from "../../../../api/src/components/vehicle/dto/IUpdateVehicle";
-import ICreateVehicle from "../../../../api/src/components/vehicle/dto/ICreateVehicle";
+import VehicleModel from "../../../../../api/src/components/vehicle/vehicle.model";
+import IUpdateVehicle from "../../../../../api/src/components/vehicle/dto/IUpdateVehicle";
+import ICreateVehicle from "../../../../../api/src/components/vehicle/dto/ICreateVehicle";
 class AddVehiclePageProperties extends BasePageProperties {
   match?: {
     params: {
